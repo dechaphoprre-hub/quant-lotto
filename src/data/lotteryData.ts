@@ -12,17 +12,17 @@ export const THAI_LOTTERY_DRAWS: DrawRecord[] = [
     "date": "2026-09-01",
     "dayOfWeekTh": "อังคาร",
     "drawNumber": "งวด 1 ก.ย. 69",
-    "topPrize": "929341",
-    "twoDigitTop": "41",
-    "twoDigitBottom": "94",
-    "threeDigitTop": "341",
+    "topPrize": "417212",
+    "twoDigitTop": "12",
+    "twoDigitBottom": "04",
+    "threeDigitTop": "212",
     "threeDigitFront": [
-      "130",
-      "725"
+      "257",
+      "346"
     ],
     "threeDigitBack": [
-      "341",
-      "904"
+      "136",
+      "740"
     ]
   },
   {

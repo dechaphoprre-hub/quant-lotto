@@ -2,7 +2,7 @@ import { DrawRecord, MarketType } from '../types';
 import { validateDrawRecord, sanitizeDrawDataset } from './dataValidator';
 
 const STORAGE_PREFIX = 'quantlotto_dataset_';
-const STORAGE_VERSION = 'v3_';
+const STORAGE_VERSION = 'v4_';
 
 /**
  * Storage Service: Manages client-side persistence and zero-latency caching
