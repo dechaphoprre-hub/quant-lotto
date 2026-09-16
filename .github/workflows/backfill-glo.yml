@@ -1,0 +1,42 @@
+name: Backfill Historical Thai GLO Results
+
+on:
+  workflow_dispatch:
+    inputs:
+      start_date:
+        description: 'Earliest draw date to backfill (YYYY-MM-DD)'
+        required: true
+        type: string
+      end_date:
+        description: 'Latest draw date to backfill (YYYY-MM-DD), defaults to today'
+        required: false
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  backfill:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Backfill GLO results
+        run: npm run backfill:glo
+        env:
+          SUPABASE_URL: ${{ vars.VITE_SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          BACKFILL_START_DATE: ${{ inputs.start_date }}
+          BACKFILL_END_DATE: ${{ inputs.end_date }}
+      - name: Commit prediction for the next draw
+        run: npm run generate:proof
+        env:
+          SUPABASE_URL: ${{ vars.VITE_SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
