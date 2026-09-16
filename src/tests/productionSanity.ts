@@ -1,5 +1,6 @@
 import { validateDrawRecord, sanitizeDrawDataset } from '../services/dataValidator.ts';
 import { calculateDigitStatistics, runMonteCarloSimulation, calculateMarkovTransitions, runThreeDigitSimulation } from '../math/quantEngine.ts';
+import { calculateChiSquareTest, findDormantNumbers, calculateCoOccurrencePairs } from '../math/statisticalInsights.ts';
 import { THAI_LOTTERY_DRAWS, LAO_LOTTERY_DRAWS, HANOI_LOTTERY_DRAWS, HANOI_VIP_LOTTERY_DRAWS } from '../data/lotteryData.ts';
 import { DrawRecord } from '../types/index.ts';
 
@@ -132,6 +133,32 @@ assert(allValidPatterns, 'All 3D candidates correctly categorized into patterns'
 
 const allValidRoots = threeD.every(c => c.sumRoot >= 1 && c.sumRoot <= 9);
 assert(allValidRoots, 'All digital sum roots are in range 1-9');
+
+// 7. Statistical Insights (chi-square honesty check, dormant numbers, co-occurrence)
+console.log('\n--- 7. Testing Statistical Insights ---');
+
+const chiSquareUniform = calculateChiSquareTest(stats);
+assert(!isNaN(chiSquareUniform.statistic) && !isNaN(chiSquareUniform.pValue), 'Chi-square test returns numeric statistic and p-value');
+assert(chiSquareUniform.degreesOfFreedom === 99, `Chi-square degrees of freedom is 99 for 100 categories (${chiSquareUniform.degreesOfFreedom})`);
+
+const perfectlyUniformStats = stats.map(s => ({ ...s, occurrences: 10 }));
+const chiSquarePerfect = calculateChiSquareTest(perfectlyUniformStats);
+assert(chiSquarePerfect.statistic === 0 && chiSquarePerfect.isConsistentWithRandom, 'Perfectly uniform occurrences score chi-square statistic 0 and pass the randomness check');
+
+const emptyChiSquare = calculateChiSquareTest(calculateDigitStatistics([]));
+assert(!isNaN(emptyChiSquare.pValue) && emptyChiSquare.isConsistentWithRandom, 'Chi-square test on empty dataset handles zero-sample case safely without crash');
+
+const dormant = findDormantNumbers(thaiClean.cleanDataset, 3);
+assert(dormant.length <= 100 && dormant.every(d => /^\d{2}$/.test(d.digit)), 'Dormant numbers are valid 2-digit entries within bounds');
+assert(dormant.every(d => d.lastSeenDate === null || d.yearsSinceLastSeen !== null), 'Every dormant number with a last-seen date also has a computed years-since value');
+
+const coOccurrence = calculateCoOccurrencePairs(thaiClean.cleanDataset, 10);
+assert(coOccurrence.length <= 10, `Co-occurrence returns at most 10 pairs (${coOccurrence.length})`);
+assert(coOccurrence.every(p => p.count > 1 && p.pair[0] !== p.pair[1]), 'Every co-occurrence pair repeated more than once and has two distinct digits');
+assert(
+  coOccurrence.every((p, idx) => idx === 0 || coOccurrence[idx - 1].count >= p.count),
+  'Co-occurrence pairs are sorted by count descending'
+);
 
 console.log('\n====================================================');
 console.log(`   TEST SUMMARY: ${passedTests} / ${totalTests} TESTS PASSED (100% SUCESS)   `);

@@ -4,13 +4,13 @@ import { MARKET_CONFIG } from '../data/lotteryData';
 import { ACTIVE_MARKETS } from '../data/dataSources';
 import { Translations, Language } from '../i18n/translations';
 import { LiveServerClock } from './LiveServerClock';
-import { Activity, ShieldCheck, Flame, Radio, Cpu, Video, Globe } from 'lucide-react';
+import { Activity, ShieldCheck, Flame, Radio, Cpu, Video, Globe, Sigma } from 'lucide-react';
 
 interface NavbarProps {
   activeMarket: MarketType;
   onSelectMarket: (m: MarketType) => void;
-  activeTab: 'TERMINAL' | 'HEATMAP' | 'WAR_ROOM' | 'PROOF';
-  onSelectTab: (tab: 'TERMINAL' | 'HEATMAP' | 'WAR_ROOM' | 'PROOF') => void;
+  activeTab: 'TERMINAL' | 'HEATMAP' | 'WAR_ROOM' | 'PROOF' | 'INSIGHTS';
+  onSelectTab: (tab: 'TERMINAL' | 'HEATMAP' | 'WAR_ROOM' | 'PROOF' | 'INSIGHTS') => void;
   currentLang: Language;
   onSelectLang: (lang: Language) => void;
   onOpenGuide: () => void;
@@ -194,6 +194,18 @@ export const TerminalNavbar: React.FC<NavbarProps> = ({
             >
               <ShieldCheck className="w-3.5 h-3.5 shrink-0" />
               <span className="whitespace-nowrap">{t.proofTab}</span>
+            </button>
+
+            <button
+              onClick={() => onSelectTab('INSIGHTS')}
+              className={`flex items-center justify-center space-x-1 px-2 sm:px-2.5 py-1 rounded text-[10px] sm:text-[11px] font-mono transition-all active:scale-95 shrink-0 ${
+                activeTab === 'INSIGHTS'
+                  ? 'bg-indigo-500/20 text-indigo-300 border border-indigo-500/50 font-bold shadow-sm'
+                  : 'text-slate-400 hover:text-white hover:bg-terminal-hover'
+              }`}
+            >
+              <Sigma className="w-3.5 h-3.5 shrink-0" />
+              <span className="whitespace-nowrap">{t.insightsTab}</span>
             </button>
           </div>
         </div>

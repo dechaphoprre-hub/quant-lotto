@@ -15,6 +15,7 @@ import { AdminConsoleModal } from './components/AdminConsoleModal';
 import { DrawTomorrowAlert } from './components/DrawTomorrowAlert';
 import { EventTimelineRadar } from './components/EventTimelineRadar';
 import { BannerAd } from './components/BannerAd';
+import { StatisticalInsights } from './components/StatisticalInsights';
 import { TRANSLATIONS, Language } from './i18n/translations';
 import { Shield, Bell } from 'lucide-react';
 
@@ -22,7 +23,7 @@ const LINE_OA_URL = import.meta.env.VITE_LINE_OA_URL as string | undefined;
 
 export const App: React.FC = () => {
   const [activeMarket, setActiveMarket] = useState<MarketType>('THAI');
-  const [activeTab, setActiveTab] = useState<'TERMINAL' | 'HEATMAP' | 'WAR_ROOM' | 'PROOF'>('TERMINAL');
+  const [activeTab, setActiveTab] = useState<'TERMINAL' | 'HEATMAP' | 'WAR_ROOM' | 'PROOF' | 'INSIGHTS'>('TERMINAL');
   const [dimensionMode, setDimensionMode] = useState<DimensionMode>('2D');
   const [monteCarloRuns, setMonteCarloRuns] = useState<number>(50000);
   const [currentLang, setCurrentLang] = useState<Language>('TH');
@@ -178,6 +179,10 @@ export const App: React.FC = () => {
 
         {activeTab === 'PROOF' && (
           <ProofOfAlgorithm t={t} market={activeMarket} />
+        )}
+
+        {activeTab === 'INSIGHTS' && (
+          <StatisticalInsights draws={draws} stats={digitStats} market={activeMarket} t={t} />
         )}
 
         {/* Monetization & Platform Acquisition Slot */}
