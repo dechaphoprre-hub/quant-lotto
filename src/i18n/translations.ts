@@ -22,7 +22,7 @@ export interface Translations {
   topTwoDigit: string;
   bottomTwoDigit: string;
   algorithmIndex: string;
-  highAccuracy: string;
+  entropyNote: string;
   quantPool: string;
   simulationsLabel: string;
   backtestNote: string;
@@ -191,7 +191,7 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     topTwoDigit: '2 ตัวบน',
     bottomTwoDigit: '2 ตัวล่าง',
     algorithmIndex: 'ดัชนีเสถียรภาพตัวเลข',
-    highAccuracy: 'ความแม่นยำระดับสถิติสูง',
+    entropyNote: 'วัดจากการกระจายตัวของตัวเลข (Entropy) ไม่ใช่ตัวชี้วัดผลแพ้ชนะจริง',
     quantPool: 'หน่วยประมวลผลควอนต์',
     simulationsLabel: 'รอบจำลอง',
     backtestNote: 'ผ่านการทดสอบย้อนหลัง 300+ งวด',
@@ -366,7 +366,7 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     topTwoDigit: '2 ໂຕເທິງ',
     bottomTwoDigit: '2 ໂຕລຸ່ມ',
     algorithmIndex: 'ດັດຊະນີຄວາມສະຖຽນ',
-    highAccuracy: 'ຄວາມແມ່ນຍຳສູງ',
+    entropyNote: 'ວັດຈາກການກະຈາຍຕົວຂອງໂຕເລກ (Entropy) ບໍ່ແມ່ນຕົວຊີ້ວັດຜົນແພ້ຊະນະຈິງ',
     quantPool: 'ໜ່ວຍປະມວນຜົນຄວອນຕ໌',
     simulationsLabel: 'ຮອບຈຳລອງ',
     backtestNote: 'ຜ່ານການທົດສອບຍ້ອນຫຼັງ 300+ ງວດ',
@@ -541,7 +541,7 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     topTwoDigit: '2 Số Đầu',
     bottomTwoDigit: '2 Số Đuôi',
     algorithmIndex: 'Chỉ Số Ổn Định',
-    highAccuracy: 'Độ Chuẩn Xác Cao',
+    entropyNote: 'Đo từ độ phân tán của các chữ số (Entropy), không phải chỉ số thắng/thua thực tế',
     quantPool: 'Bộ Xử Lý Lượng Tử',
     simulationsLabel: 'Vòng Giả Lập',
     backtestNote: 'Đã kiểm thử ngược 300+ kỳ',
@@ -716,7 +716,7 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     topTwoDigit: 'Top 2D',
     bottomTwoDigit: 'Bottom 2D',
     algorithmIndex: 'Stability Index',
-    highAccuracy: 'High Statistical Precision',
+    entropyNote: 'Measured from digit distribution (Entropy), not a real win-rate metric',
     quantPool: 'Quant Compute Pool',
     simulationsLabel: 'Simulations',
     backtestNote: 'Backtested over 300+ draws',

@@ -3,6 +3,7 @@ import { MarketType, DrawRecord } from '../types';
 import { MARKET_CONFIG } from '../data/lotteryData';
 import { Translations } from '../i18n/translations';
 import { Timer, Trophy, BarChart3, Binary, Sparkles } from 'lucide-react';
+import { ShareResult } from './ShareResult';
 
 interface HeaderProps {
   market: MarketType;
@@ -97,6 +98,7 @@ export const MarketStatsHeader: React.FC<HeaderProps> = ({
               <Trophy className="w-3.5 h-3.5 text-amber-400" />
               {t.latestDrawTitle} ({t.drawDatePrefix} {latestDraw.date})
             </span>
+            <ShareResult draw={latestDraw} marketLabel={marketInfo.name} />
           </div>
           <div className="flex items-baseline space-x-2">
             <span className="text-2xl font-extrabold font-mono text-white tracking-wider">
@@ -163,9 +165,9 @@ export const MarketStatsHeader: React.FC<HeaderProps> = ({
             </span>
             <span className="text-[10px] text-slate-400 font-mono">/ 1.000</span>
           </div>
-          <div className="text-[10px] text-emerald-400 font-mono mt-1 flex items-center gap-1">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
-            {t.highAccuracy}
+          <div className="text-[10px] text-slate-400 font-mono mt-1 flex items-center gap-1">
+            <span className="w-1.5 h-1.5 rounded-full bg-slate-500"></span>
+            {t.entropyNote}
           </div>
         </div>
 
