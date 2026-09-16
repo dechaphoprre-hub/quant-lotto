@@ -173,28 +173,22 @@ export function runMonteCarloSimulation(
   };
 }
 
-/**
- * 3. Three Digit Simulation & Pattern Detector (3D Mode)
- * Empirically derives top 3D candidates from authentic draw history,
- * with pattern classification and digital sum roots.
- */
-export function runThreeDigitSimulation(draws: DrawRecord[]): ThreeDigitCandidate[] {
-  const getPattern = (str: string): 'CLEAN' | 'HAAM' | 'DOUBLE' | 'TRIPLE' => {
-    if (!str || str.length !== 3) return 'CLEAN';
-    const [d0, d1, d2] = str.split('');
-    if (d0 === d1 && d1 === d2) return 'TRIPLE';
-    if (d0 === d2) return 'HAAM'; // Symmetrical, e.g. 898, 707
-    if (d0 === d1 || d1 === d2) return 'DOUBLE'; // Pairs, e.g. 773, 899
-    return 'CLEAN';
-  };
+export const getThreeDigitPattern = (str: string): 'CLEAN' | 'HAAM' | 'DOUBLE' | 'TRIPLE' => {
+  if (!str || str.length !== 3) return 'CLEAN';
+  const [d0, d1, d2] = str.split('');
+  if (d0 === d1 && d1 === d2) return 'TRIPLE';
+  if (d0 === d2) return 'HAAM'; // Symmetrical, e.g. 898, 707
+  if (d0 === d1 || d1 === d2) return 'DOUBLE'; // Pairs, e.g. 773, 899
+  return 'CLEAN';
+};
 
-  const getSumRoot = (str: string): number => {
-    if (!str) return 0;
-    const sum = str.split('').reduce((acc, c) => acc + (parseInt(c, 10) || 0), 0);
-    return sum > 9 ? (sum % 9 || 9) : sum;
-  };
+export const getThreeDigitSumRoot = (str: string): number => {
+  if (!str) return 0;
+  const sum = str.split('').reduce((acc, c) => acc + (parseInt(c, 10) || 0), 0);
+  return sum > 9 ? (sum % 9 || 9) : sum;
+};
 
-  // Collect all historical 3D appearances
+const collectThreeDigitAppearances = (draws: DrawRecord[]): { frequencyMap: Record<string, number>; recent3D: string[] } => {
   const frequencyMap: Record<string, number> = {};
   const recent3D: string[] = [];
 
@@ -210,31 +204,109 @@ export function runThreeDigitSimulation(draws: DrawRecord[]): ThreeDigitCandidat
     });
   });
 
-  const fallbackSeeds = ['894', '377', '707', '779', '209', '863', '400', '680', '534', '053'];
-  const pool = recent3D.length >= 5 ? recent3D : [...recent3D, ...fallbackSeeds];
+  return { frequencyMap, recent3D };
+};
 
-  // Weight candidates by recency & pattern attraction
-  const scored = pool.slice(0, 15).map((num, idx) => {
-    const pattern = getPattern(num);
-    const sumRoot = getSumRoot(num);
+/**
+ * 3. Three Digit Simulation & Pattern Detector (3D Mode)
+ * Empirically derives top 3D candidates from authentic draw history, with
+ * pattern classification and digital sum roots. `hits` is the real count
+ * of times this exact 3-digit number has appeared in the loaded history —
+ * never a synthetic formula dressed up to look like a simulation output.
+ */
+export function runThreeDigitSimulation(draws: DrawRecord[]): ThreeDigitCandidate[] {
+  const { frequencyMap, recent3D } = collectThreeDigitAppearances(draws);
+
+  // Weight candidates by recency & historical frequency
+  const scored = recent3D.slice(0, 15).map((num, idx) => {
+    const pattern = getThreeDigitPattern(num);
+    const sumRoot = getThreeDigitSumRoot(num);
     const recencyWeight = Math.max(1, 15 - idx);
     const freq = frequencyMap[num] || 1;
     const score = (recencyWeight * 1.5) + (freq * 2);
-    return { num, pattern, sumRoot, score };
+    return { num, pattern, sumRoot, score, freq };
   }).sort((a, b) => b.score - a.score);
 
-  const totalScore = scored.slice(0, 5).reduce((acc, s) => acc + s.score, 0) || 1;
+  const top = scored.slice(0, 5);
+  const totalScore = top.reduce((acc, s) => acc + s.score, 0) || 1;
 
-  return scored.slice(0, 5).map(item => {
+  return top.map(item => {
     const prob = Number(((item.score / totalScore) * 60).toFixed(1));
     return {
       digit: item.num,
-      hits: Math.round(item.score * 180 + 1200),
+      hits: item.freq,
       probability: prob > 0 ? prob : 12.5,
       pattern: item.pattern,
       sumRoot: item.sumRoot
     };
   });
+}
+
+export interface PatternDistributionEntry {
+  pattern: 'CLEAN' | 'HAAM' | 'DOUBLE' | 'TRIPLE';
+  count: number;
+  percentage: number;
+}
+
+/**
+ * Real distribution of CLEAN/HAAM/DOUBLE/TRIPLE across every 3-digit
+ * number that has actually appeared in the loaded history — not a
+ * theoretical or hardcoded percentage.
+ */
+export function calculateThreeDigitPatternDistribution(draws: DrawRecord[]): PatternDistributionEntry[] {
+  const { frequencyMap } = collectThreeDigitAppearances(draws);
+  const totals: Record<'CLEAN' | 'HAAM' | 'DOUBLE' | 'TRIPLE', number> = { CLEAN: 0, HAAM: 0, DOUBLE: 0, TRIPLE: 0 };
+  let totalAppearances = 0;
+
+  Object.entries(frequencyMap).forEach(([num, count]) => {
+    totals[getThreeDigitPattern(num)] += count;
+    totalAppearances += count;
+  });
+
+  const safeTotal = Math.max(1, totalAppearances);
+  return (['CLEAN', 'HAAM', 'DOUBLE', 'TRIPLE'] as const).map(pattern => ({
+    pattern,
+    count: totals[pattern],
+    percentage: Number(((totals[pattern] / safeTotal) * 100).toFixed(1))
+  }));
+}
+
+export interface DigitalRootStat {
+  root: number;
+  occurrences: number;
+  drawsSinceLastSeen: number;
+}
+
+/**
+ * Real hot/cold ranking of digital-sum roots (1-9) across every 3-digit
+ * number in the loaded history, mirroring calculateDigitStatistics'
+ * recency tracking but for roots instead of raw 2-digit numbers.
+ */
+export function calculateDigitalRootStats(draws: DrawRecord[]): DigitalRootStat[] {
+  const occurrences: Record<number, number> = {};
+  const lastSeenIndex: Record<number, number> = {};
+  const safeDrawsCount = Math.max(1, draws.length);
+
+  for (let root = 1; root <= 9; root++) {
+    occurrences[root] = 0;
+    lastSeenIndex[root] = safeDrawsCount;
+  }
+
+  draws.forEach((draw, drawIndex) => {
+    const candidates = [draw.threeDigitTop, ...(draw.threeDigitFront || []), ...(draw.threeDigitBack || [])].filter(Boolean) as string[];
+    candidates.forEach(num => {
+      if (!/^\d{3}$/.test(num)) return;
+      const root = getThreeDigitSumRoot(num);
+      occurrences[root] = (occurrences[root] || 0) + 1;
+      if (lastSeenIndex[root] === safeDrawsCount) lastSeenIndex[root] = drawIndex;
+    });
+  });
+
+  const stats: DigitalRootStat[] = [];
+  for (let root = 1; root <= 9; root++) {
+    stats.push({ root, occurrences: occurrences[root] ?? 0, drawsSinceLastSeen: lastSeenIndex[root] ?? safeDrawsCount });
+  }
+  return stats;
 }
 
 /**

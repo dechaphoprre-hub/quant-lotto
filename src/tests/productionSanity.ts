@@ -1,5 +1,5 @@
 import { validateDrawRecord, sanitizeDrawDataset } from '../services/dataValidator.ts';
-import { calculateDigitStatistics, runMonteCarloSimulation, calculateMarkovTransitions, runThreeDigitSimulation } from '../math/quantEngine.ts';
+import { calculateDigitStatistics, runMonteCarloSimulation, calculateMarkovTransitions, runThreeDigitSimulation, calculateThreeDigitPatternDistribution, calculateDigitalRootStats } from '../math/quantEngine.ts';
 import { calculateChiSquareTest, findDormantNumbers, calculateCoOccurrencePairs } from '../math/statisticalInsights.ts';
 import { extractNumbersFromText } from '../math/newsNumberExtraction.ts';
 import { THAI_LOTTERY_DRAWS, LAO_LOTTERY_DRAWS, HANOI_LOTTERY_DRAWS, HANOI_VIP_LOTTERY_DRAWS } from '../data/lotteryData.ts';
@@ -134,6 +134,18 @@ assert(allValidPatterns, 'All 3D candidates correctly categorized into patterns'
 
 const allValidRoots = threeD.every(c => c.sumRoot >= 1 && c.sumRoot <= 9);
 assert(allValidRoots, 'All digital sum roots are in range 1-9');
+
+const allRealHits = threeD.every(c => Number.isInteger(c.hits) && c.hits >= 1);
+assert(allRealHits, `3D candidate "hits" are real integer occurrence counts, not a synthetic formula (${threeD.map(c => c.hits).join(', ')})`);
+
+const patternDistribution = calculateThreeDigitPatternDistribution(thaiClean.cleanDataset);
+assert(patternDistribution.length === 4, 'Pattern distribution covers all 4 pattern categories');
+const distributionTotal = patternDistribution.reduce((sum, p) => sum + p.percentage, 0);
+assert(Math.abs(distributionTotal - 100) < 0.5, `Pattern distribution percentages sum to ~100% (${distributionTotal})`);
+
+const rootStats = calculateDigitalRootStats(thaiClean.cleanDataset);
+assert(rootStats.length === 9, 'Digital root stats cover roots 1-9');
+assert(rootStats.every(r => !isNaN(r.occurrences) && !isNaN(r.drawsSinceLastSeen)), 'Digital root stats have no NaN values');
 
 // 7. Statistical Insights (chi-square honesty check, dormant numbers, co-occurrence)
 console.log('\n--- 7. Testing Statistical Insights ---');
