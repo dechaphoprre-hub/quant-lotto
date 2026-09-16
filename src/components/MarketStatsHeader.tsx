@@ -3,6 +3,8 @@ import { MarketType, DrawRecord } from '../types';
 import { MARKET_CONFIG } from '../data/lotteryData';
 import { Translations } from '../i18n/translations';
 import { Timer, Trophy, BarChart3, Binary, Sparkles } from 'lucide-react';
+import { ShareResult } from './ShareResult';
+import { DataTrustBanner } from './DataTrustBanner';
 
 interface HeaderProps {
   market: MarketType;
@@ -88,8 +90,12 @@ export const MarketStatsHeader: React.FC<HeaderProps> = ({
         </div>
       </div>
 
+      <div className="relative z-10 mt-5">
+        <DataTrustBanner latestDraw={latestDraw} t={t} />
+      </div>
+
       {/* Grid Summary Cards with Dynamic 2D & 3D Numbers */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mt-5 pt-5 border-t border-terminal-border/80">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 pt-5 border-t border-terminal-border/80">
         {/* Latest Top Result - Expanded with Country-Specific 3D breakdown */}
         <div className="bg-terminal-bg/60 border border-terminal-border p-3.5 rounded-lg sm:col-span-2 lg:col-span-1">
           <div className="flex items-center justify-between text-slate-400 text-xs font-mono mb-1">
@@ -97,6 +103,7 @@ export const MarketStatsHeader: React.FC<HeaderProps> = ({
               <Trophy className="w-3.5 h-3.5 text-amber-400" />
               {t.latestDrawTitle} ({t.drawDatePrefix} {latestDraw.date})
             </span>
+            <ShareResult draw={latestDraw} marketLabel={marketInfo.name} />
           </div>
           <div className="flex items-baseline space-x-2">
             <span className="text-2xl font-extrabold font-mono text-white tracking-wider">
@@ -163,9 +170,9 @@ export const MarketStatsHeader: React.FC<HeaderProps> = ({
             </span>
             <span className="text-[10px] text-slate-400 font-mono">/ 1.000</span>
           </div>
-          <div className="text-[10px] text-emerald-400 font-mono mt-1 flex items-center gap-1">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
-            {t.highAccuracy}
+          <div className="text-[10px] text-slate-400 font-mono mt-1 flex items-center gap-1">
+            <span className="w-1.5 h-1.5 rounded-full bg-slate-500"></span>
+            {t.entropyNote}
           </div>
         </div>
 

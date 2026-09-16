@@ -14,8 +14,11 @@ import { GuideModal } from './components/GuideModal';
 import { AdminConsoleModal } from './components/AdminConsoleModal';
 import { DrawTomorrowAlert } from './components/DrawTomorrowAlert';
 import { EventTimelineRadar } from './components/EventTimelineRadar';
+import { BannerAd } from './components/BannerAd';
 import { TRANSLATIONS, Language } from './i18n/translations';
-import { Shield, BarChart, Bell } from 'lucide-react';
+import { Shield, Bell } from 'lucide-react';
+
+const LINE_OA_URL = import.meta.env.VITE_LINE_OA_URL as string | undefined;
 
 export const App: React.FC = () => {
   const [activeMarket, setActiveMarket] = useState<MarketType>('THAI');
@@ -80,13 +83,6 @@ export const App: React.FC = () => {
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [adminConsoleEnabled]);
-
-  const handleDatasetUpdated = (updated: DrawRecord[]) => {
-    setDatasets(prev => ({
-      ...prev,
-      [activeMarket]: updated
-    }));
-  };
 
   // Compute quantitative models for the selected market with deterministic cross-device PRNG
   const digitStats = useMemo(() => calculateDigitStatistics(draws), [draws]);
@@ -181,50 +177,42 @@ export const App: React.FC = () => {
         )}
 
         {activeTab === 'PROOF' && (
-          <ProofOfAlgorithm t={t} />
+          <ProofOfAlgorithm t={t} market={activeMarket} />
         )}
 
         {/* Monetization & Platform Acquisition Slot */}
         <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-4">
-          {/* Ad Slot (Demonstrating Formula 4 Revenue Stream) */}
-          <div className="md:col-span-2 bg-terminal-card/60 border border-dashed border-cyan-500/30 rounded-xl p-4 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 rounded-lg bg-cyan-950 border border-cyan-800 flex items-center justify-center text-cyan-400 shrink-0">
-                <BarChart className="w-5 h-5" />
-              </div>
-              <div>
-                <div className="text-xs font-mono font-bold text-cyan-400 uppercase">
-                  {t.adSlotTitle}
-                </div>
-                <p className="text-xs text-slate-400">
-                  {t.adSlotDesc}
-                </p>
-              </div>
-            </div>
-            <div className="px-3 py-1.5 rounded bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 text-xs font-mono font-bold whitespace-nowrap shrink-0">
-              {t.adSlotEst}
-            </div>
+          {/* Real sponsor banner: renders nothing when there is no active campaign */}
+          <div className="md:col-span-2">
+            <BannerAd market={activeMarket} slot="TOP_BANNER" />
           </div>
 
           {/* LINE OA Acquisition Widget */}
-          <div className="bg-terminal-card border border-terminal-border rounded-xl p-4 flex items-center justify-between gap-3">
-            <div className="flex items-center space-x-3 overflow-hidden">
-              <div className="w-10 h-10 rounded-lg bg-emerald-950 border border-emerald-800 flex items-center justify-center text-emerald-400 shrink-0">
-                <Bell className="w-5 h-5 animate-pulse" />
-              </div>
-              <div className="truncate">
-                <div className="text-xs font-mono font-bold text-emerald-400 truncate">
-                  {t.lineBotTitle}
+          {LINE_OA_URL && (
+            <div className="bg-terminal-card border border-terminal-border rounded-xl p-4 flex items-center justify-between gap-3">
+              <div className="flex items-center space-x-3 overflow-hidden">
+                <div className="w-10 h-10 rounded-lg bg-emerald-950 border border-emerald-800 flex items-center justify-center text-emerald-400 shrink-0">
+                  <Bell className="w-5 h-5 animate-pulse" />
                 </div>
-                <p className="text-[11px] text-slate-400 truncate">
-                  {t.lineBotDesc}
-                </p>
+                <div className="truncate">
+                  <div className="text-xs font-mono font-bold text-emerald-400 truncate">
+                    {t.lineBotTitle}
+                  </div>
+                  <p className="text-[11px] text-slate-400 truncate">
+                    {t.lineBotDesc}
+                  </p>
+                </div>
               </div>
+              <a
+                href={LINE_OA_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-3 py-1.5 rounded bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs font-mono transition-all shrink-0 whitespace-nowrap"
+              >
+                {t.lineBotBtn}
+              </a>
             </div>
-            <button className="px-3 py-1.5 rounded bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs font-mono transition-all shrink-0 whitespace-nowrap">
-              {t.lineBotBtn}
-            </button>
-          </div>
+          )}
         </div>
       </main>
 
@@ -256,9 +244,6 @@ export const App: React.FC = () => {
         isOpen={adminConsoleEnabled && isAdminOpen}
         onClose={() => setIsAdminOpen(false)}
         activeMarket={activeMarket}
-        currentDataset={draws}
-        onDatasetUpdated={handleDatasetUpdated}
-        factoryDefaultDataset={MARKET_CONFIG[activeMarket].dataset}
       />
     </div>
   );

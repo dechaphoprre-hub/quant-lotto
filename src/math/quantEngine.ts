@@ -1,4 +1,4 @@
-import { DrawRecord, DigitStat, MonteCarloSimulation, MarkovState, ProofItemRecord, ThreeDigitCandidate } from '../types';
+import { DrawRecord, DigitStat, MonteCarloSimulation, MarkovState, ThreeDigitCandidate } from '../types';
 
 /**
  * 1. Digit Statistics & Anomaly Detector (2D)
@@ -285,73 +285,6 @@ export function calculateMarkovTransitions(draws: DrawRecord[]): MarkovState[] {
   return markovStates;
 }
 
-/**
- * 5. Verifiable Cryptographic Ledger (Proof of Algorithm)
- */
-export const STRUCTURED_PROOF_RECORDS: ProofItemRecord[] = [
-  {
-    id: 'proof-01',
-    market: 'THAI',
-    drawDate: '2025-03-01',
-    timestampGenerated: '2025-02-28T18:00:00Z',
-    sha256Hash: 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855',
-    predictedTop5: ['94', '63', '12', '89', '45'],
-    topTwoDigit: '94',
-    bottomTwoDigit: '54',
-    threeDigitTop: '894',
-    matched: true,
-    matchType: 'DIRECT_HIT'
-  },
-  {
-    id: 'proof-02',
-    market: 'THAI',
-    drawDate: '2025-02-16',
-    timestampGenerated: '2025-02-15T18:00:00Z',
-    sha256Hash: 'a7c93e43b1239f1c149afbf4c8996fb92427ae41e4649b934ca495991b7852c99',
-    predictedTop5: ['77', '50', '39', '02', '64'],
-    topTwoDigit: '77',
-    bottomTwoDigit: '50',
-    threeDigitTop: '377',
-    matched: true,
-    matchType: 'DIRECT_HIT'
-  },
-  {
-    id: 'proof-03',
-    market: 'THAI',
-    drawDate: '2025-02-01',
-    timestampGenerated: '2025-01-31T18:00:00Z',
-    sha256Hash: '4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945',
-    predictedTop5: ['00', '51', '82', '14', '73'],
-    topTwoDigit: '00',
-    bottomTwoDigit: '51',
-    threeDigitTop: '700',
-    matched: true,
-    matchType: 'DIRECT_HIT'
-  },
-  {
-    id: 'proof-04',
-    market: 'THAI',
-    drawDate: '2025-01-17',
-    timestampGenerated: '2025-01-16T18:00:00Z',
-    sha256Hash: '7d35b91b8a2e5f3c1d4e6a8b0c2d4e6f8a0b2c4d6e8f0a2b4c6d8e0f2a4b6c8d',
-    predictedTop5: ['79', '23', '08', '41', '95'],
-    topTwoDigit: '79',
-    bottomTwoDigit: '23',
-    threeDigitTop: '779',
-    matched: true,
-    matchType: 'DIRECT_HIT'
-  },
-  {
-    id: 'proof-05',
-    market: 'THAI',
-    drawDate: '2024-12-30',
-    timestampGenerated: '2024-12-29T18:00:00Z',
-    sha256Hash: '2c8d6e0f2a4b6c8d7d35b91b8a2e5f3c1d4e6a8b0c2d4e6f8a0b2c4d6e8f0a2b',
-    predictedTop5: ['09', '51', '68', '33', '27'],
-    topTwoDigit: '09',
-    bottomTwoDigit: '51',
-    threeDigitTop: '209',
-    matched: true,
-    matchType: 'DIRECT_HIT'
-  }
-];
+// The proof-of-algorithm ledger is real, server-verified data read from
+// Supabase (see src/services/proofService.ts and scripts/generate-proof.ts).
+// It is intentionally not bundled here as static frontend data.

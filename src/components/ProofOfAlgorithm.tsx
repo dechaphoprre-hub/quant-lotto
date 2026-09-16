@@ -1,20 +1,42 @@
 import React from 'react';
-import { STRUCTURED_PROOF_RECORDS } from '../math/quantEngine';
+import { MarketType } from '../types';
+import { fetchProofRecords, ProofRecordView } from '../services/proofService';
 import { Translations } from '../i18n/translations';
-import { ShieldCheck, Lock, CheckCircle2, Copy } from 'lucide-react';
+import { ShieldCheck, Lock, CheckCircle2, Copy, Clock } from 'lucide-react';
 
 interface ProofProps {
   t: Translations;
+  market: MarketType;
 }
 
-export const ProofOfAlgorithm: React.FC<ProofProps> = ({ t }) => {
+export const ProofOfAlgorithm: React.FC<ProofProps> = ({ t, market }) => {
   const [copiedHash, setCopiedHash] = React.useState<string | null>(null);
+  const [loading, setLoading] = React.useState(true);
+  const [records, setRecords] = React.useState<ProofRecordView[]>([]);
+
+  React.useEffect(() => {
+    let cancelled = false;
+    setLoading(true);
+    fetchProofRecords(market).then(result => {
+      if (cancelled) return;
+      setRecords(result.records);
+      setLoading(false);
+    });
+    return () => { cancelled = true; };
+  }, [market]);
 
   const handleCopy = (hash: string) => {
     navigator.clipboard.writeText(hash);
     setCopiedHash(hash);
     setTimeout(() => setCopiedHash(null), 2000);
   };
+
+  const scoredRecords = records.filter(record => record.scoredAt);
+  const pendingRecords = records.filter(record => !record.scoredAt);
+  const hitCount = scoredRecords.filter(record => record.matchType === 'DIRECT_HIT' || record.matchType === 'REVERSE_HIT').length;
+  const hitRateLabel = scoredRecords.length > 0
+    ? `${((hitCount / scoredRecords.length) * 100).toFixed(1)}%`
+    : 'N/A';
 
   return (
     <div className="space-y-6">
@@ -41,12 +63,12 @@ export const ProofOfAlgorithm: React.FC<ProofProps> = ({ t }) => {
           <div className="flex items-center space-x-4 bg-terminal-bg px-4 py-2 rounded-lg border border-terminal-border font-mono text-xs">
             <div>
               <span className="text-slate-500 text-[10px] uppercase block">{t.proofHitRateLabel}</span>
-              <span className="text-amber-300 font-extrabold text-lg">N/A</span>
+              <span className="text-amber-300 font-extrabold text-lg">{hitRateLabel}</span>
             </div>
             <div className="h-7 w-px bg-slate-800"></div>
             <div>
               <span className="text-slate-500 text-[10px] uppercase block">{t.proofVerifiedDrawsLabel}</span>
-              <span className="text-white font-extrabold text-lg">{STRUCTURED_PROOF_RECORDS.length} {t.proofDrawUnit}</span>
+              <span className="text-white font-extrabold text-lg">{scoredRecords.length} {t.proofDrawUnit}</span>
             </div>
           </div>
         </div>
@@ -54,93 +76,122 @@ export const ProofOfAlgorithm: React.FC<ProofProps> = ({ t }) => {
         <div className="mt-4 text-xs font-mono text-slate-400 bg-emerald-950/20 border border-emerald-900/40 p-3 rounded-lg flex items-start gap-2">
           <Lock className="w-4 h-4 text-emerald-400 mt-0.5 shrink-0" />
           <span>
-            <strong>{t.proofGuaranteeTitle}</strong> Live cryptographic verification is available only for records ingested with a verified source and stored audit observation.
+            <strong>{t.proofGuaranteeTitle}</strong> {t.proofGuaranteeText}
           </span>
         </div>
       </div>
 
+      {loading && (
+        <div className="bg-terminal-card border border-terminal-border rounded-xl p-6 text-center text-xs font-mono text-slate-400">
+          {t.proofLoadingLabel}
+        </div>
+      )}
+
+      {!loading && pendingRecords.length > 0 && (
+        <div className="bg-terminal-card border border-amber-800/40 rounded-xl p-4 flex items-start gap-3">
+          <Clock className="w-5 h-5 text-amber-400 mt-0.5 shrink-0" />
+          <div className="text-xs font-mono">
+            <span className="inline-block mb-1 px-2 py-0.5 rounded-full bg-amber-950 text-amber-300 border border-amber-800 text-[10px] font-bold">
+              {t.proofPendingBadge}
+            </span>
+            <p className="text-slate-400">{t.proofPendingDesc}</p>
+            <p className="text-slate-500 mt-1">
+              {pendingRecords[0].drawDate} · {pendingRecords[0].predictedTop5.join(', ')} · {pendingRecords[0].commitmentHash.slice(0, 16)}…
+            </p>
+          </div>
+        </div>
+      )}
+
+      {!loading && scoredRecords.length === 0 && (
+        <div className="bg-terminal-card border border-terminal-border rounded-xl p-8 text-center">
+          <p className="text-sm font-bold text-white font-mono mb-1">{t.proofEmptyTitle}</p>
+          <p className="text-xs text-slate-400 max-w-md mx-auto">{t.proofEmptyDesc}</p>
+        </div>
+      )}
+
       {/* Historical Verifiable Ledger Table */}
-      <div className="bg-terminal-card border border-terminal-border rounded-xl p-5 overflow-hidden">
-        <div className="text-xs font-mono text-slate-400 uppercase tracking-wider mb-4 flex items-center justify-between">
-          <span>{t.proofTableTitle}</span>
-          <span className="text-emerald-400">{t.proofAuditedBadge}</span>
-        </div>
+      {!loading && scoredRecords.length > 0 && (
+        <div className="bg-terminal-card border border-terminal-border rounded-xl p-5 overflow-hidden">
+          <div className="text-xs font-mono text-slate-400 uppercase tracking-wider mb-4 flex items-center justify-between">
+            <span>{t.proofTableTitle}</span>
+            <span className="text-emerald-400">{t.proofAuditedBadge}</span>
+          </div>
 
-        <div className="overflow-x-auto">
-          <table className="w-full text-left font-mono text-xs">
-            <thead>
-              <tr className="border-b border-terminal-border text-slate-500">
-                <th className="pb-3 font-semibold">{t.proofThDateMarket}</th>
-                <th className="pb-3 font-semibold">{t.proofThPredictions}</th>
-                <th className="pb-3 font-semibold">{t.proofThActual}</th>
-                <th className="pb-3 font-semibold">{t.proofThResult}</th>
-                <th className="pb-3 font-semibold">{t.proofThHash}</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-terminal-border/60">
-              {STRUCTURED_PROOF_RECORDS.map(record => (
-                <tr key={record.id} className="hover:bg-terminal-hover/40 transition-colors">
-                  <td className="py-3.5">
-                    <div className="font-bold text-white">{record.drawDate}</div>
-                    <div className="text-[10px] text-cyan-400">{record.market} LOTTERY</div>
-                  </td>
-
-                  <td className="py-3.5">
-                    <div className="flex items-center space-x-1.5">
-                      {record.predictedTop5.map((num, i) => (
-                        <span
-                          key={num}
-                          className={`px-1.5 py-0.5 rounded font-bold ${
-                            i === 0
-                              ? 'bg-cyan-950 text-cyan-300 border border-cyan-800'
-                              : 'bg-slate-900 text-slate-300 border border-slate-800'
-                          }`}
-                        >
-                          {num}
-                        </span>
-                      ))}
-                    </div>
-                  </td>
-
-                  {/* Fully Translated Actual Winning: (Top 2D) / (Bottom 2D) */}
-                  <td className="py-3.5 font-bold text-slate-200">
-                    <span>{record.topTwoDigit}</span>{' '}
-                    <span className="text-slate-400 font-normal text-[11px]">({t.topTwoDigit})</span>
-                    <span className="mx-1 text-slate-600">/</span>
-                    <span>{record.bottomTwoDigit}</span>{' '}
-                    <span className="text-slate-400 font-normal text-[11px]">({t.bottomTwoDigit})</span>
-                  </td>
-
-                  <td className="py-3.5">
-                    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-950 text-emerald-300 border border-emerald-800">
-                      <CheckCircle2 className="w-3 h-3 text-emerald-400" />
-                      {record.matchType}
-                    </span>
-                  </td>
-
-                  <td className="py-3.5">
-                    <div className="flex items-center space-x-1.5">
-                      <code className="text-[10px] text-slate-400 bg-slate-900 px-2 py-1 rounded border border-slate-800 truncate max-w-[140px]">
-                        {record.sha256Hash}
-                      </code>
-                      <button
-                        onClick={() => handleCopy(record.sha256Hash)}
-                        className="p-1 text-slate-400 hover:text-white rounded hover:bg-slate-800 transition-colors"
-                        title="Copy Hash"
-                      >
-                        <Copy className="w-3.5 h-3.5" />
-                      </button>
-                    </div>
-                    {copiedHash === record.sha256Hash && (
-                      <span className="text-[9px] text-emerald-400 block mt-0.5">{t.proofCopied}</span>
-                    )}
-                  </td>
+          <div className="overflow-x-auto">
+            <table className="w-full text-left font-mono text-xs">
+              <thead>
+                <tr className="border-b border-terminal-border text-slate-500">
+                  <th className="pb-3 font-semibold">{t.proofThDateMarket}</th>
+                  <th className="pb-3 font-semibold">{t.proofThPredictions}</th>
+                  <th className="pb-3 font-semibold">{t.proofThActual}</th>
+                  <th className="pb-3 font-semibold">{t.proofThResult}</th>
+                  <th className="pb-3 font-semibold">{t.proofThHash}</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody className="divide-y divide-terminal-border/60">
+                {scoredRecords.map(record => (
+                  <tr key={record.id} className="hover:bg-terminal-hover/40 transition-colors">
+                    <td className="py-3.5">
+                      <div className="font-bold text-white">{record.drawDate}</div>
+                      <div className="text-[10px] text-cyan-400">{record.market} LOTTERY</div>
+                    </td>
+
+                    <td className="py-3.5">
+                      <div className="flex items-center space-x-1.5">
+                        {record.predictedTop5.map((num, i) => (
+                          <span
+                            key={num}
+                            className={`px-1.5 py-0.5 rounded font-bold ${
+                              i === 0
+                                ? 'bg-cyan-950 text-cyan-300 border border-cyan-800'
+                                : 'bg-slate-900 text-slate-300 border border-slate-800'
+                            }`}
+                          >
+                            {num}
+                          </span>
+                        ))}
+                      </div>
+                    </td>
+
+                    <td className="py-3.5 font-bold text-slate-200">
+                      <span>{record.actualTwoDigitTop}</span>{' '}
+                      <span className="text-slate-400 font-normal text-[11px]">({t.topTwoDigit})</span>
+                      <span className="mx-1 text-slate-600">/</span>
+                      <span>{record.actualTwoDigitBottom}</span>{' '}
+                      <span className="text-slate-400 font-normal text-[11px]">({t.bottomTwoDigit})</span>
+                    </td>
+
+                    <td className="py-3.5">
+                      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-950 text-emerald-300 border border-emerald-800">
+                        <CheckCircle2 className="w-3 h-3 text-emerald-400" />
+                        {record.matchType}
+                      </span>
+                    </td>
+
+                    <td className="py-3.5">
+                      <div className="flex items-center space-x-1.5">
+                        <code className="text-[10px] text-slate-400 bg-slate-900 px-2 py-1 rounded border border-slate-800 truncate max-w-[140px]">
+                          {record.commitmentHash}
+                        </code>
+                        <button
+                          onClick={() => handleCopy(record.commitmentHash)}
+                          className="p-1 text-slate-400 hover:text-white rounded hover:bg-slate-800 transition-colors"
+                          title="Copy Hash"
+                        >
+                          <Copy className="w-3.5 h-3.5" />
+                        </button>
+                      </div>
+                      {copiedHash === record.commitmentHash && (
+                        <span className="text-[9px] text-emerald-400 block mt-0.5">{t.proofCopied}</span>
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

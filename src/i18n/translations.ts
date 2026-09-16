@@ -22,7 +22,11 @@ export interface Translations {
   topTwoDigit: string;
   bottomTwoDigit: string;
   algorithmIndex: string;
-  highAccuracy: string;
+  entropyNote: string;
+  trustPendingTitle: string;
+  trustPendingDesc: string;
+  trustDemoTitle: string;
+  trustDemoDesc: string;
   quantPool: string;
   simulationsLabel: string;
   backtestNote: string;
@@ -141,6 +145,11 @@ export interface Translations {
   proofThResult: string;
   proofThHash: string;
   proofCopied: string;
+  proofLoadingLabel: string;
+  proofEmptyTitle: string;
+  proofEmptyDesc: string;
+  proofPendingBadge: string;
+  proofPendingDesc: string;
 
   // Guide Modal
   guideTitle: string;
@@ -186,7 +195,11 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     topTwoDigit: '2 ตัวบน',
     bottomTwoDigit: '2 ตัวล่าง',
     algorithmIndex: 'ดัชนีเสถียรภาพตัวเลข',
-    highAccuracy: 'ความแม่นยำระดับสถิติสูง',
+    entropyNote: 'วัดจากการกระจายตัวของตัวเลข (Entropy) ไม่ใช่ตัวชี้วัดผลแพ้ชนะจริง',
+    trustPendingTitle: 'ข้อมูลอ้างอิงจากแหล่งข้อมูลบุคคลที่สาม',
+    trustPendingDesc: 'ผลรางวัลตลาดนี้ยังไม่มีการยืนยันโดยตรงจากหน่วยงานทางการ กรุณาตรวจสอบผลจริงจากประกาศทางการอีกครั้งก่อนใช้อ้างอิง',
+    trustDemoTitle: 'นี่คือข้อมูลตัวอย่างสำหรับสาธิตระบบ',
+    trustDemoDesc: 'ยังไม่มีการเชื่อมต่อข้อมูลสดสำหรับตลาดนี้ ตัวเลขที่แสดงเป็นชุดข้อมูลตัวอย่าง ไม่ใช่ผลรางวัลจริง',
     quantPool: 'หน่วยประมวลผลควอนต์',
     simulationsLabel: 'รอบจำลอง',
     backtestNote: 'ผ่านการทดสอบย้อนหลัง 300+ งวด',
@@ -315,6 +328,11 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     proofThResult: 'ผลการจับคู่',
     proofThHash: 'รหัสแฮช SHA-256 ยืนยันเวลา',
     proofCopied: 'คัดลอกรหัสแฮชสำเร็จ!',
+    proofLoadingLabel: 'กำลังโหลดข้อมูลจริงจาก Supabase...',
+    proofEmptyTitle: 'ยังไม่มีประวัติที่ตรวจสอบแล้ว',
+    proofEmptyDesc: 'ระบบยังไม่มีการทำนายที่ล็อกไว้ล่วงหน้าและตรวจสอบครบกับผลจริง ข้อมูลจะปรากฏหลังผ่านงวดถัดไป',
+    proofPendingBadge: 'รอผลงวดถัดไป',
+    proofPendingDesc: 'ล็อกเลขทำนายและรหัสแฮชไว้แล้วก่อนหวยออก รอผลจริงมาตรวจสอบ',
 
     guideTitle: 'คู่มือใช้งาน QUANTLOTTO สำหรับผู้เริ่มต้น',
     guideSub: 'ดูจบใน 1 นาที เข้าใจทันทีว่าต้องดูตรงไหนก่อนหวยออก!',
@@ -356,7 +374,11 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     topTwoDigit: '2 ໂຕເທິງ',
     bottomTwoDigit: '2 ໂຕລຸ່ມ',
     algorithmIndex: 'ດັດຊະນີຄວາມສະຖຽນ',
-    highAccuracy: 'ຄວາມແມ່ນຍຳສູງ',
+    entropyNote: 'ວັດຈາກການກະຈາຍຕົວຂອງໂຕເລກ (Entropy) ບໍ່ແມ່ນຕົວຊີ້ວັດຜົນແພ້ຊະນະຈິງ',
+    trustPendingTitle: 'ຂໍ້ມູນອ້າງອີງຈາກແຫຼ່ງຂໍ້ມູນບຸກຄົນທີສາມ',
+    trustPendingDesc: 'ຜົນລາງວັນຕະຫຼາດນີ້ຍັງບໍ່ໄດ້ຮັບການຢືນຢັນໂດຍກົງຈາກໜ່ວຍງານທາງການ ກະລຸນາກວດສອບຜົນຈິງອີກຄັ້ງກ່ອນນຳໄປໃຊ້',
+    trustDemoTitle: 'ນີ້ແມ່ນຂໍ້ມູນຕົວຢ່າງສຳລັບສາທິດລະບົບ',
+    trustDemoDesc: 'ຍັງບໍ່ມີການເຊື່ອມຕໍ່ຂໍ້ມູນສົດສຳລັບຕະຫຼາດນີ້ ໂຕເລກທີ່ສະແດງເປັນຊຸດຂໍ້ມູນຕົວຢ່າງ ບໍ່ແມ່ນຜົນລາງວັນຈິງ',
     quantPool: 'ໜ່ວຍປະມວນຜົນຄວອນຕ໌',
     simulationsLabel: 'ຮອບຈຳລອງ',
     backtestNote: 'ຜ່ານການທົດສອບຍ້ອນຫຼັງ 300+ ງວດ',
@@ -485,6 +507,11 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     proofThResult: 'ຜົນການຈັບຄູ່',
     proofThHash: 'ລະຫັດແຮຊ SHA-256 ຢືນຢັນເວລາ',
     proofCopied: 'ຄັດລອກລະຫັດແຮຊແລ້ວ!',
+    proofLoadingLabel: 'ກຳລັງໂຫຼດຂໍ້ມູນຈິງຈາກ Supabase...',
+    proofEmptyTitle: 'ຍັງບໍ່ມີປະຫວັດທີ່ກວດສອບແລ້ວ',
+    proofEmptyDesc: 'ລະບົບຍັງບໍ່ມີການທຳນາຍທີ່ລັອກໄວ້ລ່ວງໜ້າ ແລະ ກວດສອບກັບຜົນຈິງແລ້ວ ຂໍ້ມູນຈະປາກົດຫຼັງຈາກງວດຖັດໄປ',
+    proofPendingBadge: 'ລໍຖ້າຜົນງວດຖັດໄປ',
+    proofPendingDesc: 'ລັອກເລກທຳນາຍ ແລະ ລະຫັດແຮັຊໄວ້ກ່ອນອອກຜົນ ລໍຖ້າຜົນຈິງມາກວດສອບ',
 
     guideTitle: 'ຄູ່ມືນຳໃຊ້ QUANTLOTTO ສຳລັບຜູ້ເລີ່ມຕົ້ນ',
     guideSub: 'ເບິ່ງຈົບໃນ 1 ນາທີ ເຂົ້າໃຈທັນທີວ່າຄວນເບິ່ງຈຸດໃດກ່ອນຫວຍອອກ!',
@@ -526,7 +553,11 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     topTwoDigit: '2 Số Đầu',
     bottomTwoDigit: '2 Số Đuôi',
     algorithmIndex: 'Chỉ Số Ổn Định',
-    highAccuracy: 'Độ Chuẩn Xác Cao',
+    entropyNote: 'Đo từ độ phân tán của các chữ số (Entropy), không phải chỉ số thắng/thua thực tế',
+    trustPendingTitle: 'Dữ liệu tham khảo từ nguồn bên thứ ba',
+    trustPendingDesc: 'Kết quả thị trường này chưa được xác nhận trực tiếp từ cơ quan chính thức. Vui lòng kiểm tra lại kết quả thật từ thông báo chính thức trước khi sử dụng.',
+    trustDemoTitle: 'Đây là dữ liệu mẫu để minh họa hệ thống',
+    trustDemoDesc: 'Chưa kết nối dữ liệu trực tiếp cho thị trường này. Các con số hiển thị là dữ liệu mẫu, không phải kết quả thật.',
     quantPool: 'Bộ Xử Lý Lượng Tử',
     simulationsLabel: 'Vòng Giả Lập',
     backtestNote: 'Đã kiểm thử ngược 300+ kỳ',
@@ -655,6 +686,11 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     proofThResult: 'Khớp kết quả',
     proofThHash: 'Mã băm SHA-256 đối soát',
     proofCopied: 'Đã sao chép mã băm thành công!',
+    proofLoadingLabel: 'Đang tải dữ liệu thực từ Supabase...',
+    proofEmptyTitle: 'Chưa có lịch sử đã đối soát',
+    proofEmptyDesc: 'Hệ thống chưa có dự đoán nào được khóa trước và đối soát với kết quả thật. Dữ liệu sẽ xuất hiện sau kỳ quay tiếp theo.',
+    proofPendingBadge: 'Chờ kết quả kỳ tới',
+    proofPendingDesc: 'Đã khóa số dự đoán và mã băm trước khi quay số, đang chờ kết quả thật để đối soát.',
 
     guideTitle: 'HƯỚNG DẪN DÀNH CHO NGƯỜI MỚI',
     guideSub: 'Xem trong 1 phút để hiểu cách soi cầu xác suất cao nhất trước giờ quay!',
@@ -696,7 +732,11 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     topTwoDigit: 'Top 2D',
     bottomTwoDigit: 'Bottom 2D',
     algorithmIndex: 'Stability Index',
-    highAccuracy: 'High Statistical Precision',
+    entropyNote: 'Measured from digit distribution (Entropy), not a real win-rate metric',
+    trustPendingTitle: 'Reference data from a third-party source',
+    trustPendingDesc: 'This market\'s result has not been directly confirmed by an official body. Please double-check the real result against an official announcement before relying on it.',
+    trustDemoTitle: 'This is sample data for demonstrating the system',
+    trustDemoDesc: 'No live data connection exists for this market yet. The numbers shown are a sample dataset, not a real draw result.',
     quantPool: 'Quant Compute Pool',
     simulationsLabel: 'Simulations',
     backtestNote: 'Backtested over 300+ draws',
@@ -825,6 +865,11 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     proofThResult: 'RESULT MATCH',
     proofThHash: 'SHA-256 COMMITMENT',
     proofCopied: 'Copied hash to clipboard!',
+    proofLoadingLabel: 'Loading live data from Supabase...',
+    proofEmptyTitle: 'No audited track record yet',
+    proofEmptyDesc: 'No prediction has been committed in advance and reconciled against a real result yet. This will populate after the next draw.',
+    proofPendingBadge: 'Awaiting next draw',
+    proofPendingDesc: 'Prediction and hash are already locked in ahead of the draw, pending the real result to reconcile against.',
 
     guideTitle: 'QUANTLOTTO BEGINNER QUICK-START GUIDE',
     guideSub: 'Learn how to navigate and extract top probability picks in 60 seconds!',

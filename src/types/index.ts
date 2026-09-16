@@ -13,6 +13,9 @@ export interface DrawRecord {
   threeDigitTop?: string; // 3 ตัวบน / Ba Càng
   threeDigitFront?: string[]; // 3 ตัวหน้า (เฉพาะไทย)
   threeDigitBack?: string[]; // 3 ตัวท้าย (เฉพาะไทย)
+  // How much this specific record can be trusted, so the UI never shows
+  // demo/third-party data with the same confidence as an officially verified one.
+  verificationStatus?: 'VERIFIED' | 'PENDING' | 'DEMO';
 }
 
 export interface DigitStat {

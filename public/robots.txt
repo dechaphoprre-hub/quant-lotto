@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://dechaphoprre-hub.github.io/quant-lotto/sitemap.xml

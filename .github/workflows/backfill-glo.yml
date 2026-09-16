@@ -1,12 +1,14 @@
-name: Ingest Thai GLO Results
+name: Backfill Historical Thai GLO Results
 
 on:
-  schedule:
-    - cron: '45 8 1,16 * *'
   workflow_dispatch:
     inputs:
-      draw_date:
-        description: 'Published draw date (YYYY-MM-DD)'
+      start_date:
+        description: 'Earliest draw date to backfill (YYYY-MM-DD)'
+        required: true
+        type: string
+      end_date:
+        description: 'Latest draw date to backfill (YYYY-MM-DD), defaults to today'
         required: false
         type: string
 
@@ -14,7 +16,7 @@ permissions:
   contents: read
 
 jobs:
-  ingest:
+  backfill:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -26,12 +28,13 @@ jobs:
           cache: npm
       - name: Install dependencies
         run: npm ci
-      - name: Ingest GLO result
-        run: npm run ingest:glo
+      - name: Backfill GLO results
+        run: npm run backfill:glo
         env:
           SUPABASE_URL: ${{ vars.VITE_SUPABASE_URL }}
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
-          DRAW_DATE: ${{ inputs.draw_date }}
+          BACKFILL_START_DATE: ${{ inputs.start_date }}
+          BACKFILL_END_DATE: ${{ inputs.end_date }}
       - name: Commit prediction for the next draw
         run: npm run generate:proof
         env:
