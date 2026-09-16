@@ -10,6 +10,8 @@ export interface LotteryDataSource {
   notes: string;
 }
 
+export const ACTIVE_MARKETS: MarketType[] = ['THAI'];
+
 /** Sources are documented separately so bundled snapshots are not presented as live official data. */
 export const LOTTERY_DATA_SOURCES: Record<MarketType, LotteryDataSource[]> = {
   THAI: [

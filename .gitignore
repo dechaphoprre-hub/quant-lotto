@@ -36,3 +36,4 @@ Thumbs.db
 # System generated logs and caches
 .system_generated/
 scratch/
+supabase/.temp/

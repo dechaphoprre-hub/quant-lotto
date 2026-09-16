@@ -1,6 +1,7 @@
 import React from 'react';
 import { MarketType } from '../types';
 import { MARKET_CONFIG } from '../data/lotteryData';
+import { ACTIVE_MARKETS } from '../data/dataSources';
 import { Translations, Language } from '../i18n/translations';
 import { LiveServerClock } from './LiveServerClock';
 import { Activity, ShieldCheck, Flame, Radio, Cpu, Video, Globe } from 'lucide-react';
@@ -124,7 +125,7 @@ export const TerminalNavbar: React.FC<NavbarProps> = ({
         <div className="flex items-center gap-1.5 sm:gap-2 shrink-0 overflow-x-auto no-scrollbar">
           {/* Market Selector Box - Ultra Compact (No TH/LA/VN/VN prefix) */}
           <div className="flex items-center bg-terminal-bg p-0.5 sm:p-1 rounded-lg border border-terminal-border shrink-0">
-            {(Object.keys(MARKET_CONFIG) as MarketType[]).map((key) => {
+            {ACTIVE_MARKETS.map((key) => {
               const conf = MARKET_CONFIG[key];
               const isActive = activeMarket === key;
               const shortTag = key === 'THAI' ? 'GLO THAI' : key === 'LAO' ? 'LAO DEV' : key === 'HANOI' ? 'HANOI' : 'HANOI VIP';

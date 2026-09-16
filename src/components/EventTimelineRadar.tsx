@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { MarketType } from '../types';
 import { MARKET_CONFIG } from '../data/lotteryData';
+import { ACTIVE_MARKETS } from '../data/dataSources';
 import { Translations } from '../i18n/translations';
 import { Calendar, Timer, Zap, ChevronRight, Sparkles, CheckCircle2, ArrowRight } from 'lucide-react';
 
@@ -69,7 +70,7 @@ export const EventTimelineRadar: React.FC<EventTimelineRadarProps> = ({
   const laoTarget = new Date(MARKET_CONFIG.LAO.nextDrawDate).getTime();
 
   // Dynamic Events list
-  const events: EventItem[] = [
+  const events = ([
     {
       market: 'THAI',
       title: t.markets.THAI.name,
@@ -114,7 +115,7 @@ export const EventTimelineRadar: React.FC<EventTimelineRadarProps> = ({
       badgeType: 'MAJOR',
       targetTimestamp: laoTarget
     }
-  ];
+  ] as EventItem[]).filter(event => ACTIVE_MARKETS.includes(event.market));
 
   const formatCountdown = (target: number) => {
     const diff = target - now;
