@@ -58,6 +58,8 @@ try {
   let lastError = 'unknown provider error';
   for (let attempt = 1; attempt <= 5; attempt++) {
     try {
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 15000);
       const gloResponse = await fetch(gloUrl, {
         method: 'POST',
         headers: {
@@ -65,8 +67,10 @@ try {
           Accept: 'application/json',
           'User-Agent': 'quant-lotto-ingestion/1.0'
         },
-        body: JSON.stringify({ date: day, month, year })
+        body: JSON.stringify({ date: day, month, year }),
+        signal: controller.signal
       });
+      clearTimeout(timeout);
       if (!gloResponse.ok) throw new Error(`GLO HTTP ${gloResponse.status}`);
       payload = await gloResponse.json() as GloPayload;
       if (payload.status && payload.response?.data) break;
