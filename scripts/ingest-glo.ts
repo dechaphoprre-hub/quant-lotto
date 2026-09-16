@@ -54,15 +54,32 @@ const run = await api(`ingestion_runs`, {
 const runId = run?.[0]?.id;
 
 try {
-  const gloResponse = await fetch(gloUrl, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-    body: JSON.stringify({ date: day, month, year })
-  });
-  if (!gloResponse.ok) throw new Error(`GLO HTTP ${gloResponse.status}`);
-  const payload = await gloResponse.json() as GloPayload;
+  let payload: GloPayload | undefined;
+  let lastError = 'unknown provider error';
+  for (let attempt = 1; attempt <= 5; attempt++) {
+    try {
+      const gloResponse = await fetch(gloUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          'User-Agent': 'quant-lotto-ingestion/1.0'
+        },
+        body: JSON.stringify({ date: day, month, year })
+      });
+      if (!gloResponse.ok) throw new Error(`GLO HTTP ${gloResponse.status}`);
+      payload = await gloResponse.json() as GloPayload;
+      if (payload.status && payload.response?.data) break;
+      lastError = 'GLO returned no published result for this date.';
+    } catch (error) {
+      lastError = error instanceof Error ? error.message : String(error);
+    }
+    await new Promise(resolve => setTimeout(resolve, attempt * 3000));
+  }
+
+  if (!payload) throw new Error(`GLO unavailable after retries: ${lastError}`);
   const data = payload.response?.data;
-  if (!payload.status || !data) throw new Error('GLO returned no published result for this date.');
+  if (!payload.status || !data) throw new Error(lastError);
 
   const topPrize = getValue(data.first?.number);
   const bottomTwo = getValue(data.last2?.number);
