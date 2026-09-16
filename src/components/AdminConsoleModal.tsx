@@ -24,6 +24,7 @@ export const AdminConsoleModal: React.FC<AdminConsoleModalProps> = ({ isOpen, on
   const [formFrontThree, setFormFrontThree] = useState('');
   const [formBackThree, setFormBackThree] = useState('');
   const [formReason, setFormReason] = useState('');
+  const [formOfficial, setFormOfficial] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
   const [formSuccess, setFormSuccess] = useState<string | null>(null);
 
@@ -85,7 +86,8 @@ export const AdminConsoleModal: React.FC<AdminConsoleModalProps> = ({ isOpen, on
       threeDigitTop: topPrize.slice(-3),
       threeDigitFront: formFrontThree ? formFrontThree.split(',').map(s => s.trim()).filter(Boolean) : undefined,
       threeDigitBack: formBackThree ? formBackThree.split(',').map(s => s.trim()).filter(Boolean) : undefined,
-      reason: formReason.trim()
+      reason: formReason.trim(),
+      isOfficiallyConfirmed: formOfficial
     });
 
     if (result.success) {
@@ -95,6 +97,7 @@ export const AdminConsoleModal: React.FC<AdminConsoleModalProps> = ({ isOpen, on
       setFormFrontThree('');
       setFormBackThree('');
       setFormReason('');
+      setFormOfficial(false);
       void loadPending(session);
     } else {
       setFormError(result.error);
@@ -241,13 +244,20 @@ export const AdminConsoleModal: React.FC<AdminConsoleModalProps> = ({ isOpen, on
                   </div>
                 )}
                 <textarea
-                  placeholder="เหตุผลที่ต้องแก้ไขด้วยมือ (เช่น GLO API ล่ม อ้างอิงแหล่งที่มา)"
+                  placeholder="เหตุผลและแหล่งอ้างอิง (เช่น GLO API ล่ม อ้างอิงประกาศทางการ หรือชื่อเว็บอ้างอิงที่ใช้เช็ก)"
                   value={formReason}
                   onChange={e => setFormReason(e.target.value)}
                   rows={2}
                   className="w-full bg-slate-950 border border-terminal-border rounded-lg px-3 py-2 text-xs font-mono text-white focus:outline-none focus:border-cyan-500"
                   required
                 />
+                <label className="flex items-start gap-2 text-[11px] font-mono text-slate-400 cursor-pointer">
+                  <input type="checkbox" checked={formOfficial} onChange={e => setFormOfficial(e.target.checked)} className="mt-0.5" />
+                  <span>
+                    ยืนยันว่าตรวจสอบกับแหล่งข้อมูลทางการโดยตรง (จะเผยแพร่เป็น <strong className="text-emerald-400">VERIFIED</strong>) —
+                    ถ้าไม่ติ๊ก จะเผยแพร่เป็น <strong className="text-amber-400">PENDING/อ้างอิงบุคคลที่สาม</strong> พร้อมป้ายเตือนผู้ใช้แทน
+                  </span>
+                </label>
                 <button type="submit" className="w-full py-2 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-slate-950 font-bold font-mono text-xs rounded-lg transition-all">
                   ส่งคำขอแก้ไข (SUBMIT FOR REVIEW)
                 </button>
@@ -273,7 +283,10 @@ export const AdminConsoleModal: React.FC<AdminConsoleModalProps> = ({ isOpen, on
                             <span className="text-white font-bold">{item.marketCode} · {item.drawDate}</span>
                             <span className="text-slate-500">{item.topPrize} / {item.twoDigitBottom}</span>
                           </div>
-                          <p className="text-slate-400 mb-2">{item.reason}</p>
+                          <p className="text-slate-400 mb-1">{item.reason}</p>
+                          <span className={`inline-block mb-2 px-1.5 py-0.5 rounded text-[9px] font-bold ${item.isOfficiallyConfirmed ? 'bg-emerald-950 text-emerald-400 border border-emerald-800' : 'bg-amber-950 text-amber-400 border border-amber-800'}`}>
+                            {item.isOfficiallyConfirmed ? 'อ้างว่าเป็นแหล่งทางการ → VERIFIED' : 'อ้างอิงบุคคลที่สาม → PENDING'}
+                          </span>
                           {isOwn ? (
                             <span className="text-[10px] text-amber-400">รอ Admin คนอื่นอนุมัติ (คุณอนุมัติคำขอของตัวเองไม่ได้)</span>
                           ) : (

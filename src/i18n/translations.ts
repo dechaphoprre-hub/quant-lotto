@@ -23,6 +23,10 @@ export interface Translations {
   bottomTwoDigit: string;
   algorithmIndex: string;
   entropyNote: string;
+  trustPendingTitle: string;
+  trustPendingDesc: string;
+  trustDemoTitle: string;
+  trustDemoDesc: string;
   quantPool: string;
   simulationsLabel: string;
   backtestNote: string;
@@ -192,6 +196,10 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     bottomTwoDigit: '2 ตัวล่าง',
     algorithmIndex: 'ดัชนีเสถียรภาพตัวเลข',
     entropyNote: 'วัดจากการกระจายตัวของตัวเลข (Entropy) ไม่ใช่ตัวชี้วัดผลแพ้ชนะจริง',
+    trustPendingTitle: 'ข้อมูลอ้างอิงจากแหล่งข้อมูลบุคคลที่สาม',
+    trustPendingDesc: 'ผลรางวัลตลาดนี้ยังไม่มีการยืนยันโดยตรงจากหน่วยงานทางการ กรุณาตรวจสอบผลจริงจากประกาศทางการอีกครั้งก่อนใช้อ้างอิง',
+    trustDemoTitle: 'นี่คือข้อมูลตัวอย่างสำหรับสาธิตระบบ',
+    trustDemoDesc: 'ยังไม่มีการเชื่อมต่อข้อมูลสดสำหรับตลาดนี้ ตัวเลขที่แสดงเป็นชุดข้อมูลตัวอย่าง ไม่ใช่ผลรางวัลจริง',
     quantPool: 'หน่วยประมวลผลควอนต์',
     simulationsLabel: 'รอบจำลอง',
     backtestNote: 'ผ่านการทดสอบย้อนหลัง 300+ งวด',
@@ -367,6 +375,10 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     bottomTwoDigit: '2 ໂຕລຸ່ມ',
     algorithmIndex: 'ດັດຊະນີຄວາມສະຖຽນ',
     entropyNote: 'ວັດຈາກການກະຈາຍຕົວຂອງໂຕເລກ (Entropy) ບໍ່ແມ່ນຕົວຊີ້ວັດຜົນແພ້ຊະນະຈິງ',
+    trustPendingTitle: 'ຂໍ້ມູນອ້າງອີງຈາກແຫຼ່ງຂໍ້ມູນບຸກຄົນທີສາມ',
+    trustPendingDesc: 'ຜົນລາງວັນຕະຫຼາດນີ້ຍັງບໍ່ໄດ້ຮັບການຢືນຢັນໂດຍກົງຈາກໜ່ວຍງານທາງການ ກະລຸນາກວດສອບຜົນຈິງອີກຄັ້ງກ່ອນນຳໄປໃຊ້',
+    trustDemoTitle: 'ນີ້ແມ່ນຂໍ້ມູນຕົວຢ່າງສຳລັບສາທິດລະບົບ',
+    trustDemoDesc: 'ຍັງບໍ່ມີການເຊື່ອມຕໍ່ຂໍ້ມູນສົດສຳລັບຕະຫຼາດນີ້ ໂຕເລກທີ່ສະແດງເປັນຊຸດຂໍ້ມູນຕົວຢ່າງ ບໍ່ແມ່ນຜົນລາງວັນຈິງ',
     quantPool: 'ໜ່ວຍປະມວນຜົນຄວອນຕ໌',
     simulationsLabel: 'ຮອບຈຳລອງ',
     backtestNote: 'ຜ່ານການທົດສອບຍ້ອນຫຼັງ 300+ ງວດ',
@@ -542,6 +554,10 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     bottomTwoDigit: '2 Số Đuôi',
     algorithmIndex: 'Chỉ Số Ổn Định',
     entropyNote: 'Đo từ độ phân tán của các chữ số (Entropy), không phải chỉ số thắng/thua thực tế',
+    trustPendingTitle: 'Dữ liệu tham khảo từ nguồn bên thứ ba',
+    trustPendingDesc: 'Kết quả thị trường này chưa được xác nhận trực tiếp từ cơ quan chính thức. Vui lòng kiểm tra lại kết quả thật từ thông báo chính thức trước khi sử dụng.',
+    trustDemoTitle: 'Đây là dữ liệu mẫu để minh họa hệ thống',
+    trustDemoDesc: 'Chưa kết nối dữ liệu trực tiếp cho thị trường này. Các con số hiển thị là dữ liệu mẫu, không phải kết quả thật.',
     quantPool: 'Bộ Xử Lý Lượng Tử',
     simulationsLabel: 'Vòng Giả Lập',
     backtestNote: 'Đã kiểm thử ngược 300+ kỳ',
@@ -717,6 +733,10 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     bottomTwoDigit: 'Bottom 2D',
     algorithmIndex: 'Stability Index',
     entropyNote: 'Measured from digit distribution (Entropy), not a real win-rate metric',
+    trustPendingTitle: 'Reference data from a third-party source',
+    trustPendingDesc: 'This market\'s result has not been directly confirmed by an official body. Please double-check the real result against an official announcement before relying on it.',
+    trustDemoTitle: 'This is sample data for demonstrating the system',
+    trustDemoDesc: 'No live data connection exists for this market yet. The numbers shown are a sample dataset, not a real draw result.',
     quantPool: 'Quant Compute Pool',
     simulationsLabel: 'Simulations',
     backtestNote: 'Backtested over 300+ draws',

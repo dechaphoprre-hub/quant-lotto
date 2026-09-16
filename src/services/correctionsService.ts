@@ -13,6 +13,7 @@ export interface DrawCorrectionInput {
   threeDigitFront?: string[];
   threeDigitBack?: string[];
   reason: string;
+  isOfficiallyConfirmed: boolean;
 }
 
 export interface DrawCorrectionView {
@@ -23,6 +24,7 @@ export interface DrawCorrectionView {
   twoDigitTop: string;
   twoDigitBottom: string;
   reason: string;
+  isOfficiallyConfirmed: boolean;
   status: 'PENDING' | 'APPROVED' | 'REJECTED';
   submittedBy: string;
   createdAt: string;
@@ -55,7 +57,8 @@ export const submitCorrection = async (
         three_digit_top: input.threeDigitTop,
         three_digit_front: input.threeDigitFront || [],
         three_digit_back: input.threeDigitBack || [],
-        reason: input.reason
+        reason: input.reason,
+        is_officially_confirmed: input.isOfficiallyConfirmed
       })
     });
     if (!response.ok) {
@@ -74,7 +77,7 @@ export const fetchPendingCorrections = async (session: AdminSession): Promise<Dr
 
   try {
     const response = await fetch(
-      `${SUPABASE_URL}/rest/v1/draw_corrections?status=eq.PENDING&order=created_at.asc&select=id,market_code,draw_date,top_prize,two_digit_top,two_digit_bottom,reason,status,submitted_by,created_at`,
+      `${SUPABASE_URL}/rest/v1/draw_corrections?status=eq.PENDING&order=created_at.asc&select=id,market_code,draw_date,top_prize,two_digit_top,two_digit_bottom,reason,is_officially_confirmed,status,submitted_by,created_at`,
       { headers: authHeaders(session) }
     );
     if (!response.ok) return [];
@@ -87,6 +90,7 @@ export const fetchPendingCorrections = async (session: AdminSession): Promise<Dr
       twoDigitTop: String(row.two_digit_top),
       twoDigitBottom: String(row.two_digit_bottom),
       reason: String(row.reason),
+      isOfficiallyConfirmed: Boolean(row.is_officially_confirmed),
       status: row.status as DrawCorrectionView['status'],
       submittedBy: String(row.submitted_by),
       createdAt: String(row.created_at)

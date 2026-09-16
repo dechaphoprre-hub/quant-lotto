@@ -35,8 +35,12 @@ const mapSupabaseDraw = (row: Record<string, unknown>): DrawRecord => ({
   twoDigitBottom: String(row.two_digit_bottom),
   threeDigitTop: row.three_digit_top ? String(row.three_digit_top) : undefined,
   threeDigitFront: Array.isArray(row.three_digit_front) ? row.three_digit_front.map(String) : undefined,
-  threeDigitBack: Array.isArray(row.three_digit_back) ? row.three_digit_back.map(String) : undefined
+  threeDigitBack: Array.isArray(row.three_digit_back) ? row.three_digit_back.map(String) : undefined,
+  verificationStatus: row.verification_status === 'PENDING' ? 'PENDING' : 'VERIFIED'
 });
+
+/** Bundled sample data was never fetched live — always label it DEMO, even if the record already claims otherwise. */
+const asDemo = (draws: DrawRecord[]): DrawRecord[] => draws.map(d => ({ ...d, verificationStatus: 'DEMO' }));
 
 /**
  * Lottery Cloud Sync Service:
@@ -100,7 +104,7 @@ export class LotterySyncService {
           success: false,
           message: `Remote data API is not configured; using bundled snapshot for ${market}.`
         };
-        return { updated: false, dataset: cleanDataset, message: this.status.message };
+        return { updated: false, dataset: asDemo(cleanDataset), message: this.status.message };
       }
 
       const controller = new AbortController();
@@ -108,7 +112,7 @@ export class LotterySyncService {
       const isCustomApi = Boolean(DATA_API_BASE_URL);
       const endpoint = isCustomApi
         ? `${DATA_API_BASE_URL}/markets/${market}/draws`
-        : `${SUPABASE_URL}/rest/v1/draws?market_code=eq.${market}&verification_status=eq.VERIFIED&select=id,market_code,draw_date,draw_number,top_prize,two_digit_top,two_digit_bottom,three_digit_top,three_digit_front,three_digit_back&order=draw_date.desc`;
+        : `${SUPABASE_URL}/rest/v1/draws?market_code=eq.${market}&verification_status=in.(VERIFIED,PENDING)&select=id,market_code,draw_date,draw_number,top_prize,two_digit_top,two_digit_bottom,three_digit_top,three_digit_front,three_digit_back,verification_status&order=draw_date.desc`;
       const response = await fetch(endpoint, {
         headers: {
           Accept: 'application/json',
@@ -165,7 +169,7 @@ export class LotterySyncService {
 
       return {
         updated: false,
-        dataset: currentDataset,
+        dataset: asDemo(currentDataset),
         message: this.status.message
       };
     }

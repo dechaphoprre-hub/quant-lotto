@@ -59,6 +59,18 @@ The "Proof of Algorithm" tab must only ever show real, pre-committed predictions
 - `npm run generate:proof` computes a Top-5 prediction from only the verified draws known so far, hashes it, and inserts it into `proof_records` before the next draw happens. It is chained after `npm run ingest:glo` in `.github/workflows/ingest-glo.yml`, so a fresh prediction is committed right after each draw is ingested, for the draw after that.
 - Scoring against the real result happens automatically inside the GLO ingestion (`scripts/lib/glo.ts`) the moment that draw's result is verified; a proof record is never edited to change its prediction after it was committed.
 
+## Laos / Hanoi / Hanoi VIP: no official API exists
+
+Unlike Thailand's GLO, there is no official government API for Lao or Vietnamese (Hanoi) lottery results. Wiring an automated scraper against an unverified third-party site and marking it `VERIFIED` would misrepresent it as government-confirmed, which this project treats as a hard no (see "no fabricated data" throughout this file).
+
+Instead, `draws.verification_status` now has a real third tier the frontend renders honestly:
+
+- `VERIFIED` — automated, government-sourced (GLO today), or an admin attested `is_officially_confirmed = true` on a correction.
+- `PENDING` — published, but only backed by a manual correction citing a third-party reference (`is_officially_confirmed = false`, the default). The site shows an amber "reference data, not officially confirmed" banner on it.
+- `DEMO` (frontend-only, not a database value) — the bundled sample dataset, shown with a red "sample data, not a real result" banner whenever no live Supabase row exists yet for that market. This is the honest state Laos/Hanoi/Hanoi VIP are in today, and Thai will fall back to it too until `backfill:glo` actually runs.
+
+To get Laos/Hanoi/Hanoi VIP results onto the site today: an operator checks whatever third-party source they trust, submits it via the admin console (leaving "officially confirmed" unchecked) citing that source in the reason field, and a different admin approves it — publishing as `PENDING` with the disclaimer, never silently as `VERIFIED`. If a genuine official/primary source for one of these markets is identified later, build an automated ingestion script the same shape as `scripts/lib/glo.ts` and use `is_officially_confirmed = true` (or automate it directly with `verification_status = 'VERIFIED'`) instead.
+
 ## Admin backend (real auth, approval, and audit trail)
 
 The operator console (`Ctrl/Cmd+Shift+A`, gated by `VITE_ADMIN_CONSOLE_ENABLED`) no longer has a client-side PIN or any ability to write to the browser's local storage as if it were production data. It signs in against real Supabase Auth, and every write is enforced by Postgres row-level security, not by frontend logic:
