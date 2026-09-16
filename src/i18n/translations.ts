@@ -17,6 +17,7 @@ export interface Translations {
   heatmapTab: string;
   warRoomTab: string;
   proofTab: string;
+  insightsTab: string;
   countdownTitle: string;
   latestDrawTitle: string;
   topTwoDigit: string;
@@ -151,6 +152,30 @@ export interface Translations {
   proofPendingBadge: string;
   proofPendingDesc: string;
 
+  // Statistical Insights (honesty tools + separated belief-numbers section)
+  chiSquareTitle: string;
+  chiSquareDesc: string;
+  chiSquareStatLabel: string;
+  chiSquareDfLabel: string;
+  chiSquarePValueLabel: string;
+  chiSquareVerdictRandom: string;
+  chiSquareVerdictSkewed: string;
+  chiSquareFootnote: string;
+  dormantTitle: string;
+  dormantDesc: string;
+  dormantEmptyState: string;
+  dormantNeverSeenLabel: string;
+  dormantLastSeenLabel: string;
+  cooccurTitle: string;
+  cooccurDesc: string;
+  cooccurCountLabel: string;
+  cooccurEmptyState: string;
+  beliefTitle: string;
+  beliefDisclaimer: string;
+  beliefEmptyTitle: string;
+  beliefEmptyDesc: string;
+  beliefSourceLabel: string;
+
   // Guide Modal
   guideTitle: string;
   guideSub: string;
@@ -190,6 +215,7 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     heatmapTab: 'ตารางสถิติ 00-99',
     warRoomTab: 'ห้องลุ้นสด LIVE',
     proofTab: 'บันทึกความแม่นยำ',
+    insightsTab: 'เจาะลึกสถิติ',
     countdownTitle: 'นับถอยหลังออกรางวัล',
     latestDrawTitle: 'ผลรางวัลงวดล่าสุด',
     topTwoDigit: '2 ตัวบน',
@@ -334,6 +360,29 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     proofPendingBadge: 'รอผลงวดถัดไป',
     proofPendingDesc: 'ล็อกเลขทำนายและรหัสแฮชไว้แล้วก่อนหวยออก รอผลจริงมาตรวจสอบ',
 
+    chiSquareTitle: 'การทดสอบไคสแควร์ (ตรวจสอบความสุ่ม)',
+    chiSquareDesc: 'ทดสอบว่าตัวเลขที่ออกจริงในอดีตกระจายตัวใกล้เคียงการสุ่มแบบสม่ำเสมอแค่ไหน ไม่ใช่เครื่องมือทำนายเลขที่จะออก',
+    chiSquareStatLabel: 'ค่าสถิติ χ²',
+    chiSquareDfLabel: 'องศาอิสระ (df)',
+    chiSquarePValueLabel: 'ค่า p-value',
+    chiSquareVerdictRandom: 'สอดคล้องกับการสุ่มจริง',
+    chiSquareVerdictSkewed: 'เบี่ยงเบนจากการสุ่มอย่างมีนัยสำคัญ',
+    chiSquareFootnote: 'ผลทดสอบนี้บอกแค่ว่าประวัติที่ผ่านมาสุ่มจริงหรือไม่ ไม่ได้บ่งชี้ว่าเลขใดจะออกในงวดถัดไป',
+    dormantTitle: 'เลขที่ไม่ออกนาน (ย้อนหลัง 3 ปี)',
+    dormantDesc: 'รายชื่อเลข 2 ตัวที่ไม่ปรากฏเลยในช่วง 3 ปีล่าสุดของข้อมูลที่มี เป็นข้อเท็จจริงทางประวัติศาสตร์ ไม่ใช่สัญญาณว่าเลขนั้น "ใกล้จะออก"',
+    dormantEmptyState: 'ทุกเลขปรากฏแล้วอย่างน้อยหนึ่งครั้งในช่วง 3 ปีล่าสุด',
+    dormantNeverSeenLabel: 'ไม่เคยออกเลยในประวัติทั้งหมด',
+    dormantLastSeenLabel: 'ออกล่าสุด',
+    cooccurTitle: 'คู่เลขที่ออกพร้อมกันบ่อย',
+    cooccurDesc: 'คู่เลข 2 ตัวบน/ล่างที่เคยออกพร้อมกันในงวดเดียวกันมากกว่า 1 ครั้ง เป็นข้อมูลเชิงพรรณนาเท่านั้น เลขแต่ละตัวออกอิสระจากกัน',
+    cooccurCountLabel: 'ครั้ง',
+    cooccurEmptyState: 'ยังไม่พบคู่เลขที่ออกซ้ำกันในข้อมูลที่มี',
+    beliefTitle: 'เลขจากกระแสสังคม/ข่าว',
+    beliefDisclaimer: 'ส่วนนี้คือความเชื่อและกระแสสังคม ไม่ใช่การวิเคราะห์ทางสถิติ และไม่มีความเกี่ยวข้องกับ Quant Engine ด้านบน',
+    beliefEmptyTitle: 'ยังไม่มีเลขจากกระแสสังคมในตอนนี้',
+    beliefEmptyDesc: 'เมื่อมีการเผยแพร่โดยผู้ดูแลระบบ พร้อมแหล่งที่มา รายการจะปรากฏที่นี่',
+    beliefSourceLabel: 'แหล่งที่มา',
+
     guideTitle: 'คู่มือใช้งาน QUANTLOTTO สำหรับผู้เริ่มต้น',
     guideSub: 'ดูจบใน 1 นาที เข้าใจทันทีว่าต้องดูตรงไหนก่อนหวยออก!',
     guideChapter1Title: 'ขั้นตอนที่ 1: ส่องเลขเด่น 5 อันดับแรก (Alpha Picks)',
@@ -369,6 +418,7 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     heatmapTab: 'ຕາຕະລາງ 00-99',
     warRoomTab: 'ຫ້ອງລຸ້ນສົດ LIVE',
     proofTab: 'ປະຫວັດຄວາມແມ່ນຍຳ',
+    insightsTab: 'ເຈາະເລິກສະຖິຕິ',
     countdownTitle: 'ນັບຖອຍຫຼັງອອກລາງວັນ',
     latestDrawTitle: 'ຜົນລາງວັນຫຼ້າສຸດ',
     topTwoDigit: '2 ໂຕເທິງ',
@@ -513,6 +563,29 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     proofPendingBadge: 'ລໍຖ້າຜົນງວດຖັດໄປ',
     proofPendingDesc: 'ລັອກເລກທຳນາຍ ແລະ ລະຫັດແຮັຊໄວ້ກ່ອນອອກຜົນ ລໍຖ້າຜົນຈິງມາກວດສອບ',
 
+    chiSquareTitle: 'ການທົດສອບໄຄສແຄວຣ໌ (ກວດສອບຄວາມສຸ່ມ)',
+    chiSquareDesc: 'ທົດສອບວ່າໂຕເລກທີ່ອອກຈິງໃນອະດີດກະຈາຍຕົວໃກ້ຄຽງກັບການສຸ່ມແບບສະໝໍ່າສະເໝີພຽງໃດ ບໍ່ແມ່ນເຄື່ອງມືທຳນາຍເລກທີ່ຈະອອກ',
+    chiSquareStatLabel: 'ຄ່າສະຖິຕິ χ²',
+    chiSquareDfLabel: 'ອົງສາອິດສະຫຼະ (df)',
+    chiSquarePValueLabel: 'ຄ່າ p-value',
+    chiSquareVerdictRandom: 'ສອດຄ່ອງກັບການສຸ່ມຈິງ',
+    chiSquareVerdictSkewed: 'ບ່ຽງເບນຈາກການສຸ່ມຢ່າງມີນັຍສຳຄັນ',
+    chiSquareFootnote: 'ຜົນທົດສອບນີ້ບອກພຽງວ່າປະຫວັດທີ່ຜ່ານມາສຸ່ມຈິງຫຼືບໍ່ ບໍ່ໄດ້ບົ່ງບອກວ່າເລກໃດຈະອອກໃນງວດຖັດໄປ',
+    dormantTitle: 'ເລກທີ່ບໍ່ອອກດົນ (ຍ້ອນຫຼັງ 3 ປີ)',
+    dormantDesc: 'ລາຍຊື່ເລກ 2 ໂຕທີ່ບໍ່ປາກົດເລີຍໃນຊ່ວງ 3 ປີລ່າສຸດ ເປັນຂໍ້ເທັດຈິງທາງປະຫວັດສາດ ບໍ່ແມ່ນສັນຍານວ່າເລກນັ້ນ "ໃກ້ຈະອອກ"',
+    dormantEmptyState: 'ທຸກເລກປາກົດແລ້ວຢ່າງໜ້ອຍໜຶ່ງຄັ້ງໃນຊ່ວງ 3 ປີລ່າສຸດ',
+    dormantNeverSeenLabel: 'ບໍ່ເຄີຍອອກເລີຍໃນປະຫວັດທັງໝົດ',
+    dormantLastSeenLabel: 'ອອກລ່າສຸດ',
+    cooccurTitle: 'ຄູ່ເລກທີ່ອອກພ້ອມກັນເລື້ອຍໆ',
+    cooccurDesc: 'ຄູ່ເລກ 2 ໂຕເທິງ/ລຸ່ມທີ່ເຄີຍອອກພ້ອມກັນໃນງວດດຽວກັນຫຼາຍກວ່າ 1 ຄັ້ງ ເປັນຂໍ້ມູນພັນລະນາເທົ່ານັ້ນ',
+    cooccurCountLabel: 'ຄັ້ງ',
+    cooccurEmptyState: 'ຍັງບໍ່ພົບຄູ່ເລກທີ່ອອກຊ້ຳກັນໃນຂໍ້ມູນທີ່ມີ',
+    beliefTitle: 'ເລກຈາກກະແສສັງຄົມ/ຂ່າວ',
+    beliefDisclaimer: 'ສ່ວນນີ້ແມ່ນຄວາມເຊື່ອ ແລະ ກະແສສັງຄົມ ບໍ່ແມ່ນການວິເຄາະທາງສະຖິຕິ',
+    beliefEmptyTitle: 'ຍັງບໍ່ມີເລກຈາກກະແສສັງຄົມໃນຕອນນີ້',
+    beliefEmptyDesc: 'ເມື່ອມີການເຜີຍແຜ່ໂດຍຜູ້ດູແລລະບົບ ພ້ອມແຫຼ່ງທີ່ມາ ລາຍການຈະປາກົດຢູ່ນີ້',
+    beliefSourceLabel: 'ແຫຼ່ງທີ່ມາ',
+
     guideTitle: 'ຄູ່ມືນຳໃຊ້ QUANTLOTTO ສຳລັບຜູ້ເລີ່ມຕົ້ນ',
     guideSub: 'ເບິ່ງຈົບໃນ 1 ນາທີ ເຂົ້າໃຈທັນທີວ່າຄວນເບິ່ງຈຸດໃດກ່ອນຫວຍອອກ!',
     guideChapter1Title: 'ຂັ້ນຕອນທີ 1: ເບິ່ງເລກເດັ່ນ 5 ອັນດັບແຮກ (Alpha Picks)',
@@ -548,6 +621,7 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     heatmapTab: 'Ma Trận 00-99',
     warRoomTab: 'Phòng Trực Tiếp',
     proofTab: 'Minh Chứng Độ Chuẩn',
+    insightsTab: 'Phân Tích Sâu',
     countdownTitle: 'ĐẾM NGƯỢC GIỜ QUAY',
     latestDrawTitle: 'Kết Quả Kỳ Trước',
     topTwoDigit: '2 Số Đầu',
@@ -692,6 +766,29 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     proofPendingBadge: 'Chờ kết quả kỳ tới',
     proofPendingDesc: 'Đã khóa số dự đoán và mã băm trước khi quay số, đang chờ kết quả thật để đối soát.',
 
+    chiSquareTitle: 'Kiểm định Chi-bình phương (Kiểm tra tính ngẫu nhiên)',
+    chiSquareDesc: 'Kiểm tra xem các con số đã ra trong quá khứ có phân bố gần với ngẫu nhiên đều hay không — không phải công cụ dự đoán số sẽ ra.',
+    chiSquareStatLabel: 'Giá trị χ²',
+    chiSquareDfLabel: 'Bậc tự do (df)',
+    chiSquarePValueLabel: 'Giá trị p',
+    chiSquareVerdictRandom: 'Phù hợp với ngẫu nhiên thực sự',
+    chiSquareVerdictSkewed: 'Lệch khỏi ngẫu nhiên một cách đáng kể',
+    chiSquareFootnote: 'Kết quả này chỉ cho biết lịch sử có thực sự ngẫu nhiên hay không, không cho biết số nào sẽ ra ở kỳ tới.',
+    dormantTitle: 'Số lâu chưa ra (trong 3 năm gần đây)',
+    dormantDesc: 'Danh sách số 2 chữ số chưa xuất hiện trong 3 năm gần nhất của dữ liệu hiện có — đây là dữ kiện lịch sử, không phải tín hiệu cho thấy số đó "sắp ra".',
+    dormantEmptyState: 'Mọi số đều đã xuất hiện ít nhất một lần trong 3 năm gần đây.',
+    dormantNeverSeenLabel: 'Chưa từng ra trong toàn bộ lịch sử',
+    dormantLastSeenLabel: 'Ra gần nhất',
+    cooccurTitle: 'Cặp số thường ra cùng nhau',
+    cooccurDesc: 'Cặp số 2 chữ số đầu/đuôi từng ra cùng một kỳ nhiều hơn 1 lần — chỉ là dữ liệu mô tả, mỗi số ra độc lập với nhau.',
+    cooccurCountLabel: 'lần',
+    cooccurEmptyState: 'Chưa tìm thấy cặp số nào lặp lại trong dữ liệu hiện có.',
+    beliefTitle: 'Số từ tin tức/trào lưu xã hội',
+    beliefDisclaimer: 'Phần này là niềm tin và trào lưu xã hội, không phải phân tích thống kê, và không liên quan đến Quant Engine ở trên.',
+    beliefEmptyTitle: 'Hiện chưa có số nào từ trào lưu xã hội',
+    beliefEmptyDesc: 'Khi quản trị viên đăng kèm nguồn, mục sẽ xuất hiện tại đây.',
+    beliefSourceLabel: 'Nguồn',
+
     guideTitle: 'HƯỚNG DẪN DÀNH CHO NGƯỜI MỚI',
     guideSub: 'Xem trong 1 phút để hiểu cách soi cầu xác suất cao nhất trước giờ quay!',
     guideChapter1Title: 'Bước 1: Xem Top 5 con số may mắn (Alpha Picks)',
@@ -727,6 +824,7 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     heatmapTab: 'HEATMAP 00-99',
     warRoomTab: 'LIVE WAR ROOM',
     proofTab: 'ACCURACY LEDGER',
+    insightsTab: 'INSIGHTS',
     countdownTitle: 'COUNTDOWN TO DRAW',
     latestDrawTitle: 'LATEST OFFICIAL DRAW',
     topTwoDigit: 'Top 2D',
@@ -870,6 +968,29 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     proofEmptyDesc: 'No prediction has been committed in advance and reconciled against a real result yet. This will populate after the next draw.',
     proofPendingBadge: 'Awaiting next draw',
     proofPendingDesc: 'Prediction and hash are already locked in ahead of the draw, pending the real result to reconcile against.',
+
+    chiSquareTitle: 'Chi-Square Goodness-of-Fit Test (Randomness Check)',
+    chiSquareDesc: 'Tests how closely past draws match a truly uniform random distribution — not a tool for predicting the next draw.',
+    chiSquareStatLabel: 'χ² Statistic',
+    chiSquareDfLabel: 'Degrees of Freedom (df)',
+    chiSquarePValueLabel: 'p-value',
+    chiSquareVerdictRandom: 'Consistent with true randomness',
+    chiSquareVerdictSkewed: 'Significantly deviates from randomness',
+    chiSquareFootnote: 'This result only says whether the history looks genuinely random — it says nothing about which number will draw next.',
+    dormantTitle: 'Dormant Numbers (Last 3 Years)',
+    dormantDesc: 'Two-digit numbers that have not appeared at all in the last 3 years of loaded data — a historical fact, not a signal that a number is "due."',
+    dormantEmptyState: 'Every number has appeared at least once in the last 3 years.',
+    dormantNeverSeenLabel: 'Never appeared in the full history',
+    dormantLastSeenLabel: 'Last seen',
+    cooccurTitle: 'Frequently Co-Occurring Pairs',
+    cooccurDesc: 'Top/bottom two-digit pairs that have landed together in the same draw more than once — purely descriptive; each number draws independently.',
+    cooccurCountLabel: 'times',
+    cooccurEmptyState: 'No repeated pairs found in the loaded data yet.',
+    beliefTitle: 'Numbers From the News / Social Trends',
+    beliefDisclaimer: 'This section is social belief and folklore, not statistical analysis, and is unrelated to the Quant Engine above.',
+    beliefEmptyTitle: 'No social-trend numbers posted yet',
+    beliefEmptyDesc: 'Once an admin publishes one with a source, it will appear here.',
+    beliefSourceLabel: 'Source',
 
     guideTitle: 'QUANTLOTTO BEGINNER QUICK-START GUIDE',
     guideSub: 'Learn how to navigate and extract top probability picks in 60 seconds!',

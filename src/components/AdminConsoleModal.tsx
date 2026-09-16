@@ -2,7 +2,8 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { MarketType } from '../types';
 import { AdminSession, AdminRole, signIn, signOut, fetchAdminRole } from '../services/authService';
 import { DrawCorrectionView, submitCorrection, fetchPendingCorrections, reviewCorrection } from '../services/correctionsService';
-import { X, ShieldAlert, CheckCircle2, AlertTriangle, KeyRound, PlusCircle, LogOut, ClipboardCheck } from 'lucide-react';
+import { submitBeliefNumber } from '../services/beliefNumbersService';
+import { X, ShieldAlert, CheckCircle2, AlertTriangle, KeyRound, PlusCircle, LogOut, ClipboardCheck, Newspaper } from 'lucide-react';
 
 interface AdminConsoleModalProps {
   isOpen: boolean;
@@ -29,6 +30,10 @@ export const AdminConsoleModal: React.FC<AdminConsoleModalProps> = ({ isOpen, on
   const [formSuccess, setFormSuccess] = useState<string | null>(null);
 
   const [pending, setPending] = useState<DrawCorrectionView[]>([]);
+
+  const [beliefHeadline, setBeliefHeadline] = useState('');
+  const [beliefNumbers, setBeliefNumbers] = useState('');
+  const [beliefSource, setBeliefSource] = useState('');
 
   const loadPending = useCallback(async (activeSession: AdminSession) => {
     setPending(await fetchPendingCorrections(activeSession));
@@ -99,6 +104,35 @@ export const AdminConsoleModal: React.FC<AdminConsoleModalProps> = ({ isOpen, on
       setFormReason('');
       setFormOfficial(false);
       void loadPending(session);
+    } else {
+      setFormError(result.error);
+    }
+  };
+
+  const handleSubmitBelief = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setFormError(null);
+    setFormSuccess(null);
+    if (!session) return;
+
+    const numbers = beliefNumbers.split(',').map(s => s.trim()).filter(Boolean);
+    if (!beliefHeadline.trim() || numbers.length === 0 || !beliefSource.trim()) {
+      setFormError('หัวข้อ, เลข, และแหล่งที่มา ต้องกรอกให้ครบ');
+      return;
+    }
+
+    const result = await submitBeliefNumber(session, {
+      marketCode: activeMarket,
+      headline: beliefHeadline.trim(),
+      numbers,
+      sourceNote: beliefSource.trim()
+    });
+
+    if (result.success) {
+      setFormSuccess('เผยแพร่เลขจากกระแสสังคมแล้ว (ขึ้นทันที ไม่ต้องรออนุมัติ)');
+      setBeliefHeadline('');
+      setBeliefNumbers('');
+      setBeliefSource('');
     } else {
       setFormError(result.error);
     }
@@ -260,6 +294,43 @@ export const AdminConsoleModal: React.FC<AdminConsoleModalProps> = ({ isOpen, on
                 </label>
                 <button type="submit" className="w-full py-2 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-slate-950 font-bold font-mono text-xs rounded-lg transition-all">
                   ส่งคำขอแก้ไข (SUBMIT FOR REVIEW)
+                </button>
+              </form>
+            </div>
+
+            {/* Belief-number post (news/folklore numbers) — publishes immediately, no approval queue, since it's clearly labelled social belief, not an official draw result */}
+            <div className="bg-slate-900/50 border border-purple-900/40 rounded-xl p-4">
+              <div className="flex items-center space-x-2 mb-3 pb-2 border-b border-terminal-border">
+                <Newspaper className="w-4 h-4 text-purple-400" />
+                <span className="text-xs font-mono font-bold text-white uppercase">โพสต์เลขจากกระแสสังคม/ข่าว ({activeMarket}) — เผยแพร่ทันที</span>
+              </div>
+              <form onSubmit={handleSubmitBelief} className="space-y-3">
+                <input
+                  type="text"
+                  placeholder="หัวข้อข่าว/เหตุการณ์ เช่น ทะเบียนรถอุบัติเหตุข่าวดัง"
+                  value={beliefHeadline}
+                  onChange={e => setBeliefHeadline(e.target.value)}
+                  className="w-full bg-slate-950 border border-terminal-border rounded-lg px-3 py-2 text-xs font-mono text-white focus:outline-none focus:border-purple-500"
+                  required
+                />
+                <input
+                  type="text"
+                  placeholder="เลขที่เกี่ยวข้อง คั่นด้วยจุลภาค เช่น 12, 89, 894"
+                  value={beliefNumbers}
+                  onChange={e => setBeliefNumbers(e.target.value)}
+                  className="w-full bg-slate-950 border border-terminal-border rounded-lg px-3 py-2 text-xs font-mono text-white focus:outline-none focus:border-purple-500"
+                  required
+                />
+                <input
+                  type="text"
+                  placeholder="แหล่งที่มา เช่น ลิงก์ข่าว หรือชื่อสำนักข่าว"
+                  value={beliefSource}
+                  onChange={e => setBeliefSource(e.target.value)}
+                  className="w-full bg-slate-950 border border-terminal-border rounded-lg px-3 py-2 text-xs font-mono text-white focus:outline-none focus:border-purple-500"
+                  required
+                />
+                <button type="submit" className="w-full py-2 bg-purple-600 hover:bg-purple-500 text-white font-bold font-mono text-xs rounded-lg transition-all">
+                  เผยแพร่ (PUBLISH — ไม่ต้องรออนุมัติ)
                 </button>
               </form>
             </div>
