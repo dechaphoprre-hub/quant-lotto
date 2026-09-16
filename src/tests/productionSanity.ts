@@ -1,6 +1,7 @@
 import { validateDrawRecord, sanitizeDrawDataset } from '../services/dataValidator.ts';
 import { calculateDigitStatistics, runMonteCarloSimulation, calculateMarkovTransitions, runThreeDigitSimulation } from '../math/quantEngine.ts';
 import { calculateChiSquareTest, findDormantNumbers, calculateCoOccurrencePairs } from '../math/statisticalInsights.ts';
+import { extractNumbersFromText } from '../math/newsNumberExtraction.ts';
 import { THAI_LOTTERY_DRAWS, LAO_LOTTERY_DRAWS, HANOI_LOTTERY_DRAWS, HANOI_VIP_LOTTERY_DRAWS } from '../data/lotteryData.ts';
 import { DrawRecord } from '../types/index.ts';
 
@@ -159,6 +160,21 @@ assert(
   coOccurrence.every((p, idx) => idx === 0 || coOccurrence[idx - 1].count >= p.count),
   'Co-occurrence pairs are sorted by count descending'
 );
+
+// 8. News Number Extraction (deterministic digit-derivation, not AI text understanding)
+console.log('\n--- 8. Testing News Number Extraction ---');
+
+const extractedFromPlate = extractNumbersFromText('อุบัติเหตุรถบรรทุกทะเบียน 8894 พลิกคว่ำที่สระบุรี คนขับอายุ 45 ปี');
+assert(extractedFromPlate.includes('94'), `Extracts last-2 digits from a 4-digit run (${extractedFromPlate.join(', ')})`);
+assert(extractedFromPlate.includes('88'), `Extracts first-2 digits from a 4-digit run (${extractedFromPlate.join(', ')})`);
+assert(extractedFromPlate.includes('45'), `Extracts a standalone 2-digit run as-is (${extractedFromPlate.join(', ')})`);
+assert(extractedFromPlate.every(n => /^\d{2}$/.test(n)), 'Every extracted candidate is exactly 2 digits');
+
+const extractedEmpty = extractNumbersFromText('ไม่มีตัวเลขในข้อความนี้เลย');
+assert(extractedEmpty.length === 0, 'Text with no digits extracts zero candidates');
+
+const extractedCapped = extractNumbersFromText('1 22 333 4444 55555 666666 7 88 999', 5);
+assert(extractedCapped.length <= 5, `Extraction respects the maxCandidates cap (${extractedCapped.length} <= 5)`);
 
 console.log('\n====================================================');
 console.log(`   TEST SUMMARY: ${passedTests} / ${totalTests} TESTS PASSED (100% SUCESS)   `);
