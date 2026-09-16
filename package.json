@@ -13,6 +13,8 @@
     "backfill:glo": "npx tsx scripts/backfill-glo.ts",
     "generate:proof": "npx tsx scripts/generate-proof.ts",
     "backtest:3d": "npx tsx scripts/backtest-3d-scoring.ts",
+    "announce:draw": "npx tsx scripts/announce-draw.ts",
+    "generate:draw-page": "npx tsx scripts/generate-draw-page.ts",
     "deploy": "npm run build && npx gh-pages -d dist"
   },
   "dependencies": {
