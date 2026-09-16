@@ -1,6 +1,6 @@
 import { validateDrawRecord, sanitizeDrawDataset } from '../services/dataValidator.ts';
 import { calculateDigitStatistics, runMonteCarloSimulation, calculateMarkovTransitions, runThreeDigitSimulation } from '../math/quantEngine.ts';
-import { THAI_LOTTERY_DRAWS, LAO_LOTTERY_DRAWS, HANOI_LOTTERY_DRAWS } from '../data/lotteryData.ts';
+import { THAI_LOTTERY_DRAWS, LAO_LOTTERY_DRAWS, HANOI_LOTTERY_DRAWS, HANOI_VIP_LOTTERY_DRAWS } from '../data/lotteryData.ts';
 import { DrawRecord } from '../types/index.ts';
 
 console.log('====================================================');
@@ -56,14 +56,23 @@ assert(!v2.isValid && v2.errors.length >= 4, 'Invalid record correctly rejected 
 console.log('\n--- 2. Testing Deep Authentic Datasets ---');
 
 const thaiClean = sanitizeDrawDataset(THAI_LOTTERY_DRAWS);
-assert(thaiClean.rejectedCount === 0, `Thai dataset has 0 invalid records (Total: ${THAI_LOTTERY_DRAWS.length} draws)`);
+assert(thaiClean.rejectedCount === 0, `Thai dataset clean with 0 errors (Total: ${THAI_LOTTERY_DRAWS.length} draws)`);
 assert(thaiClean.cleanDataset.length >= 40, `Thai dataset has deep sample size (${thaiClean.cleanDataset.length} >= 40)`);
 
 const laoClean = sanitizeDrawDataset(LAO_LOTTERY_DRAWS);
-assert(laoClean.rejectedCount === 0, `Lao dataset clean (Total: ${LAO_LOTTERY_DRAWS.length} draws)`);
+assert(laoClean.rejectedCount === 0, `Lao dataset clean with 0 errors (Total: ${LAO_LOTTERY_DRAWS.length} draws)`);
+assert(laoClean.cleanDataset.length >= 40, `Lao dataset has deep sample size (${laoClean.cleanDataset.length} >= 40)`);
 
 const hanoiClean = sanitizeDrawDataset(HANOI_LOTTERY_DRAWS);
-assert(hanoiClean.rejectedCount === 0, `Hanoi dataset clean (Total: ${HANOI_LOTTERY_DRAWS.length} draws)`);
+assert(hanoiClean.rejectedCount === 0, `Hanoi Regular dataset clean with 0 errors (Total: ${HANOI_LOTTERY_DRAWS.length} draws)`);
+assert(hanoiClean.cleanDataset.length >= 40, `Hanoi Regular dataset has deep sample size (${hanoiClean.cleanDataset.length} >= 40)`);
+
+const hanoiVipClean = sanitizeDrawDataset(HANOI_VIP_LOTTERY_DRAWS);
+assert(hanoiVipClean.rejectedCount === 0, `Hanoi VIP dataset clean with 0 errors (Total: ${HANOI_VIP_LOTTERY_DRAWS.length} draws)`);
+assert(hanoiVipClean.cleanDataset.length >= 40, `Hanoi VIP dataset has deep sample size (${hanoiVipClean.cleanDataset.length} >= 40)`);
+
+const samePrizeCount = HANOI_LOTTERY_DRAWS.filter((h, idx) => h.topPrize === HANOI_VIP_LOTTERY_DRAWS[idx]?.topPrize).length;
+assert(samePrizeCount === 0, 'Hanoi Regular and Hanoi VIP are strictly distinct, independent datasets');
 
 // 3. Mathematical Defensive Guardrails
 console.log('\n--- 3. Testing Mathematical Engine Guardrails ---');
