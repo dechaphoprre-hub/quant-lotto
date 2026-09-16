@@ -36,7 +36,39 @@ export const EventTimelineRadar: React.FC<EventTimelineRadarProps> = ({
     return () => clearInterval(timer);
   }, []);
 
-  // Events list for Tomorrow (16 September 2026) & Today
+  const getDynamicDateStr = (targetTimestamp: number) => {
+    const tgt = new Date(targetTimestamp);
+    const curr = new Date(now);
+
+    const isSameDay =
+      tgt.getFullYear() === curr.getFullYear() &&
+      tgt.getMonth() === curr.getMonth() &&
+      tgt.getDate() === curr.getDate();
+
+    const targetDayStart = new Date(tgt.getFullYear(), tgt.getMonth(), tgt.getDate()).getTime();
+    const currDayStart = new Date(curr.getFullYear(), curr.getMonth(), curr.getDate()).getTime();
+    const dayDiff = Math.round((targetDayStart - currDayStart) / (24 * 60 * 60 * 1000));
+
+    const day = tgt.getDate();
+    const thMonths = ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย.', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'];
+    const month = thMonths[tgt.getMonth()];
+    const yearBe = tgt.getFullYear() + 543;
+
+    if (isSameDay) {
+      return `${day} ${month} ${yearBe} (${t.todayLabel})`;
+    }
+    if (dayDiff === 1) {
+      return `${day} ${month} ${yearBe} (${t.tomorrowLabel})`;
+    }
+    return `${day} ${month} ${yearBe}`;
+  };
+
+  const thaiTarget = new Date(MARKET_CONFIG.THAI.nextDrawDate).getTime();
+  const hanoiTarget = new Date(MARKET_CONFIG.HANOI.nextDrawDate).getTime();
+  const hanoiVipTarget = new Date(MARKET_CONFIG.HANOI_VIP.nextDrawDate).getTime();
+  const laoTarget = new Date(MARKET_CONFIG.LAO.nextDrawDate).getTime();
+
+  // Dynamic Events list
   const events: EventItem[] = [
     {
       market: 'THAI',
@@ -44,10 +76,10 @@ export const EventTimelineRadar: React.FC<EventTimelineRadarProps> = ({
       flag: '🇹🇭',
       tag: 'GLO THAILAND',
       timeStr: '14:30 - 15:30 น.',
-      dateStr: '16 ก.ย. 2569 (พรุ่งนี้)',
+      dateStr: getDynamicDateStr(thaiTarget),
       dayBadge: t.superDrawDayBadge,
       badgeType: 'SUPER',
-      targetTimestamp: new Date(MARKET_CONFIG.THAI.nextDrawDate).getTime()
+      targetTimestamp: thaiTarget
     },
     {
       market: 'HANOI',
@@ -55,10 +87,10 @@ export const EventTimelineRadar: React.FC<EventTimelineRadarProps> = ({
       flag: '🇻🇳',
       tag: 'HANOI REGULAR',
       timeStr: '18:15 น.',
-      dateStr: '16 ก.ย. 2569 (พรุ่งนี้)',
+      dateStr: getDynamicDateStr(hanoiTarget),
       dayBadge: 'DAILY DRAW',
       badgeType: 'DAILY',
-      targetTimestamp: new Date(MARKET_CONFIG.HANOI.nextDrawDate).getTime()
+      targetTimestamp: hanoiTarget
     },
     {
       market: 'HANOI_VIP',
@@ -66,10 +98,10 @@ export const EventTimelineRadar: React.FC<EventTimelineRadarProps> = ({
       flag: '🇻🇳',
       tag: 'HANOI VIP',
       timeStr: '19:15 น.',
-      dateStr: '16 ก.ย. 2569 (พรุ่งนี้)',
+      dateStr: getDynamicDateStr(hanoiVipTarget),
       dayBadge: 'DAILY DRAW',
       badgeType: 'DAILY',
-      targetTimestamp: new Date(MARKET_CONFIG.HANOI_VIP.nextDrawDate).getTime()
+      targetTimestamp: hanoiVipTarget
     },
     {
       market: 'LAO',
@@ -77,21 +109,30 @@ export const EventTimelineRadar: React.FC<EventTimelineRadarProps> = ({
       flag: '🇱🇦',
       tag: 'LAO DEVELOPMENT',
       timeStr: '20:30 น.',
-      dateStr: '16 ก.ย. 2569 (พรุ่งนี้)',
+      dateStr: getDynamicDateStr(laoTarget),
       dayBadge: 'WEDNESDAY NIGHT',
       badgeType: 'MAJOR',
-      targetTimestamp: new Date(MARKET_CONFIG.LAO.nextDrawDate).getTime()
+      targetTimestamp: laoTarget
     }
   ];
 
   const formatCountdown = (target: number) => {
-    const diff = Math.max(0, target - now);
-    const hours = Math.floor(diff / (1000 * 60 * 60));
-    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+    const diff = target - now;
+    if (diff <= 0 && diff > -(60 * 60 * 1000)) {
+      return {
+        text: 'LIVE ON AIR',
+        isUrgent: true,
+        isLive: true
+      };
+    }
+    const absDiff = Math.max(0, diff);
+    const hours = Math.floor(absDiff / (1000 * 60 * 60));
+    const minutes = Math.floor((absDiff % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((absDiff % (1000 * 60)) / 1000);
     return {
       text: `${String(hours).padStart(2, '0')}h : ${String(minutes).padStart(2, '0')}m : ${String(seconds).padStart(2, '0')}s`,
-      isUrgent: hours < 18
+      isUrgent: hours < 18,
+      isLive: false
     };
   };
 

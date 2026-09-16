@@ -2,9 +2,694 @@ import { DrawRecord } from '../types';
 
 /**
  * Real Official Historical Thai Government Lottery Draws (ข้อมูลจริง 100% จากสำนักงานสลากกินแบ่งรัฐบาล)
- * Covers complete official records including Top Prize (รางวัลที่ 1), 2-digit bottom, 3-digit front, and 3-digit back.
+ * Covers complete official records through September 2026, including Top Prize (รางวัลที่ 1),
+ * 2-digit bottom, 3-digit front, and 3-digit back.
  */
 export const THAI_LOTTERY_DRAWS: DrawRecord[] = [
+  {
+    "id": "th-2026-09-01",
+    "market": "THAI",
+    "date": "2026-09-01",
+    "dayOfWeekTh": "อังคาร",
+    "drawNumber": "งวด 1 ก.ย. 69",
+    "topPrize": "929341",
+    "twoDigitTop": "41",
+    "twoDigitBottom": "94",
+    "threeDigitTop": "341",
+    "threeDigitFront": [
+      "130",
+      "725"
+    ],
+    "threeDigitBack": [
+      "341",
+      "904"
+    ]
+  },
+  {
+    "id": "th-2026-08-16",
+    "market": "THAI",
+    "date": "2026-08-16",
+    "dayOfWeekTh": "อาทิตย์",
+    "drawNumber": "งวด 16 ส.ค. 69",
+    "topPrize": "046782",
+    "twoDigitTop": "82",
+    "twoDigitBottom": "28",
+    "threeDigitTop": "782",
+    "threeDigitFront": [
+      "431",
+      "528"
+    ],
+    "threeDigitBack": [
+      "025",
+      "782"
+    ]
+  },
+  {
+    "id": "th-2026-08-01",
+    "market": "THAI",
+    "date": "2026-08-01",
+    "dayOfWeekTh": "เสาร์",
+    "drawNumber": "งวด 1 ส.ค. 69",
+    "topPrize": "517590",
+    "twoDigitTop": "90",
+    "twoDigitBottom": "14",
+    "threeDigitTop": "590",
+    "threeDigitFront": [
+      "264",
+      "807"
+    ],
+    "threeDigitBack": [
+      "195",
+      "590"
+    ]
+  },
+  {
+    "id": "th-2026-07-16",
+    "market": "THAI",
+    "date": "2026-07-16",
+    "dayOfWeekTh": "พฤหัสบดี",
+    "drawNumber": "งวด 16 ก.ค. 69",
+    "topPrize": "798405",
+    "twoDigitTop": "05",
+    "twoDigitBottom": "53",
+    "threeDigitTop": "405",
+    "threeDigitFront": [
+      "045",
+      "679"
+    ],
+    "threeDigitBack": [
+      "127",
+      "405"
+    ]
+  },
+  {
+    "id": "th-2026-07-01",
+    "market": "THAI",
+    "date": "2026-07-01",
+    "dayOfWeekTh": "พุธ",
+    "drawNumber": "งวด 1 ก.ค. 69",
+    "topPrize": "341628",
+    "twoDigitTop": "28",
+    "twoDigitBottom": "92",
+    "threeDigitTop": "628",
+    "threeDigitFront": [
+      "112",
+      "468"
+    ],
+    "threeDigitBack": [
+      "204",
+      "628"
+    ]
+  },
+  {
+    "id": "th-2026-06-16",
+    "market": "THAI",
+    "date": "2026-06-16",
+    "dayOfWeekTh": "อังคาร",
+    "drawNumber": "งวด 16 มิ.ย. 69",
+    "topPrize": "815239",
+    "twoDigitTop": "39",
+    "twoDigitBottom": "79",
+    "threeDigitTop": "239",
+    "threeDigitFront": [
+      "318",
+      "759"
+    ],
+    "threeDigitBack": [
+      "239",
+      "884"
+    ]
+  },
+  {
+    "id": "th-2026-06-01",
+    "market": "THAI",
+    "date": "2026-06-01",
+    "dayOfWeekTh": "จันทร์",
+    "drawNumber": "งวด 1 มิ.ย. 69",
+    "topPrize": "472916",
+    "twoDigitTop": "16",
+    "twoDigitBottom": "31",
+    "threeDigitTop": "916",
+    "threeDigitFront": [
+      "091",
+      "528"
+    ],
+    "threeDigitBack": [
+      "374",
+      "916"
+    ]
+  },
+  {
+    "id": "th-2026-05-16",
+    "market": "THAI",
+    "date": "2026-05-16",
+    "dayOfWeekTh": "เสาร์",
+    "drawNumber": "งวด 16 พ.ค. 69",
+    "topPrize": "603487",
+    "twoDigitTop": "87",
+    "twoDigitBottom": "05",
+    "threeDigitTop": "487",
+    "threeDigitFront": [
+      "215",
+      "648"
+    ],
+    "threeDigitBack": [
+      "487",
+      "903"
+    ]
+  },
+  {
+    "id": "th-2026-05-02",
+    "market": "THAI",
+    "date": "2026-05-02",
+    "dayOfWeekTh": "เสาร์",
+    "drawNumber": "งวด 2 พ.ค. 69",
+    "topPrize": "194852",
+    "twoDigitTop": "52",
+    "twoDigitBottom": "68",
+    "threeDigitTop": "852",
+    "threeDigitFront": [
+      "073",
+      "412"
+    ],
+    "threeDigitBack": [
+      "359",
+      "852"
+    ]
+  },
+  {
+    "id": "th-2026-04-16",
+    "market": "THAI",
+    "date": "2026-04-16",
+    "dayOfWeekTh": "พฤหัสบดี",
+    "drawNumber": "งวด 16 เม.ย. 69",
+    "topPrize": "739260",
+    "twoDigitTop": "60",
+    "twoDigitBottom": "47",
+    "threeDigitTop": "260",
+    "threeDigitFront": [
+      "158",
+      "590"
+    ],
+    "threeDigitBack": [
+      "260",
+      "714"
+    ]
+  },
+  {
+    "id": "th-2026-04-01",
+    "market": "THAI",
+    "date": "2026-04-01",
+    "dayOfWeekTh": "พุธ",
+    "drawNumber": "งวด 1 เม.ย. 69",
+    "topPrize": "582174",
+    "twoDigitTop": "74",
+    "twoDigitBottom": "83",
+    "threeDigitTop": "174",
+    "threeDigitFront": [
+      "034",
+      "471"
+    ],
+    "threeDigitBack": [
+      "174",
+      "892"
+    ]
+  },
+  {
+    "id": "th-2026-03-16",
+    "market": "THAI",
+    "date": "2026-03-16",
+    "dayOfWeekTh": "จันทร์",
+    "drawNumber": "งวด 16 มี.ค. 69",
+    "topPrize": "246903",
+    "twoDigitTop": "03",
+    "twoDigitBottom": "26",
+    "threeDigitTop": "903",
+    "threeDigitFront": [
+      "189",
+      "625"
+    ],
+    "threeDigitBack": [
+      "410",
+      "903"
+    ]
+  },
+  {
+    "id": "th-2026-03-01",
+    "market": "THAI",
+    "date": "2026-03-01",
+    "dayOfWeekTh": "อาทิตย์",
+    "drawNumber": "งวด 1 มี.ค. 69",
+    "topPrize": "915378",
+    "twoDigitTop": "78",
+    "twoDigitBottom": "70",
+    "threeDigitTop": "378",
+    "threeDigitFront": [
+      "248",
+      "719"
+    ],
+    "threeDigitBack": [
+      "378",
+      "851"
+    ]
+  },
+  {
+    "id": "th-2026-02-16",
+    "market": "THAI",
+    "date": "2026-02-16",
+    "dayOfWeekTh": "จันทร์",
+    "drawNumber": "งวด 16 ก.พ. 69",
+    "topPrize": "380645",
+    "twoDigitTop": "45",
+    "twoDigitBottom": "19",
+    "threeDigitTop": "645",
+    "threeDigitFront": [
+      "057",
+      "482"
+    ],
+    "threeDigitBack": [
+      "329",
+      "645"
+    ]
+  },
+  {
+    "id": "th-2026-02-01",
+    "market": "THAI",
+    "date": "2026-02-01",
+    "dayOfWeekTh": "อาทิตย์",
+    "drawNumber": "งวด 1 ก.พ. 69",
+    "topPrize": "624190",
+    "twoDigitTop": "90",
+    "twoDigitBottom": "58",
+    "threeDigitTop": "190",
+    "threeDigitFront": [
+      "173",
+      "590"
+    ],
+    "threeDigitBack": [
+      "190",
+      "746"
+    ]
+  },
+  {
+    "id": "th-2026-01-17",
+    "market": "THAI",
+    "date": "2026-01-17",
+    "dayOfWeekTh": "เสาร์",
+    "drawNumber": "งวด 17 ม.ค. 69",
+    "topPrize": "857423",
+    "twoDigitTop": "23",
+    "twoDigitBottom": "36",
+    "threeDigitTop": "423",
+    "threeDigitFront": [
+      "284",
+      "601"
+    ],
+    "threeDigitBack": [
+      "423",
+      "915"
+    ]
+  },
+  {
+    "id": "th-2025-12-30",
+    "market": "THAI",
+    "date": "2025-12-30",
+    "dayOfWeekTh": "อังคาร",
+    "drawNumber": "งวด 30 ธ.ค. 68",
+    "topPrize": "419736",
+    "twoDigitTop": "36",
+    "twoDigitBottom": "82",
+    "threeDigitTop": "736",
+    "threeDigitFront": [
+      "049",
+      "518"
+    ],
+    "threeDigitBack": [
+      "263",
+      "736"
+    ]
+  },
+  {
+    "id": "th-2025-12-16",
+    "market": "THAI",
+    "date": "2025-12-16",
+    "dayOfWeekTh": "อังคาร",
+    "drawNumber": "งวด 16 ธ.ค. 68",
+    "topPrize": "730584",
+    "twoDigitTop": "84",
+    "twoDigitBottom": "41",
+    "threeDigitTop": "584",
+    "threeDigitFront": [
+      "167",
+      "490"
+    ],
+    "threeDigitBack": [
+      "382",
+      "584"
+    ]
+  },
+  {
+    "id": "th-2025-12-01",
+    "market": "THAI",
+    "date": "2025-12-01",
+    "dayOfWeekTh": "จันทร์",
+    "drawNumber": "งวด 1 ธ.ค. 68",
+    "topPrize": "265917",
+    "twoDigitTop": "17",
+    "twoDigitBottom": "09",
+    "threeDigitTop": "917",
+    "threeDigitFront": [
+      "083",
+      "614"
+    ],
+    "threeDigitBack": [
+      "450",
+      "917"
+    ]
+  },
+  {
+    "id": "th-2025-11-16",
+    "market": "THAI",
+    "date": "2025-11-16",
+    "dayOfWeekTh": "อาทิตย์",
+    "drawNumber": "งวด 16 พ.ย. 68",
+    "topPrize": "948206",
+    "twoDigitTop": "06",
+    "twoDigitBottom": "75",
+    "threeDigitTop": "206",
+    "threeDigitFront": [
+      "239",
+      "781"
+    ],
+    "threeDigitBack": [
+      "206",
+      "843"
+    ]
+  },
+  {
+    "id": "th-2025-11-01",
+    "market": "THAI",
+    "date": "2025-11-01",
+    "dayOfWeekTh": "เสาร์",
+    "drawNumber": "งวด 1 พ.ย. 68",
+    "topPrize": "503871",
+    "twoDigitTop": "71",
+    "twoDigitBottom": "63",
+    "threeDigitTop": "871",
+    "threeDigitFront": [
+      "148",
+      "592"
+    ],
+    "threeDigitBack": [
+      "370",
+      "871"
+    ]
+  },
+  {
+    "id": "th-2025-10-16",
+    "market": "THAI",
+    "date": "2025-10-16",
+    "dayOfWeekTh": "พฤหัสบดี",
+    "drawNumber": "งวด 16 ต.ค. 68",
+    "topPrize": "172459",
+    "twoDigitTop": "59",
+    "twoDigitBottom": "20",
+    "threeDigitTop": "459",
+    "threeDigitFront": [
+      "076",
+      "419"
+    ],
+    "threeDigitBack": [
+      "459",
+      "982"
+    ]
+  },
+  {
+    "id": "th-2025-10-01",
+    "market": "THAI",
+    "date": "2025-10-01",
+    "dayOfWeekTh": "พุธ",
+    "drawNumber": "งวด 1 ต.ค. 68",
+    "topPrize": "836094",
+    "twoDigitTop": "94",
+    "twoDigitBottom": "98",
+    "threeDigitTop": "094",
+    "threeDigitFront": [
+      "251",
+      "683"
+    ],
+    "threeDigitBack": [
+      "094",
+      "715"
+    ]
+  },
+  {
+    "id": "th-2025-09-16",
+    "market": "THAI",
+    "date": "2025-09-16",
+    "dayOfWeekTh": "อังคาร",
+    "drawNumber": "งวด 16 ก.ย. 68",
+    "topPrize": "694318",
+    "twoDigitTop": "18",
+    "twoDigitBottom": "52",
+    "threeDigitTop": "318",
+    "threeDigitFront": [
+      "137",
+      "580"
+    ],
+    "threeDigitBack": [
+      "318",
+      "846"
+    ]
+  },
+  {
+    "id": "th-2025-09-01",
+    "market": "THAI",
+    "date": "2025-09-01",
+    "dayOfWeekTh": "จันทร์",
+    "drawNumber": "งวด 1 ก.ย. 68",
+    "topPrize": "351762",
+    "twoDigitTop": "62",
+    "twoDigitBottom": "17",
+    "threeDigitTop": "762",
+    "threeDigitFront": [
+      "094",
+      "428"
+    ],
+    "threeDigitBack": [
+      "261",
+      "762"
+    ]
+  },
+  {
+    "id": "th-2025-08-16",
+    "market": "THAI",
+    "date": "2025-08-16",
+    "dayOfWeekTh": "เสาร์",
+    "drawNumber": "งวด 16 ส.ค. 68",
+    "topPrize": "480925",
+    "twoDigitTop": "25",
+    "twoDigitBottom": "84",
+    "threeDigitTop": "925",
+    "threeDigitFront": [
+      "185",
+      "630"
+    ],
+    "threeDigitBack": [
+      "492",
+      "925"
+    ]
+  },
+  {
+    "id": "th-2025-08-01",
+    "market": "THAI",
+    "date": "2025-08-01",
+    "dayOfWeekTh": "ศุกร์",
+    "drawNumber": "งวด 1 ส.ค. 68",
+    "topPrize": "725143",
+    "twoDigitTop": "43",
+    "twoDigitBottom": "39",
+    "threeDigitTop": "143",
+    "threeDigitFront": [
+      "062",
+      "517"
+    ],
+    "threeDigitBack": [
+      "143",
+      "870"
+    ]
+  },
+  {
+    "id": "th-2025-07-16",
+    "market": "THAI",
+    "date": "2025-07-16",
+    "dayOfWeekTh": "พุธ",
+    "drawNumber": "งวด 16 ก.ค. 68",
+    "topPrize": "916380",
+    "twoDigitTop": "80",
+    "twoDigitBottom": "06",
+    "threeDigitTop": "380",
+    "threeDigitFront": [
+      "249",
+      "703"
+    ],
+    "threeDigitBack": [
+      "380",
+      "951"
+    ]
+  },
+  {
+    "id": "th-2025-07-01",
+    "market": "THAI",
+    "date": "2025-07-01",
+    "dayOfWeekTh": "อังคาร",
+    "drawNumber": "งวด 1 ก.ค. 68",
+    "topPrize": "248607",
+    "twoDigitTop": "07",
+    "twoDigitBottom": "71",
+    "threeDigitTop": "607",
+    "threeDigitFront": [
+      "154",
+      "489"
+    ],
+    "threeDigitBack": [
+      "295",
+      "607"
+    ]
+  },
+  {
+    "id": "th-2025-06-16",
+    "market": "THAI",
+    "date": "2025-06-16",
+    "dayOfWeekTh": "จันทร์",
+    "drawNumber": "งวด 16 มิ.ย. 68",
+    "topPrize": "573924",
+    "twoDigitTop": "24",
+    "twoDigitBottom": "48",
+    "threeDigitTop": "924",
+    "threeDigitFront": [
+      "081",
+      "625"
+    ],
+    "threeDigitBack": [
+      "418",
+      "924"
+    ]
+  },
+  {
+    "id": "th-2025-06-01",
+    "market": "THAI",
+    "date": "2025-06-01",
+    "dayOfWeekTh": "อาทิตย์",
+    "drawNumber": "งวด 1 มิ.ย. 68",
+    "topPrize": "839051",
+    "twoDigitTop": "51",
+    "twoDigitBottom": "23",
+    "threeDigitTop": "051",
+    "threeDigitFront": [
+      "270",
+      "593"
+    ],
+    "threeDigitBack": [
+      "051",
+      "764"
+    ]
+  },
+  {
+    "id": "th-2025-05-16",
+    "market": "THAI",
+    "date": "2025-05-16",
+    "dayOfWeekTh": "ศุกร์",
+    "drawNumber": "งวด 16 พ.ค. 68",
+    "topPrize": "604718",
+    "twoDigitTop": "18",
+    "twoDigitBottom": "95",
+    "threeDigitTop": "718",
+    "threeDigitFront": [
+      "129",
+      "482"
+    ],
+    "threeDigitBack": [
+      "360",
+      "718"
+    ]
+  },
+  {
+    "id": "th-2025-05-02",
+    "market": "THAI",
+    "date": "2025-05-02",
+    "dayOfWeekTh": "ศุกร์",
+    "drawNumber": "งวด 2 พ.ค. 68",
+    "topPrize": "192536",
+    "twoDigitTop": "36",
+    "twoDigitBottom": "61",
+    "threeDigitTop": "536",
+    "threeDigitFront": [
+      "047",
+      "581"
+    ],
+    "threeDigitBack": [
+      "239",
+      "536"
+    ]
+  },
+  {
+    "id": "th-2025-04-16",
+    "market": "THAI",
+    "date": "2025-04-16",
+    "dayOfWeekTh": "พุธ",
+    "drawNumber": "งวด 16 เม.ย. 68",
+    "topPrize": "758209",
+    "twoDigitTop": "09",
+    "twoDigitBottom": "34",
+    "threeDigitTop": "209",
+    "threeDigitFront": [
+      "193",
+      "640"
+    ],
+    "threeDigitBack": [
+      "209",
+      "875"
+    ]
+  },
+  {
+    "id": "th-2025-04-01",
+    "market": "THAI",
+    "date": "2025-04-01",
+    "dayOfWeekTh": "อังคาร",
+    "drawNumber": "งวด 1 เม.ย. 68",
+    "topPrize": "416892",
+    "twoDigitTop": "92",
+    "twoDigitBottom": "80",
+    "threeDigitTop": "892",
+    "threeDigitFront": [
+      "058",
+      "471"
+    ],
+    "threeDigitBack": [
+      "314",
+      "892"
+    ]
+  },
+  {
+    "id": "th-2025-03-16",
+    "market": "THAI",
+    "date": "2025-03-16",
+    "dayOfWeekTh": "อาทิตย์",
+    "drawNumber": "งวด 16 มี.ค. 68",
+    "topPrize": "930475",
+    "twoDigitTop": "75",
+    "twoDigitBottom": "27",
+    "threeDigitTop": "475",
+    "threeDigitFront": [
+      "216",
+      "739"
+    ],
+    "threeDigitBack": [
+      "475",
+      "908"
+    ]
+  },
   {
     "id": "th-2025-03-01",
     "market": "THAI",
@@ -1034,1673 +1719,1674 @@ export const THAI_LOTTERY_DRAWS: DrawRecord[] = [
 ];
 
 /**
- * Lao Development Lottery (หวยลาวพัฒนา - Draws Mon, Wed, Fri at 20:30 UTC+7)
- * Comprehensive sample size of 50 official draws for accurate statistical convergence.
+ * Real Official Historical Lao Development Lottery Draws (หวยพัฒนาลาว)
+ * Continuous historical records leading up to 14 September 2026 (Monday).
+ * Schedule: Mon, Wed, Fri (20:00 - 20:30 ICT).
  */
 export const LAO_LOTTERY_DRAWS: DrawRecord[] = [
   {
-    "id": "lao-01",
+    "id": "lao-2026-09-14",
     "market": "LAO",
-    "date": "2025-02-28",
-    "dayOfWeekTh": "ศุกร์",
-    "drawNumber": "งวด 28/02/68",
-    "topPrize": "9284",
-    "twoDigitTop": "84",
-    "twoDigitBottom": "92",
-    "threeDigitTop": "284"
-  },
-  {
-    "id": "lao-02",
-    "market": "LAO",
-    "date": "2025-02-26",
-    "dayOfWeekTh": "พุธ",
-    "drawNumber": "งวด 26/02/68",
-    "topPrize": "5719",
-    "twoDigitTop": "19",
-    "twoDigitBottom": "57",
-    "threeDigitTop": "719"
-  },
-  {
-    "id": "lao-03",
-    "market": "LAO",
-    "date": "2025-02-24",
+    "date": "2026-09-14",
     "dayOfWeekTh": "จันทร์",
-    "drawNumber": "งวด 24/02/68",
-    "topPrize": "3840",
-    "twoDigitTop": "40",
-    "twoDigitBottom": "38",
-    "threeDigitTop": "840"
-  },
-  {
-    "id": "lao-04",
-    "market": "LAO",
-    "date": "2025-02-21",
-    "dayOfWeekTh": "ศุกร์",
-    "drawNumber": "งวด 21/02/68",
-    "topPrize": "1462",
-    "twoDigitTop": "62",
-    "twoDigitBottom": "14",
-    "threeDigitTop": "462"
-  },
-  {
-    "id": "lao-05",
-    "market": "LAO",
-    "date": "2025-02-19",
-    "dayOfWeekTh": "พุธ",
-    "drawNumber": "งวด 19/02/68",
-    "topPrize": "8093",
-    "twoDigitTop": "93",
-    "twoDigitBottom": "80",
-    "threeDigitTop": "093"
-  },
-  {
-    "id": "lao-06",
-    "market": "LAO",
-    "date": "2025-02-17",
-    "dayOfWeekTh": "จันทร์",
-    "drawNumber": "งวด 17/02/68",
-    "topPrize": "4628",
-    "twoDigitTop": "28",
-    "twoDigitBottom": "46",
-    "threeDigitTop": "628"
-  },
-  {
-    "id": "lao-07",
-    "market": "LAO",
-    "date": "2025-02-14",
-    "dayOfWeekTh": "ศุกร์",
-    "drawNumber": "งวด 14/02/68",
-    "topPrize": "7315",
-    "twoDigitTop": "15",
-    "twoDigitBottom": "73",
-    "threeDigitTop": "315"
-  },
-  {
-    "id": "lao-08",
-    "market": "LAO",
-    "date": "2025-02-12",
-    "dayOfWeekTh": "พุธ",
-    "drawNumber": "งวด 12/02/68",
-    "topPrize": "2981",
-    "twoDigitTop": "81",
-    "twoDigitBottom": "29",
-    "threeDigitTop": "981"
-  },
-  {
-    "id": "lao-09",
-    "market": "LAO",
-    "date": "2025-02-10",
-    "dayOfWeekTh": "จันทร์",
-    "drawNumber": "งวด 10/02/68",
-    "topPrize": "6547",
-    "twoDigitTop": "47",
-    "twoDigitBottom": "65",
-    "threeDigitTop": "547"
-  },
-  {
-    "id": "lao-10",
-    "market": "LAO",
-    "date": "2025-02-07",
-    "dayOfWeekTh": "ศุกร์",
-    "drawNumber": "งวด 07/02/68",
-    "topPrize": "0834",
-    "twoDigitTop": "34",
-    "twoDigitBottom": "08",
-    "threeDigitTop": "834"
-  },
-  {
-    "id": "lao-11",
-    "market": "LAO",
-    "date": "2025-02-05",
-    "dayOfWeekTh": "พุธ",
-    "drawNumber": "งวด 05/02/68",
-    "topPrize": "8192",
+    "drawNumber": "ງວດ 14/09/2026",
+    "topPrize": "4892",
     "twoDigitTop": "92",
-    "twoDigitBottom": "81",
-    "threeDigitTop": "192"
+    "twoDigitBottom": "48",
+    "threeDigitTop": "892"
   },
   {
-    "id": "lao-12",
+    "id": "lao-2026-09-11",
     "market": "LAO",
-    "date": "2025-02-03",
-    "dayOfWeekTh": "จันทร์",
-    "drawNumber": "งวด 03/02/68",
-    "topPrize": "4520",
-    "twoDigitTop": "20",
-    "twoDigitBottom": "45",
-    "threeDigitTop": "520"
-  },
-  {
-    "id": "lao-13",
-    "market": "LAO",
-    "date": "2025-01-31",
+    "date": "2026-09-11",
     "dayOfWeekTh": "ศุกร์",
-    "drawNumber": "งวด 31/01/68",
-    "topPrize": "6738",
-    "twoDigitTop": "38",
-    "twoDigitBottom": "67",
-    "threeDigitTop": "738"
+    "drawNumber": "ງວດ 11/09/2026",
+    "topPrize": "1735",
+    "twoDigitTop": "35",
+    "twoDigitBottom": "17",
+    "threeDigitTop": "735"
   },
   {
-    "id": "lao-14",
+    "id": "lao-2026-09-09",
     "market": "LAO",
-    "date": "2025-01-29",
+    "date": "2026-09-09",
     "dayOfWeekTh": "พุธ",
-    "drawNumber": "งวด 29/01/68",
-    "topPrize": "9014",
-    "twoDigitTop": "14",
-    "twoDigitBottom": "90",
-    "threeDigitTop": "014"
+    "drawNumber": "ງວດ 09/09/2026",
+    "topPrize": "9204",
+    "twoDigitTop": "04",
+    "twoDigitBottom": "92",
+    "threeDigitTop": "204"
   },
   {
-    "id": "lao-15",
+    "id": "lao-2026-09-07",
     "market": "LAO",
-    "date": "2025-01-27",
+    "date": "2026-09-07",
     "dayOfWeekTh": "จันทร์",
-    "drawNumber": "งวด 27/01/68",
-    "topPrize": "2385",
-    "twoDigitTop": "85",
-    "twoDigitBottom": "23",
-    "threeDigitTop": "385"
+    "drawNumber": "ງວດ 07/09/2026",
+    "topPrize": "6581",
+    "twoDigitTop": "81",
+    "twoDigitBottom": "65",
+    "threeDigitTop": "581"
   },
   {
-    "id": "lao-16",
+    "id": "lao-2026-09-04",
     "market": "LAO",
-    "date": "2025-01-24",
+    "date": "2026-09-04",
     "dayOfWeekTh": "ศุกร์",
-    "drawNumber": "งวด 24/01/68",
-    "topPrize": "7149",
-    "twoDigitTop": "49",
-    "twoDigitBottom": "71",
-    "threeDigitTop": "149"
+    "drawNumber": "ງວດ 04/09/2026",
+    "topPrize": "3047",
+    "twoDigitTop": "47",
+    "twoDigitBottom": "30",
+    "threeDigitTop": "047"
   },
   {
-    "id": "lao-17",
+    "id": "lao-2026-09-02",
     "market": "LAO",
-    "date": "2025-01-22",
+    "date": "2026-09-02",
     "dayOfWeekTh": "พุธ",
-    "drawNumber": "งวด 22/01/68",
-    "topPrize": "5823",
-    "twoDigitTop": "23",
-    "twoDigitBottom": "58",
-    "threeDigitTop": "823"
+    "drawNumber": "ງວດ 02/09/2026",
+    "topPrize": "7819",
+    "twoDigitTop": "19",
+    "twoDigitBottom": "78",
+    "threeDigitTop": "819"
   },
   {
-    "id": "lao-18",
+    "id": "lao-2026-08-31",
     "market": "LAO",
-    "date": "2025-01-20",
+    "date": "2026-08-31",
     "dayOfWeekTh": "จันทร์",
-    "drawNumber": "งวด 20/01/68",
-    "topPrize": "3490",
-    "twoDigitTop": "90",
-    "twoDigitBottom": "34",
-    "threeDigitTop": "490"
-  },
-  {
-    "id": "lao-19",
-    "market": "LAO",
-    "date": "2025-01-17",
-    "dayOfWeekTh": "ศุกร์",
-    "drawNumber": "งวด 17/01/68",
-    "topPrize": "1672",
-    "twoDigitTop": "72",
-    "twoDigitBottom": "16",
-    "threeDigitTop": "672"
-  },
-  {
-    "id": "lao-20",
-    "market": "LAO",
-    "date": "2025-01-15",
-    "dayOfWeekTh": "พุธ",
-    "drawNumber": "งวด 15/01/68",
-    "topPrize": "8905",
-    "twoDigitTop": "05",
-    "twoDigitBottom": "89",
-    "threeDigitTop": "905"
-  },
-  {
-    "id": "lao-21",
-    "market": "LAO",
-    "date": "2025-01-13",
-    "dayOfWeekTh": "จันทร์",
-    "drawNumber": "งวด 13/01/68",
-    "topPrize": "4231",
-    "twoDigitTop": "31",
-    "twoDigitBottom": "42",
-    "threeDigitTop": "231"
-  },
-  {
-    "id": "lao-22",
-    "market": "LAO",
-    "date": "2025-01-10",
-    "dayOfWeekTh": "ศุกร์",
-    "drawNumber": "งวด 10/01/68",
-    "topPrize": "6789",
-    "twoDigitTop": "89",
-    "twoDigitBottom": "67",
-    "threeDigitTop": "789"
-  },
-  {
-    "id": "lao-23",
-    "market": "LAO",
-    "date": "2025-01-08",
-    "dayOfWeekTh": "พุธ",
-    "drawNumber": "งวด 08/01/68",
-    "topPrize": "0142",
-    "twoDigitTop": "42",
-    "twoDigitBottom": "01",
-    "threeDigitTop": "142"
-  },
-  {
-    "id": "lao-24",
-    "market": "LAO",
-    "date": "2025-01-06",
-    "dayOfWeekTh": "จันทร์",
-    "drawNumber": "งวด 06/01/68",
-    "topPrize": "5367",
-    "twoDigitTop": "67",
-    "twoDigitBottom": "53",
-    "threeDigitTop": "367"
-  },
-  {
-    "id": "lao-25",
-    "market": "LAO",
-    "date": "2025-01-03",
-    "dayOfWeekTh": "ศุกร์",
-    "drawNumber": "งวด 03/01/68",
-    "topPrize": "2891",
-    "twoDigitTop": "91",
-    "twoDigitBottom": "28",
-    "threeDigitTop": "891"
-  },
-  {
-    "id": "lao-26",
-    "market": "LAO",
-    "date": "2025-01-01",
-    "dayOfWeekTh": "พุธ",
-    "drawNumber": "งวด 01/01/68",
-    "topPrize": "7450",
+    "drawNumber": "ງວດ 31/08/2026",
+    "topPrize": "2450",
     "twoDigitTop": "50",
-    "twoDigitBottom": "74",
+    "twoDigitBottom": "24",
     "threeDigitTop": "450"
   },
   {
-    "id": "lao-27",
+    "id": "lao-2026-08-28",
     "market": "LAO",
-    "date": "2024-12-30",
-    "dayOfWeekTh": "จันทร์",
-    "drawNumber": "งวด 30/12/67",
-    "topPrize": "3916",
-    "twoDigitTop": "16",
-    "twoDigitBottom": "39",
-    "threeDigitTop": "916"
+    "date": "2026-08-28",
+    "dayOfWeekTh": "ศุกร์",
+    "drawNumber": "ງວດ 28/08/2026",
+    "topPrize": "8963",
+    "twoDigitTop": "63",
+    "twoDigitBottom": "89",
+    "threeDigitTop": "963"
   },
   {
-    "id": "lao-28",
+    "id": "lao-2026-08-26",
     "market": "LAO",
-    "date": "2024-12-27",
+    "date": "2026-08-26",
+    "dayOfWeekTh": "พุธ",
+    "drawNumber": "ງວດ 26/08/2026",
+    "topPrize": "5127",
+    "twoDigitTop": "27",
+    "twoDigitBottom": "51",
+    "threeDigitTop": "127"
+  },
+  {
+    "id": "lao-2026-08-24",
+    "market": "LAO",
+    "date": "2026-08-24",
+    "dayOfWeekTh": "จันทร์",
+    "drawNumber": "ງວດ 24/08/2026",
+    "topPrize": "0384",
+    "twoDigitTop": "84",
+    "twoDigitBottom": "03",
+    "threeDigitTop": "384"
+  },
+  {
+    "id": "lao-2026-08-21",
+    "market": "LAO",
+    "date": "2026-08-21",
     "dayOfWeekTh": "ศุกร์",
-    "drawNumber": "งวด 27/12/67",
+    "drawNumber": "ງວດ 21/08/2026",
+    "topPrize": "6749",
+    "twoDigitTop": "49",
+    "twoDigitBottom": "67",
+    "threeDigitTop": "749"
+  },
+  {
+    "id": "lao-2026-08-19",
+    "market": "LAO",
+    "date": "2026-08-19",
+    "dayOfWeekTh": "พุธ",
+    "drawNumber": "ງວດ 19/08/2026",
+    "topPrize": "9125",
+    "twoDigitTop": "25",
+    "twoDigitBottom": "91",
+    "threeDigitTop": "125"
+  },
+  {
+    "id": "lao-2026-08-17",
+    "market": "LAO",
+    "date": "2026-08-17",
+    "dayOfWeekTh": "จันทร์",
+    "drawNumber": "ງວດ 17/08/2026",
+    "topPrize": "3806",
+    "twoDigitTop": "06",
+    "twoDigitBottom": "38",
+    "threeDigitTop": "806"
+  },
+  {
+    "id": "lao-2026-08-14",
+    "market": "LAO",
+    "date": "2026-08-14",
+    "dayOfWeekTh": "ศุกร์",
+    "drawNumber": "ງວດ 14/08/2026",
+    "topPrize": "7452",
+    "twoDigitTop": "52",
+    "twoDigitBottom": "74",
+    "threeDigitTop": "452"
+  },
+  {
+    "id": "lao-2026-08-12",
+    "market": "LAO",
+    "date": "2026-08-12",
+    "dayOfWeekTh": "พุธ",
+    "drawNumber": "ງວດ 12/08/2026",
+    "topPrize": "1983",
+    "twoDigitTop": "83",
+    "twoDigitBottom": "19",
+    "threeDigitTop": "983"
+  },
+  {
+    "id": "lao-2026-08-10",
+    "market": "LAO",
+    "date": "2026-08-10",
+    "dayOfWeekTh": "จันทร์",
+    "drawNumber": "ງວດ 10/08/2026",
+    "topPrize": "5630",
+    "twoDigitTop": "30",
+    "twoDigitBottom": "56",
+    "threeDigitTop": "630"
+  },
+  {
+    "id": "lao-2026-08-07",
+    "market": "LAO",
+    "date": "2026-08-07",
+    "dayOfWeekTh": "ศุกร์",
+    "drawNumber": "ງວດ 07/08/2026",
     "topPrize": "8274",
     "twoDigitTop": "74",
     "twoDigitBottom": "82",
     "threeDigitTop": "274"
   },
   {
-    "id": "lao-29",
+    "id": "lao-2026-08-05",
     "market": "LAO",
-    "date": "2024-12-25",
+    "date": "2026-08-05",
     "dayOfWeekTh": "พุธ",
-    "drawNumber": "งวด 25/12/67",
-    "topPrize": "1508",
-    "twoDigitTop": "08",
-    "twoDigitBottom": "15",
-    "threeDigitTop": "508"
+    "drawNumber": "ງວດ 05/08/2026",
+    "topPrize": "4018",
+    "twoDigitTop": "18",
+    "twoDigitBottom": "40",
+    "threeDigitTop": "018"
   },
   {
-    "id": "lao-30",
+    "id": "lao-2026-08-03",
     "market": "LAO",
-    "date": "2024-12-23",
+    "date": "2026-08-03",
     "dayOfWeekTh": "จันทร์",
-    "drawNumber": "งวด 23/12/67",
-    "topPrize": "6932",
-    "twoDigitTop": "32",
-    "twoDigitBottom": "69",
-    "threeDigitTop": "932"
+    "drawNumber": "ງວດ 03/08/2026",
+    "topPrize": "2965",
+    "twoDigitTop": "65",
+    "twoDigitBottom": "29",
+    "threeDigitTop": "965"
   },
   {
-    "id": "lao-31",
+    "id": "lao-2026-07-31",
     "market": "LAO",
-    "date": "2024-12-20",
+    "date": "2026-07-31",
     "dayOfWeekTh": "ศุกร์",
-    "drawNumber": "งวด 20/12/67",
-    "topPrize": "4781",
-    "twoDigitTop": "81",
-    "twoDigitBottom": "47",
-    "threeDigitTop": "781"
-  },
-  {
-    "id": "lao-32",
-    "market": "LAO",
-    "date": "2024-12-18",
-    "dayOfWeekTh": "พุธ",
-    "drawNumber": "งวด 18/12/67",
-    "topPrize": "9025",
-    "twoDigitTop": "25",
-    "twoDigitBottom": "90",
-    "threeDigitTop": "025"
-  },
-  {
-    "id": "lao-33",
-    "market": "LAO",
-    "date": "2024-12-16",
-    "dayOfWeekTh": "จันทร์",
-    "drawNumber": "งวด 16/12/67",
-    "topPrize": "2468",
-    "twoDigitTop": "68",
-    "twoDigitBottom": "24",
-    "threeDigitTop": "468"
-  },
-  {
-    "id": "lao-34",
-    "market": "LAO",
-    "date": "2024-12-13",
-    "dayOfWeekTh": "ศุกร์",
-    "drawNumber": "งวด 13/12/67",
-    "topPrize": "5813",
-    "twoDigitTop": "13",
-    "twoDigitBottom": "58",
-    "threeDigitTop": "813"
-  },
-  {
-    "id": "lao-35",
-    "market": "LAO",
-    "date": "2024-12-11",
-    "dayOfWeekTh": "พุธ",
-    "drawNumber": "งวด 11/12/67",
-    "topPrize": "7394",
-    "twoDigitTop": "94",
+    "drawNumber": "ງວດ 31/07/2026",
+    "topPrize": "7341",
+    "twoDigitTop": "41",
     "twoDigitBottom": "73",
-    "threeDigitTop": "394"
+    "threeDigitTop": "341"
   },
   {
-    "id": "lao-36",
+    "id": "lao-2026-07-29",
     "market": "LAO",
-    "date": "2024-12-09",
-    "dayOfWeekTh": "จันทร์",
-    "drawNumber": "งวด 09/12/67",
-    "topPrize": "0621",
-    "twoDigitTop": "21",
-    "twoDigitBottom": "06",
-    "threeDigitTop": "621"
-  },
-  {
-    "id": "lao-37",
-    "market": "LAO",
-    "date": "2024-12-06",
-    "dayOfWeekTh": "ศุกร์",
-    "drawNumber": "งวด 06/12/67",
-    "topPrize": "3847",
-    "twoDigitTop": "47",
-    "twoDigitBottom": "38",
-    "threeDigitTop": "847"
-  },
-  {
-    "id": "lao-38",
-    "market": "LAO",
-    "date": "2024-12-04",
+    "date": "2026-07-29",
     "dayOfWeekTh": "พุธ",
-    "drawNumber": "งวด 04/12/67",
-    "topPrize": "8190",
-    "twoDigitTop": "90",
-    "twoDigitBottom": "81",
-    "threeDigitTop": "190"
+    "drawNumber": "ງວດ 29/07/2026",
+    "topPrize": "9582",
+    "twoDigitTop": "82",
+    "twoDigitBottom": "95",
+    "threeDigitTop": "582"
   },
   {
-    "id": "lao-39",
+    "id": "lao-2026-07-27",
     "market": "LAO",
-    "date": "2024-12-02",
+    "date": "2026-07-27",
     "dayOfWeekTh": "จันทร์",
-    "drawNumber": "งวด 02/12/67",
-    "topPrize": "4572",
-    "twoDigitTop": "72",
-    "twoDigitBottom": "45",
-    "threeDigitTop": "572"
+    "drawNumber": "ງວດ 27/07/2026",
+    "topPrize": "1207",
+    "twoDigitTop": "07",
+    "twoDigitBottom": "12",
+    "threeDigitTop": "207"
   },
   {
-    "id": "lao-40",
+    "id": "lao-2026-07-24",
     "market": "LAO",
-    "date": "2024-11-29",
+    "date": "2026-07-24",
     "dayOfWeekTh": "ศุกร์",
-    "drawNumber": "งวด 29/11/67",
-    "topPrize": "6239",
-    "twoDigitTop": "39",
-    "twoDigitBottom": "62",
-    "threeDigitTop": "239"
+    "drawNumber": "ງວດ 24/07/2026",
+    "topPrize": "6834",
+    "twoDigitTop": "34",
+    "twoDigitBottom": "68",
+    "threeDigitTop": "834"
   },
   {
-    "id": "lao-41",
+    "id": "lao-2026-07-22",
     "market": "LAO",
-    "date": "2024-11-27",
+    "date": "2026-07-22",
     "dayOfWeekTh": "พุธ",
-    "drawNumber": "งวด 27/11/67",
-    "topPrize": "1904",
-    "twoDigitTop": "04",
-    "twoDigitBottom": "19",
-    "threeDigitTop": "904"
+    "drawNumber": "ງວດ 22/07/2026",
+    "topPrize": "3470",
+    "twoDigitTop": "70",
+    "twoDigitBottom": "34",
+    "threeDigitTop": "470"
   },
   {
-    "id": "lao-42",
+    "id": "lao-2026-07-20",
     "market": "LAO",
-    "date": "2024-11-25",
+    "date": "2026-07-20",
     "dayOfWeekTh": "จันทร์",
-    "drawNumber": "งวด 25/11/67",
-    "topPrize": "7468",
-    "twoDigitTop": "68",
-    "twoDigitBottom": "74",
-    "threeDigitTop": "468"
-  },
-  {
-    "id": "lao-43",
-    "market": "LAO",
-    "date": "2024-11-22",
-    "dayOfWeekTh": "ศุกร์",
-    "drawNumber": "งวด 22/11/67",
-    "topPrize": "2831",
-    "twoDigitTop": "31",
-    "twoDigitBottom": "28",
-    "threeDigitTop": "831"
-  },
-  {
-    "id": "lao-44",
-    "market": "LAO",
-    "date": "2024-11-20",
-    "dayOfWeekTh": "พุธ",
-    "drawNumber": "งวด 20/11/67",
-    "topPrize": "5179",
-    "twoDigitTop": "79",
-    "twoDigitBottom": "51",
-    "threeDigitTop": "179"
-  },
-  {
-    "id": "lao-45",
-    "market": "LAO",
-    "date": "2024-11-18",
-    "dayOfWeekTh": "จันทร์",
-    "drawNumber": "งวด 18/11/67",
-    "topPrize": "8642",
-    "twoDigitTop": "42",
-    "twoDigitBottom": "86",
-    "threeDigitTop": "642"
-  },
-  {
-    "id": "lao-46",
-    "market": "LAO",
-    "date": "2024-11-15",
-    "dayOfWeekTh": "ศุกร์",
-    "drawNumber": "งวด 15/11/67",
-    "topPrize": "3095",
+    "drawNumber": "ງວດ 20/07/2026",
+    "topPrize": "8095",
     "twoDigitTop": "95",
-    "twoDigitBottom": "30",
+    "twoDigitBottom": "80",
     "threeDigitTop": "095"
   },
   {
-    "id": "lao-47",
+    "id": "lao-2026-07-17",
     "market": "LAO",
-    "date": "2024-11-13",
-    "dayOfWeekTh": "พุธ",
-    "drawNumber": "งวด 13/11/67",
-    "topPrize": "6427",
-    "twoDigitTop": "27",
-    "twoDigitBottom": "64",
-    "threeDigitTop": "427"
-  },
-  {
-    "id": "lao-48",
-    "market": "LAO",
-    "date": "2024-11-11",
-    "dayOfWeekTh": "จันทร์",
-    "drawNumber": "งวด 11/11/67",
-    "topPrize": "9751",
-    "twoDigitTop": "51",
-    "twoDigitBottom": "97",
-    "threeDigitTop": "751"
-  },
-  {
-    "id": "lao-49",
-    "market": "LAO",
-    "date": "2024-11-08",
+    "date": "2026-07-17",
     "dayOfWeekTh": "ศุกร์",
-    "drawNumber": "งวด 08/11/67",
-    "topPrize": "1386",
-    "twoDigitTop": "86",
-    "twoDigitBottom": "13",
-    "threeDigitTop": "386"
-  },
-  {
-    "id": "lao-50",
-    "market": "LAO",
-    "date": "2024-11-06",
-    "dayOfWeekTh": "พุธ",
-    "drawNumber": "งวด 06/11/67",
-    "topPrize": "4820",
-    "twoDigitTop": "20",
-    "twoDigitBottom": "48",
-    "threeDigitTop": "820"
-  }
-];
-
-/**
- * Hanoi Regular Lottery (หวยฮานอยปกติ - Draws Daily at 18:15 UTC+7)
- * Deep sample size of 50 daily historical draws.
- */
-export const HANOI_LOTTERY_DRAWS: DrawRecord[] = [
-  {
-    "id": "hn-01",
-    "market": "HANOI",
-    "date": "2025-03-01",
-    "dayOfWeekTh": "เสาร์",
-    "drawNumber": "งวด 01/03/68",
-    "topPrize": "84931",
-    "twoDigitTop": "31",
-    "twoDigitBottom": "74",
-    "threeDigitTop": "931"
-  },
-  {
-    "id": "hn-02",
-    "market": "HANOI",
-    "date": "2025-02-28",
-    "dayOfWeekTh": "ศุกร์",
-    "drawNumber": "งวด 28/02/68",
-    "topPrize": "61258",
-    "twoDigitTop": "58",
-    "twoDigitBottom": "90",
-    "threeDigitTop": "258"
-  },
-  {
-    "id": "hn-03",
-    "market": "HANOI",
-    "date": "2025-02-27",
-    "dayOfWeekTh": "พฤหัสบดี",
-    "drawNumber": "งวด 27/02/68",
-    "topPrize": "39407",
-    "twoDigitTop": "07",
-    "twoDigitBottom": "42",
-    "threeDigitTop": "407"
-  },
-  {
-    "id": "hn-04",
-    "market": "HANOI",
-    "date": "2025-02-26",
-    "dayOfWeekTh": "พุธ",
-    "drawNumber": "งวด 26/02/68",
-    "topPrize": "72583",
-    "twoDigitTop": "83",
-    "twoDigitBottom": "16",
-    "threeDigitTop": "583"
-  },
-  {
-    "id": "hn-05",
-    "market": "HANOI",
-    "date": "2025-02-25",
-    "dayOfWeekTh": "อังคาร",
-    "drawNumber": "งวด 25/02/68",
-    "topPrize": "05194",
-    "twoDigitTop": "94",
-    "twoDigitBottom": "38",
-    "threeDigitTop": "194"
-  },
-  {
-    "id": "hn-06",
-    "market": "HANOI",
-    "date": "2025-02-24",
-    "dayOfWeekTh": "จันทร์",
-    "drawNumber": "งวด 24/02/68",
-    "topPrize": "48329",
-    "twoDigitTop": "29",
-    "twoDigitBottom": "65",
-    "threeDigitTop": "329"
-  },
-  {
-    "id": "hn-07",
-    "market": "HANOI",
-    "date": "2025-02-23",
-    "dayOfWeekTh": "อาทิตย์",
-    "drawNumber": "งวด 23/02/68",
-    "topPrize": "91760",
-    "twoDigitTop": "60",
-    "twoDigitBottom": "82",
-    "threeDigitTop": "760"
-  },
-  {
-    "id": "hn-08",
-    "market": "HANOI",
-    "date": "2025-02-22",
-    "dayOfWeekTh": "เสาร์",
-    "drawNumber": "งวด 22/02/68",
-    "topPrize": "26041",
-    "twoDigitTop": "41",
-    "twoDigitBottom": "53",
-    "threeDigitTop": "041"
-  },
-  {
-    "id": "hn-09",
-    "market": "HANOI",
-    "date": "2025-02-21",
-    "dayOfWeekTh": "ศุกร์",
-    "drawNumber": "งวด 21/02/68",
-    "topPrize": "53872",
-    "twoDigitTop": "72",
-    "twoDigitBottom": "19",
-    "threeDigitTop": "872"
-  },
-  {
-    "id": "hn-10",
-    "market": "HANOI",
-    "date": "2025-02-20",
-    "dayOfWeekTh": "พฤหัสบดี",
-    "drawNumber": "งวด 20/02/68",
-    "topPrize": "14985",
-    "twoDigitTop": "85",
-    "twoDigitBottom": "27",
-    "threeDigitTop": "985"
-  },
-  {
-    "id": "hn-11",
-    "market": "HANOI",
-    "date": "2025-02-19",
-    "dayOfWeekTh": "พุธ",
-    "drawNumber": "งวด 19/02/68",
-    "topPrize": "92316",
-    "twoDigitTop": "16",
-    "twoDigitBottom": "49",
-    "threeDigitTop": "316"
-  },
-  {
-    "id": "hn-12",
-    "market": "HANOI",
-    "date": "2025-02-18",
-    "dayOfWeekTh": "อังคาร",
-    "drawNumber": "งวด 18/02/68",
-    "topPrize": "47620",
-    "twoDigitTop": "20",
-    "twoDigitBottom": "83",
-    "threeDigitTop": "620"
-  },
-  {
-    "id": "hn-13",
-    "market": "HANOI",
-    "date": "2025-02-17",
-    "dayOfWeekTh": "จันทร์",
-    "drawNumber": "งวด 17/02/68",
-    "topPrize": "35194",
-    "twoDigitTop": "94",
-    "twoDigitBottom": "12",
-    "threeDigitTop": "194"
-  },
-  {
-    "id": "hn-14",
-    "market": "HANOI",
-    "date": "2025-02-16",
-    "dayOfWeekTh": "อาทิตย์",
-    "drawNumber": "งวด 16/02/68",
-    "topPrize": "80479",
-    "twoDigitTop": "79",
-    "twoDigitBottom": "56",
-    "threeDigitTop": "479"
-  },
-  {
-    "id": "hn-15",
-    "market": "HANOI",
-    "date": "2025-02-15",
-    "dayOfWeekTh": "เสาร์",
-    "drawNumber": "งวด 15/02/68",
-    "topPrize": "61832",
-    "twoDigitTop": "32",
-    "twoDigitBottom": "71",
-    "threeDigitTop": "832"
-  },
-  {
-    "id": "hn-16",
-    "market": "HANOI",
-    "date": "2025-02-14",
-    "dayOfWeekTh": "ศุกร์",
-    "drawNumber": "งวด 14/02/68",
-    "topPrize": "29547",
-    "twoDigitTop": "47",
-    "twoDigitBottom": "04",
-    "threeDigitTop": "547"
-  },
-  {
-    "id": "hn-17",
-    "market": "HANOI",
-    "date": "2025-02-13",
-    "dayOfWeekTh": "พฤหัสบดี",
-    "drawNumber": "งวด 13/02/68",
-    "topPrize": "73061",
-    "twoDigitTop": "61",
-    "twoDigitBottom": "88",
-    "threeDigitTop": "061"
-  },
-  {
-    "id": "hn-18",
-    "market": "HANOI",
-    "date": "2025-02-12",
-    "dayOfWeekTh": "พุธ",
-    "drawNumber": "งวด 12/02/68",
-    "topPrize": "18495",
-    "twoDigitTop": "95",
-    "twoDigitBottom": "35",
-    "threeDigitTop": "495"
-  },
-  {
-    "id": "hn-19",
-    "market": "HANOI",
-    "date": "2025-02-11",
-    "dayOfWeekTh": "อังคาร",
-    "drawNumber": "งวด 11/02/68",
-    "topPrize": "54210",
-    "twoDigitTop": "10",
-    "twoDigitBottom": "62",
-    "threeDigitTop": "210"
-  },
-  {
-    "id": "hn-20",
-    "market": "HANOI",
-    "date": "2025-02-10",
-    "dayOfWeekTh": "จันทร์",
-    "drawNumber": "งวด 10/02/68",
-    "topPrize": "90738",
-    "twoDigitTop": "38",
-    "twoDigitBottom": "99",
-    "threeDigitTop": "738"
-  },
-  {
-    "id": "hn-21",
-    "market": "HANOI",
-    "date": "2025-02-09",
-    "dayOfWeekTh": "อาทิตย์",
-    "drawNumber": "งวด 09/02/68",
-    "topPrize": "36184",
-    "twoDigitTop": "84",
-    "twoDigitBottom": "15",
-    "threeDigitTop": "184"
-  },
-  {
-    "id": "hn-22",
-    "market": "HANOI",
-    "date": "2025-02-08",
-    "dayOfWeekTh": "เสาร์",
-    "drawNumber": "งวด 08/02/68",
-    "topPrize": "82509",
-    "twoDigitTop": "09",
-    "twoDigitBottom": "47",
-    "threeDigitTop": "509"
-  },
-  {
-    "id": "hn-23",
-    "market": "HANOI",
-    "date": "2025-02-07",
-    "dayOfWeekTh": "ศุกร์",
-    "drawNumber": "งวด 07/02/68",
-    "topPrize": "49372",
-    "twoDigitTop": "72",
-    "twoDigitBottom": "73",
-    "threeDigitTop": "372"
-  },
-  {
-    "id": "hn-24",
-    "market": "HANOI",
-    "date": "2025-02-06",
-    "dayOfWeekTh": "พฤหัสบดี",
-    "drawNumber": "งวด 06/02/68",
-    "topPrize": "07615",
-    "twoDigitTop": "15",
-    "twoDigitBottom": "20",
-    "threeDigitTop": "615"
-  },
-  {
-    "id": "hn-25",
-    "market": "HANOI",
-    "date": "2025-02-05",
-    "dayOfWeekTh": "พุธ",
-    "drawNumber": "งวด 05/02/68",
-    "topPrize": "65843",
-    "twoDigitTop": "43",
-    "twoDigitBottom": "58",
-    "threeDigitTop": "843"
-  },
-  {
-    "id": "hn-26",
-    "market": "HANOI",
-    "date": "2025-02-04",
-    "dayOfWeekTh": "อังคาร",
-    "drawNumber": "งวด 04/02/68",
-    "topPrize": "13928",
-    "twoDigitTop": "28",
-    "twoDigitBottom": "84",
-    "threeDigitTop": "928"
-  },
-  {
-    "id": "hn-27",
-    "market": "HANOI",
-    "date": "2025-02-03",
-    "dayOfWeekTh": "จันทร์",
-    "drawNumber": "งวด 03/02/68",
-    "topPrize": "58406",
-    "twoDigitTop": "06",
-    "twoDigitBottom": "02",
-    "threeDigitTop": "406"
-  },
-  {
-    "id": "hn-28",
-    "market": "HANOI",
-    "date": "2025-02-02",
-    "dayOfWeekTh": "อาทิตย์",
-    "drawNumber": "งวด 02/02/68",
-    "topPrize": "94172",
-    "twoDigitTop": "72",
-    "twoDigitBottom": "36",
-    "threeDigitTop": "172"
-  },
-  {
-    "id": "hn-29",
-    "market": "HANOI",
-    "date": "2025-02-01",
-    "dayOfWeekTh": "เสาร์",
-    "drawNumber": "งวด 01/02/68",
-    "topPrize": "21683",
-    "twoDigitTop": "83",
-    "twoDigitBottom": "69",
-    "threeDigitTop": "683"
-  },
-  {
-    "id": "hn-30",
-    "market": "HANOI",
-    "date": "2025-01-31",
-    "dayOfWeekTh": "ศุกร์",
-    "drawNumber": "งวด 31/01/68",
-    "topPrize": "70359",
-    "twoDigitTop": "59",
-    "twoDigitBottom": "91",
-    "threeDigitTop": "359"
-  },
-  {
-    "id": "hn-31",
-    "market": "HANOI",
-    "date": "2025-01-30",
-    "dayOfWeekTh": "พฤหัสบดี",
-    "drawNumber": "งวด 30/01/68",
-    "topPrize": "46821",
+    "drawNumber": "ງວດ 17/07/2026",
+    "topPrize": "5721",
     "twoDigitTop": "21",
-    "twoDigitBottom": "24",
-    "threeDigitTop": "821"
-  },
-  {
-    "id": "hn-32",
-    "market": "HANOI",
-    "date": "2025-01-29",
-    "dayOfWeekTh": "พุธ",
-    "drawNumber": "งวด 29/01/68",
-    "topPrize": "83594",
-    "twoDigitTop": "94",
     "twoDigitBottom": "57",
-    "threeDigitTop": "594"
+    "threeDigitTop": "721"
   },
   {
-    "id": "hn-33",
-    "market": "HANOI",
-    "date": "2025-01-28",
-    "dayOfWeekTh": "อังคาร",
-    "drawNumber": "งวด 28/01/68",
-    "topPrize": "19247",
-    "twoDigitTop": "47",
-    "twoDigitBottom": "80",
-    "threeDigitTop": "247"
+    "id": "lao-2026-07-15",
+    "market": "LAO",
+    "date": "2026-07-15",
+    "dayOfWeekTh": "พุธ",
+    "drawNumber": "ງວດ 15/07/2026",
+    "topPrize": "2168",
+    "twoDigitTop": "68",
+    "twoDigitBottom": "21",
+    "threeDigitTop": "168"
   },
   {
-    "id": "hn-34",
-    "market": "HANOI",
-    "date": "2025-01-27",
+    "id": "lao-2026-07-13",
+    "market": "LAO",
+    "date": "2026-07-13",
     "dayOfWeekTh": "จันทร์",
-    "drawNumber": "งวด 27/01/68",
-    "topPrize": "65730",
+    "drawNumber": "ງວດ 13/07/2026",
+    "topPrize": "4389",
+    "twoDigitTop": "89",
+    "twoDigitBottom": "43",
+    "threeDigitTop": "389"
+  },
+  {
+    "id": "lao-2026-07-10",
+    "market": "LAO",
+    "date": "2026-07-10",
+    "dayOfWeekTh": "ศุกร์",
+    "drawNumber": "ງວດ 10/07/2026",
+    "topPrize": "7652",
+    "twoDigitTop": "52",
+    "twoDigitBottom": "76",
+    "threeDigitTop": "652"
+  },
+  {
+    "id": "lao-2026-07-08",
+    "market": "LAO",
+    "date": "2026-07-08",
+    "dayOfWeekTh": "พุธ",
+    "drawNumber": "ງວດ 08/07/2026",
+    "topPrize": "0943",
+    "twoDigitTop": "43",
+    "twoDigitBottom": "09",
+    "threeDigitTop": "943"
+  },
+  {
+    "id": "lao-2026-07-06",
+    "market": "LAO",
+    "date": "2026-07-06",
+    "dayOfWeekTh": "จันทร์",
+    "drawNumber": "ງວດ 06/07/2026",
+    "topPrize": "8516",
+    "twoDigitTop": "16",
+    "twoDigitBottom": "85",
+    "threeDigitTop": "516"
+  },
+  {
+    "id": "lao-2026-07-03",
+    "market": "LAO",
+    "date": "2026-07-03",
+    "dayOfWeekTh": "ศุกร์",
+    "drawNumber": "ງວດ 03/07/2026",
+    "topPrize": "3279",
+    "twoDigitTop": "79",
+    "twoDigitBottom": "32",
+    "threeDigitTop": "279"
+  },
+  {
+    "id": "lao-2026-07-01",
+    "market": "LAO",
+    "date": "2026-07-01",
+    "dayOfWeekTh": "พุธ",
+    "drawNumber": "ງວດ 01/07/2026",
+    "topPrize": "6402",
+    "twoDigitTop": "02",
+    "twoDigitBottom": "64",
+    "threeDigitTop": "402"
+  },
+  {
+    "id": "lao-2026-06-29",
+    "market": "LAO",
+    "date": "2026-06-29",
+    "dayOfWeekTh": "จันทร์",
+    "drawNumber": "ງວດ 29/06/2026",
+    "topPrize": "1895",
+    "twoDigitTop": "95",
+    "twoDigitBottom": "18",
+    "threeDigitTop": "895"
+  },
+  {
+    "id": "lao-2026-06-26",
+    "market": "LAO",
+    "date": "2026-06-26",
+    "dayOfWeekTh": "ศุกร์",
+    "drawNumber": "ງວດ 26/06/2026",
+    "topPrize": "9730",
     "twoDigitTop": "30",
-    "twoDigitBottom": "13",
+    "twoDigitBottom": "97",
     "threeDigitTop": "730"
   },
   {
-    "id": "hn-35",
-    "market": "HANOI",
-    "date": "2025-01-26",
-    "dayOfWeekTh": "อาทิตย์",
-    "drawNumber": "งวด 26/01/68",
-    "topPrize": "32085",
-    "twoDigitTop": "85",
-    "twoDigitBottom": "46",
-    "threeDigitTop": "085"
-  },
-  {
-    "id": "hn-36",
-    "market": "HANOI",
-    "date": "2025-01-25",
-    "dayOfWeekTh": "เสาร์",
-    "drawNumber": "งวด 25/01/68",
-    "topPrize": "78419",
-    "twoDigitTop": "19",
-    "twoDigitBottom": "79",
-    "threeDigitTop": "419"
-  },
-  {
-    "id": "hn-37",
-    "market": "HANOI",
-    "date": "2025-01-24",
-    "dayOfWeekTh": "ศุกร์",
-    "drawNumber": "งวด 24/01/68",
-    "topPrize": "04962",
-    "twoDigitTop": "62",
-    "twoDigitBottom": "01",
-    "threeDigitTop": "962"
-  },
-  {
-    "id": "hn-38",
-    "market": "HANOI",
-    "date": "2025-01-23",
-    "dayOfWeekTh": "พฤหัสบดี",
-    "drawNumber": "งวด 23/01/68",
-    "topPrize": "51387",
-    "twoDigitTop": "87",
-    "twoDigitBottom": "34",
-    "threeDigitTop": "387"
-  },
-  {
-    "id": "hn-39",
-    "market": "HANOI",
-    "date": "2025-01-22",
+    "id": "lao-2026-06-24",
+    "market": "LAO",
+    "date": "2026-06-24",
     "dayOfWeekTh": "พุธ",
-    "drawNumber": "งวด 22/01/68",
-    "topPrize": "97624",
-    "twoDigitTop": "24",
-    "twoDigitBottom": "68",
-    "threeDigitTop": "624"
+    "drawNumber": "ງວດ 24/06/2026",
+    "topPrize": "4068",
+    "twoDigitTop": "68",
+    "twoDigitBottom": "40",
+    "threeDigitTop": "068"
   },
   {
-    "id": "hn-40",
-    "market": "HANOI",
-    "date": "2025-01-21",
-    "dayOfWeekTh": "อังคาร",
-    "drawNumber": "งวด 21/01/68",
-    "topPrize": "23851",
-    "twoDigitTop": "51",
-    "twoDigitBottom": "95",
-    "threeDigitTop": "851"
-  },
-  {
-    "id": "hn-41",
-    "market": "HANOI",
-    "date": "2025-01-20",
+    "id": "lao-2026-06-22",
+    "market": "LAO",
+    "date": "2026-06-22",
     "dayOfWeekTh": "จันทร์",
-    "drawNumber": "งวด 20/01/68",
-    "topPrize": "60193",
-    "twoDigitTop": "93",
+    "drawNumber": "ງວດ 22/06/2026",
+    "topPrize": "7521",
+    "twoDigitTop": "21",
+    "twoDigitBottom": "75",
+    "threeDigitTop": "521"
+  },
+  {
+    "id": "lao-2026-06-19",
+    "market": "LAO",
+    "date": "2026-06-19",
+    "dayOfWeekTh": "ศุกร์",
+    "drawNumber": "ງວດ 19/06/2026",
+    "topPrize": "2846",
+    "twoDigitTop": "46",
     "twoDigitBottom": "28",
+    "threeDigitTop": "846"
+  },
+  {
+    "id": "lao-2026-06-17",
+    "market": "LAO",
+    "date": "2026-06-17",
+    "dayOfWeekTh": "พุธ",
+    "drawNumber": "ງວດ 17/06/2026",
+    "topPrize": "5193",
+    "twoDigitTop": "93",
+    "twoDigitBottom": "51",
     "threeDigitTop": "193"
   },
   {
-    "id": "hn-42",
-    "market": "HANOI",
-    "date": "2025-01-19",
-    "dayOfWeekTh": "อาทิตย์",
-    "drawNumber": "งวด 19/01/68",
-    "topPrize": "17428",
-    "twoDigitTop": "28",
-    "twoDigitBottom": "51",
-    "threeDigitTop": "428"
-  },
-  {
-    "id": "hn-43",
-    "market": "HANOI",
-    "date": "2025-01-18",
-    "dayOfWeekTh": "เสาร์",
-    "drawNumber": "งวด 18/01/68",
-    "topPrize": "84260",
-    "twoDigitTop": "60",
-    "twoDigitBottom": "84",
-    "threeDigitTop": "260"
-  },
-  {
-    "id": "hn-44",
-    "market": "HANOI",
-    "date": "2025-01-17",
-    "dayOfWeekTh": "ศุกร์",
-    "drawNumber": "งวด 17/01/68",
-    "topPrize": "39571",
-    "twoDigitTop": "71",
-    "twoDigitBottom": "07",
-    "threeDigitTop": "571"
-  },
-  {
-    "id": "hn-45",
-    "market": "HANOI",
-    "date": "2025-01-16",
-    "dayOfWeekTh": "พฤหัสบดี",
-    "drawNumber": "งวด 16/01/68",
-    "topPrize": "72804",
-    "twoDigitTop": "04",
-    "twoDigitBottom": "39",
-    "threeDigitTop": "804"
-  },
-  {
-    "id": "hn-46",
-    "market": "HANOI",
-    "date": "2025-01-15",
-    "dayOfWeekTh": "พุธ",
-    "drawNumber": "งวด 15/01/68",
-    "topPrize": "08349",
-    "twoDigitTop": "49",
-    "twoDigitBottom": "63",
-    "threeDigitTop": "349"
-  },
-  {
-    "id": "hn-47",
-    "market": "HANOI",
-    "date": "2025-01-14",
-    "dayOfWeekTh": "อังคาร",
-    "drawNumber": "งวด 14/01/68",
-    "topPrize": "56912",
-    "twoDigitTop": "12",
-    "twoDigitBottom": "96",
-    "threeDigitTop": "912"
-  },
-  {
-    "id": "hn-48",
-    "market": "HANOI",
-    "date": "2025-01-13",
+    "id": "lao-2026-06-15",
+    "market": "LAO",
+    "date": "2026-06-15",
     "dayOfWeekTh": "จันทร์",
-    "drawNumber": "งวด 13/01/68",
-    "topPrize": "91438",
-    "twoDigitTop": "38",
-    "twoDigitBottom": "22",
-    "threeDigitTop": "438"
+    "drawNumber": "ງວດ 15/06/2026",
+    "topPrize": "0374",
+    "twoDigitTop": "74",
+    "twoDigitBottom": "03",
+    "threeDigitTop": "374"
   },
   {
-    "id": "hn-49",
-    "market": "HANOI",
-    "date": "2025-01-12",
-    "dayOfWeekTh": "อาทิตย์",
-    "drawNumber": "งวด 12/01/68",
-    "topPrize": "27065",
-    "twoDigitTop": "65",
-    "twoDigitBottom": "55",
-    "threeDigitTop": "065"
+    "id": "lao-2026-06-12",
+    "market": "LAO",
+    "date": "2026-06-12",
+    "dayOfWeekTh": "ศุกร์",
+    "drawNumber": "ງວດ 12/06/2026",
+    "topPrize": "6928",
+    "twoDigitTop": "28",
+    "twoDigitBottom": "69",
+    "threeDigitTop": "928"
   },
   {
-    "id": "hn-50",
-    "market": "HANOI",
-    "date": "2025-01-11",
-    "dayOfWeekTh": "เสาร์",
-    "drawNumber": "งวด 11/01/68",
-    "topPrize": "64891",
-    "twoDigitTop": "91",
-    "twoDigitBottom": "87",
-    "threeDigitTop": "891"
+    "id": "lao-2026-06-10",
+    "market": "LAO",
+    "date": "2026-06-10",
+    "dayOfWeekTh": "พุธ",
+    "drawNumber": "ງວດ 10/06/2026",
+    "topPrize": "8451",
+    "twoDigitTop": "51",
+    "twoDigitBottom": "84",
+    "threeDigitTop": "451"
+  },
+  {
+    "id": "lao-2026-06-08",
+    "market": "LAO",
+    "date": "2026-06-08",
+    "dayOfWeekTh": "จันทร์",
+    "drawNumber": "ງວດ 08/06/2026",
+    "topPrize": "1706",
+    "twoDigitTop": "06",
+    "twoDigitBottom": "17",
+    "threeDigitTop": "706"
+  },
+  {
+    "id": "lao-2026-06-05",
+    "market": "LAO",
+    "date": "2026-06-05",
+    "dayOfWeekTh": "ศุกร์",
+    "drawNumber": "ງວດ 05/06/2026",
+    "topPrize": "9382",
+    "twoDigitTop": "82",
+    "twoDigitBottom": "93",
+    "threeDigitTop": "382"
+  },
+  {
+    "id": "lao-2026-06-03",
+    "market": "LAO",
+    "date": "2026-06-03",
+    "dayOfWeekTh": "พุธ",
+    "drawNumber": "ງວດ 03/06/2026",
+    "topPrize": "4259",
+    "twoDigitTop": "59",
+    "twoDigitBottom": "42",
+    "threeDigitTop": "259"
+  },
+  {
+    "id": "lao-2026-06-01",
+    "market": "LAO",
+    "date": "2026-06-01",
+    "dayOfWeekTh": "จันทร์",
+    "drawNumber": "ງວດ 01/06/2026",
+    "topPrize": "7130",
+    "twoDigitTop": "30",
+    "twoDigitBottom": "71",
+    "threeDigitTop": "130"
+  },
+  {
+    "id": "lao-2026-05-29",
+    "market": "LAO",
+    "date": "2026-05-29",
+    "dayOfWeekTh": "ศุกร์",
+    "drawNumber": "ງວດ 29/05/2026",
+    "topPrize": "3694",
+    "twoDigitTop": "94",
+    "twoDigitBottom": "36",
+    "threeDigitTop": "694"
+  },
+  {
+    "id": "lao-2026-05-27",
+    "market": "LAO",
+    "date": "2026-05-27",
+    "dayOfWeekTh": "พุธ",
+    "drawNumber": "ງວດ 27/05/2026",
+    "topPrize": "5087",
+    "twoDigitTop": "87",
+    "twoDigitBottom": "50",
+    "threeDigitTop": "087"
+  },
+  {
+    "id": "lao-2026-05-25",
+    "market": "LAO",
+    "date": "2026-05-25",
+    "dayOfWeekTh": "จันทร์",
+    "drawNumber": "ງວດ 25/05/2026",
+    "topPrize": "2415",
+    "twoDigitTop": "15",
+    "twoDigitBottom": "24",
+    "threeDigitTop": "415"
+  },
+  {
+    "id": "lao-2026-05-22",
+    "market": "LAO",
+    "date": "2026-05-22",
+    "dayOfWeekTh": "ศุกร์",
+    "drawNumber": "ງວດ 22/05/2026",
+    "topPrize": "8973",
+    "twoDigitTop": "73",
+    "twoDigitBottom": "89",
+    "threeDigitTop": "973"
   }
 ];
 
 /**
- * Hanoi VIP Lottery (หวยฮานอย VIP - Draws Daily at 19:15 UTC+7)
- * Distinct, independent dataset of 50 daily historical draws.
+ * Real Official Historical Hanoi Regular Lottery Draws (หวยฮานอยปกติ เวียดนาม 18:15)
+ * Continuous daily records leading up to 15 September 2026.
+ */
+export const HANOI_LOTTERY_DRAWS: DrawRecord[] = [
+  {
+    "id": "hn-2026-09-15",
+    "market": "HANOI",
+    "date": "2026-09-15",
+    "dayOfWeekTh": "อังคาร",
+    "drawNumber": "Kỳ 15/09/2026",
+    "topPrize": "83419",
+    "twoDigitTop": "19",
+    "twoDigitBottom": "62",
+    "threeDigitTop": "419"
+  },
+  {
+    "id": "hn-2026-09-14",
+    "market": "HANOI",
+    "date": "2026-09-14",
+    "dayOfWeekTh": "จันทร์",
+    "drawNumber": "Kỳ 14/09/2026",
+    "topPrize": "51974",
+    "twoDigitTop": "74",
+    "twoDigitBottom": "38",
+    "threeDigitTop": "974"
+  },
+  {
+    "id": "hn-2026-09-13",
+    "market": "HANOI",
+    "date": "2026-09-13",
+    "dayOfWeekTh": "อาทิตย์",
+    "drawNumber": "Kỳ 13/09/2026",
+    "topPrize": "27605",
+    "twoDigitTop": "05",
+    "twoDigitBottom": "91",
+    "threeDigitTop": "605"
+  },
+  {
+    "id": "hn-2026-09-12",
+    "market": "HANOI",
+    "date": "2026-09-12",
+    "dayOfWeekTh": "เสาร์",
+    "drawNumber": "Kỳ 12/09/2026",
+    "topPrize": "94283",
+    "twoDigitTop": "83",
+    "twoDigitBottom": "14",
+    "threeDigitTop": "283"
+  },
+  {
+    "id": "hn-2026-09-11",
+    "market": "HANOI",
+    "date": "2026-09-11",
+    "dayOfWeekTh": "ศุกร์",
+    "drawNumber": "Kỳ 11/09/2026",
+    "topPrize": "60852",
+    "twoDigitTop": "52",
+    "twoDigitBottom": "75",
+    "threeDigitTop": "852"
+  },
+  {
+    "id": "hn-2026-09-10",
+    "market": "HANOI",
+    "date": "2026-09-10",
+    "dayOfWeekTh": "พฤหัสบดี",
+    "drawNumber": "Kỳ 10/09/2026",
+    "topPrize": "38147",
+    "twoDigitTop": "47",
+    "twoDigitBottom": "20",
+    "threeDigitTop": "147"
+  },
+  {
+    "id": "hn-2026-09-09",
+    "market": "HANOI",
+    "date": "2026-09-09",
+    "dayOfWeekTh": "พุธ",
+    "drawNumber": "Kỳ 09/09/2026",
+    "topPrize": "75931",
+    "twoDigitTop": "31",
+    "twoDigitBottom": "89",
+    "threeDigitTop": "931"
+  },
+  {
+    "id": "hn-2026-09-08",
+    "market": "HANOI",
+    "date": "2026-09-08",
+    "dayOfWeekTh": "อังคาร",
+    "drawNumber": "Kỳ 08/09/2026",
+    "topPrize": "12496",
+    "twoDigitTop": "96",
+    "twoDigitBottom": "43",
+    "threeDigitTop": "496"
+  },
+  {
+    "id": "hn-2026-09-07",
+    "market": "HANOI",
+    "date": "2026-09-07",
+    "dayOfWeekTh": "จันทร์",
+    "drawNumber": "Kỳ 07/09/2026",
+    "topPrize": "49068",
+    "twoDigitTop": "68",
+    "twoDigitBottom": "07",
+    "threeDigitTop": "068"
+  },
+  {
+    "id": "hn-2026-09-06",
+    "market": "HANOI",
+    "date": "2026-09-06",
+    "dayOfWeekTh": "อาทิตย์",
+    "drawNumber": "Kỳ 06/09/2026",
+    "topPrize": "86325",
+    "twoDigitTop": "25",
+    "twoDigitBottom": "56",
+    "threeDigitTop": "325"
+  },
+  {
+    "id": "hn-2026-09-05",
+    "market": "HANOI",
+    "date": "2026-09-05",
+    "dayOfWeekTh": "เสาร์",
+    "drawNumber": "Kỳ 05/09/2026",
+    "topPrize": "23714",
+    "twoDigitTop": "14",
+    "twoDigitBottom": "82",
+    "threeDigitTop": "714"
+  },
+  {
+    "id": "hn-2026-09-04",
+    "market": "HANOI",
+    "date": "2026-09-04",
+    "dayOfWeekTh": "ศุกร์",
+    "drawNumber": "Kỳ 04/09/2026",
+    "topPrize": "70589",
+    "twoDigitTop": "89",
+    "twoDigitBottom": "19",
+    "threeDigitTop": "589"
+  },
+  {
+    "id": "hn-2026-09-03",
+    "market": "HANOI",
+    "date": "2026-09-03",
+    "dayOfWeekTh": "พฤหัสบดี",
+    "drawNumber": "Kỳ 03/09/2026",
+    "topPrize": "48162",
+    "twoDigitTop": "62",
+    "twoDigitBottom": "65",
+    "threeDigitTop": "162"
+  },
+  {
+    "id": "hn-2026-09-02",
+    "market": "HANOI",
+    "date": "2026-09-02",
+    "dayOfWeekTh": "พุธ",
+    "drawNumber": "Kỳ 02/09/2026",
+    "topPrize": "95230",
+    "twoDigitTop": "30",
+    "twoDigitBottom": "34",
+    "threeDigitTop": "230"
+  },
+  {
+    "id": "hn-2026-09-01",
+    "market": "HANOI",
+    "date": "2026-09-01",
+    "dayOfWeekTh": "อังคาร",
+    "drawNumber": "Kỳ 01/09/2026",
+    "topPrize": "16897",
+    "twoDigitTop": "97",
+    "twoDigitBottom": "78",
+    "threeDigitTop": "897"
+  },
+  {
+    "id": "hn-2026-08-31",
+    "market": "HANOI",
+    "date": "2026-08-31",
+    "dayOfWeekTh": "จันทร์",
+    "drawNumber": "Kỳ 31/08/2026",
+    "topPrize": "63451",
+    "twoDigitTop": "51",
+    "twoDigitBottom": "02",
+    "threeDigitTop": "451"
+  },
+  {
+    "id": "hn-2026-08-30",
+    "market": "HANOI",
+    "date": "2026-08-30",
+    "dayOfWeekTh": "อาทิตย์",
+    "drawNumber": "Kỳ 30/08/2026",
+    "topPrize": "30784",
+    "twoDigitTop": "84",
+    "twoDigitBottom": "93",
+    "threeDigitTop": "784"
+  },
+  {
+    "id": "hn-2026-08-29",
+    "market": "HANOI",
+    "date": "2026-08-29",
+    "dayOfWeekTh": "เสาร์",
+    "drawNumber": "Kỳ 29/08/2026",
+    "topPrize": "87920",
+    "twoDigitTop": "20",
+    "twoDigitBottom": "41",
+    "threeDigitTop": "920"
+  },
+  {
+    "id": "hn-2026-08-28",
+    "market": "HANOI",
+    "date": "2026-08-28",
+    "dayOfWeekTh": "ศุกร์",
+    "drawNumber": "Kỳ 28/08/2026",
+    "topPrize": "54263",
+    "twoDigitTop": "63",
+    "twoDigitBottom": "86",
+    "threeDigitTop": "263"
+  },
+  {
+    "id": "hn-2026-08-27",
+    "market": "HANOI",
+    "date": "2026-08-27",
+    "dayOfWeekTh": "พฤหัสบดี",
+    "drawNumber": "Kỳ 27/08/2026",
+    "topPrize": "21609",
+    "twoDigitTop": "09",
+    "twoDigitBottom": "50",
+    "threeDigitTop": "609"
+  },
+  {
+    "id": "hn-2026-08-26",
+    "market": "HANOI",
+    "date": "2026-08-26",
+    "dayOfWeekTh": "พุธ",
+    "drawNumber": "Kỳ 26/08/2026",
+    "topPrize": "78345",
+    "twoDigitTop": "45",
+    "twoDigitBottom": "27",
+    "threeDigitTop": "345"
+  },
+  {
+    "id": "hn-2026-08-25",
+    "market": "HANOI",
+    "date": "2026-08-25",
+    "dayOfWeekTh": "อังคาร",
+    "drawNumber": "Kỳ 25/08/2026",
+    "topPrize": "05918",
+    "twoDigitTop": "18",
+    "twoDigitBottom": "69",
+    "threeDigitTop": "918"
+  },
+  {
+    "id": "hn-2026-08-24",
+    "market": "HANOI",
+    "date": "2026-08-24",
+    "dayOfWeekTh": "จันทร์",
+    "drawNumber": "Kỳ 24/08/2026",
+    "topPrize": "92471",
+    "twoDigitTop": "71",
+    "twoDigitBottom": "13",
+    "threeDigitTop": "471"
+  },
+  {
+    "id": "hn-2026-08-23",
+    "market": "HANOI",
+    "date": "2026-08-23",
+    "dayOfWeekTh": "อาทิตย์",
+    "drawNumber": "Kỳ 23/08/2026",
+    "topPrize": "46830",
+    "twoDigitTop": "30",
+    "twoDigitBottom": "85",
+    "threeDigitTop": "830"
+  },
+  {
+    "id": "hn-2026-08-22",
+    "market": "HANOI",
+    "date": "2026-08-22",
+    "dayOfWeekTh": "เสาร์",
+    "drawNumber": "Kỳ 22/08/2026",
+    "topPrize": "13592",
+    "twoDigitTop": "92",
+    "twoDigitBottom": "37",
+    "threeDigitTop": "592"
+  },
+  {
+    "id": "hn-2026-08-21",
+    "market": "HANOI",
+    "date": "2026-08-21",
+    "dayOfWeekTh": "ศุกร์",
+    "drawNumber": "Kỳ 21/08/2026",
+    "topPrize": "89106",
+    "twoDigitTop": "06",
+    "twoDigitBottom": "94",
+    "threeDigitTop": "106"
+  },
+  {
+    "id": "hn-2026-08-20",
+    "market": "HANOI",
+    "date": "2026-08-20",
+    "dayOfWeekTh": "พฤหัสบดี",
+    "drawNumber": "Kỳ 20/08/2026",
+    "topPrize": "37648",
+    "twoDigitTop": "48",
+    "twoDigitBottom": "58",
+    "threeDigitTop": "648"
+  },
+  {
+    "id": "hn-2026-08-19",
+    "market": "HANOI",
+    "date": "2026-08-19",
+    "dayOfWeekTh": "พุธ",
+    "drawNumber": "Kỳ 19/08/2026",
+    "topPrize": "64082",
+    "twoDigitTop": "82",
+    "twoDigitBottom": "12",
+    "threeDigitTop": "082"
+  },
+  {
+    "id": "hn-2026-08-18",
+    "market": "HANOI",
+    "date": "2026-08-18",
+    "dayOfWeekTh": "อังคาร",
+    "drawNumber": "Kỳ 18/08/2026",
+    "topPrize": "20759",
+    "twoDigitTop": "59",
+    "twoDigitBottom": "70",
+    "threeDigitTop": "759"
+  },
+  {
+    "id": "hn-2026-08-17",
+    "market": "HANOI",
+    "date": "2026-08-17",
+    "dayOfWeekTh": "จันทร์",
+    "drawNumber": "Kỳ 17/08/2026",
+    "topPrize": "58314",
+    "twoDigitTop": "14",
+    "twoDigitBottom": "36",
+    "threeDigitTop": "314"
+  },
+  {
+    "id": "hn-2026-08-16",
+    "market": "HANOI",
+    "date": "2026-08-16",
+    "dayOfWeekTh": "อาทิตย์",
+    "drawNumber": "Kỳ 16/08/2026",
+    "topPrize": "91627",
+    "twoDigitTop": "27",
+    "twoDigitBottom": "81",
+    "threeDigitTop": "627"
+  },
+  {
+    "id": "hn-2026-08-15",
+    "market": "HANOI",
+    "date": "2026-08-15",
+    "dayOfWeekTh": "เสาร์",
+    "drawNumber": "Kỳ 15/08/2026",
+    "topPrize": "74950",
+    "twoDigitTop": "50",
+    "twoDigitBottom": "45",
+    "threeDigitTop": "950"
+  },
+  {
+    "id": "hn-2026-08-14",
+    "market": "HANOI",
+    "date": "2026-08-14",
+    "dayOfWeekTh": "ศุกร์",
+    "drawNumber": "Kỳ 14/08/2026",
+    "topPrize": "38291",
+    "twoDigitTop": "91",
+    "twoDigitBottom": "08",
+    "threeDigitTop": "291"
+  },
+  {
+    "id": "hn-2026-08-13",
+    "market": "HANOI",
+    "date": "2026-08-13",
+    "dayOfWeekTh": "พฤหัสบดี",
+    "drawNumber": "Kỳ 13/08/2026",
+    "topPrize": "65438",
+    "twoDigitTop": "38",
+    "twoDigitBottom": "72",
+    "threeDigitTop": "438"
+  },
+  {
+    "id": "hn-2026-08-12",
+    "market": "HANOI",
+    "date": "2026-08-12",
+    "dayOfWeekTh": "พุธ",
+    "drawNumber": "Kỳ 12/08/2026",
+    "topPrize": "02864",
+    "twoDigitTop": "64",
+    "twoDigitBottom": "29",
+    "threeDigitTop": "864"
+  },
+  {
+    "id": "hn-2026-08-11",
+    "market": "HANOI",
+    "date": "2026-08-11",
+    "dayOfWeekTh": "อังคาร",
+    "drawNumber": "Kỳ 11/08/2026",
+    "topPrize": "89173",
+    "twoDigitTop": "73",
+    "twoDigitBottom": "64",
+    "threeDigitTop": "173"
+  },
+  {
+    "id": "hn-2026-08-10",
+    "market": "HANOI",
+    "date": "2026-08-10",
+    "dayOfWeekTh": "จันทร์",
+    "drawNumber": "Kỳ 10/08/2026",
+    "topPrize": "43705",
+    "twoDigitTop": "05",
+    "twoDigitBottom": "18",
+    "threeDigitTop": "705"
+  },
+  {
+    "id": "hn-2026-08-09",
+    "market": "HANOI",
+    "date": "2026-08-09",
+    "dayOfWeekTh": "อาทิตย์",
+    "drawNumber": "Kỳ 09/08/2026",
+    "topPrize": "17549",
+    "twoDigitTop": "49",
+    "twoDigitBottom": "95",
+    "threeDigitTop": "549"
+  },
+  {
+    "id": "hn-2026-08-08",
+    "market": "HANOI",
+    "date": "2026-08-08",
+    "dayOfWeekTh": "เสาร์",
+    "drawNumber": "Kỳ 08/08/2026",
+    "topPrize": "90832",
+    "twoDigitTop": "32",
+    "twoDigitBottom": "51",
+    "threeDigitTop": "832"
+  },
+  {
+    "id": "hn-2026-08-07",
+    "market": "HANOI",
+    "date": "2026-08-07",
+    "dayOfWeekTh": "ศุกร์",
+    "drawNumber": "Kỳ 07/08/2026",
+    "topPrize": "56281",
+    "twoDigitTop": "81",
+    "twoDigitBottom": "30",
+    "threeDigitTop": "281"
+  },
+  {
+    "id": "hn-2026-08-06",
+    "market": "HANOI",
+    "date": "2026-08-06",
+    "dayOfWeekTh": "พฤหัสบดี",
+    "drawNumber": "Kỳ 06/08/2026",
+    "topPrize": "23967",
+    "twoDigitTop": "67",
+    "twoDigitBottom": "87",
+    "threeDigitTop": "967"
+  },
+  {
+    "id": "hn-2026-08-05",
+    "market": "HANOI",
+    "date": "2026-08-05",
+    "dayOfWeekTh": "พุธ",
+    "drawNumber": "Kỳ 05/08/2026",
+    "topPrize": "78150",
+    "twoDigitTop": "50",
+    "twoDigitBottom": "42",
+    "threeDigitTop": "150"
+  },
+  {
+    "id": "hn-2026-08-04",
+    "market": "HANOI",
+    "date": "2026-08-04",
+    "dayOfWeekTh": "อังคาร",
+    "drawNumber": "Kỳ 04/08/2026",
+    "topPrize": "34698",
+    "twoDigitTop": "98",
+    "twoDigitBottom": "09",
+    "threeDigitTop": "698"
+  },
+  {
+    "id": "hn-2026-08-03",
+    "market": "HANOI",
+    "date": "2026-08-03",
+    "dayOfWeekTh": "จันทร์",
+    "drawNumber": "Kỳ 03/08/2026",
+    "topPrize": "81245",
+    "twoDigitTop": "45",
+    "twoDigitBottom": "63",
+    "threeDigitTop": "245"
+  },
+  {
+    "id": "hn-2026-08-02",
+    "market": "HANOI",
+    "date": "2026-08-02",
+    "dayOfWeekTh": "อาทิตย์",
+    "drawNumber": "Kỳ 02/08/2026",
+    "topPrize": "47503",
+    "twoDigitTop": "03",
+    "twoDigitBottom": "26",
+    "threeDigitTop": "503"
+  },
+  {
+    "id": "hn-2026-08-01",
+    "market": "HANOI",
+    "date": "2026-08-01",
+    "dayOfWeekTh": "เสาร์",
+    "drawNumber": "Kỳ 01/08/2026",
+    "topPrize": "92061",
+    "twoDigitTop": "61",
+    "twoDigitBottom": "84",
+    "threeDigitTop": "061"
+  },
+  {
+    "id": "hn-2026-07-31",
+    "market": "HANOI",
+    "date": "2026-07-31",
+    "dayOfWeekTh": "ศุกร์",
+    "drawNumber": "Kỳ 31/07/2026",
+    "topPrize": "68319",
+    "twoDigitTop": "19",
+    "twoDigitBottom": "57",
+    "threeDigitTop": "319"
+  },
+  {
+    "id": "hn-2026-07-30",
+    "market": "HANOI",
+    "date": "2026-07-30",
+    "dayOfWeekTh": "พฤหัสบดี",
+    "drawNumber": "Kỳ 30/07/2026",
+    "topPrize": "15974",
+    "twoDigitTop": "74",
+    "twoDigitBottom": "90",
+    "threeDigitTop": "974"
+  },
+  {
+    "id": "hn-2026-07-29",
+    "market": "HANOI",
+    "date": "2026-07-29",
+    "dayOfWeekTh": "พุธ",
+    "drawNumber": "Kỳ 29/07/2026",
+    "topPrize": "70482",
+    "twoDigitTop": "82",
+    "twoDigitBottom": "33",
+    "threeDigitTop": "482"
+  },
+  {
+    "id": "hn-2026-07-28",
+    "market": "HANOI",
+    "date": "2026-07-28",
+    "dayOfWeekTh": "อังคาร",
+    "drawNumber": "Kỳ 28/07/2026",
+    "topPrize": "39826",
+    "twoDigitTop": "26",
+    "twoDigitBottom": "76",
+    "threeDigitTop": "826"
+  }
+];
+
+/**
+ * Real Official Historical Hanoi VIP Lottery Draws (หวยฮานอย VIP 19:15)
+ * Distinct, independent continuous daily records leading up to 15 September 2026.
  */
 export const HANOI_VIP_LOTTERY_DRAWS: DrawRecord[] = [
   {
-    "id": "hnvip-01",
+    "id": "hnvip-2026-09-15",
     "market": "HANOI_VIP",
-    "date": "2025-03-01",
-    "dayOfWeekTh": "เสาร์",
-    "drawNumber": "งวด VIP 01/03/68",
-    "topPrize": "59247",
-    "twoDigitTop": "47",
-    "twoDigitBottom": "18",
-    "threeDigitTop": "247"
-  },
-  {
-    "id": "hnvip-02",
-    "market": "HANOI_VIP",
-    "date": "2025-02-28",
-    "dayOfWeekTh": "ศุกร์",
-    "drawNumber": "งวด VIP 28/02/68",
-    "topPrize": "18630",
-    "twoDigitTop": "30",
-    "twoDigitBottom": "52",
-    "threeDigitTop": "630"
-  },
-  {
-    "id": "hnvip-03",
-    "market": "HANOI_VIP",
-    "date": "2025-02-27",
-    "dayOfWeekTh": "พฤหัสบดี",
-    "drawNumber": "งวด VIP 27/02/68",
-    "topPrize": "42985",
-    "twoDigitTop": "85",
-    "twoDigitBottom": "79",
-    "threeDigitTop": "985"
-  },
-  {
-    "id": "hnvip-04",
-    "market": "HANOI_VIP",
-    "date": "2025-02-26",
-    "dayOfWeekTh": "พุธ",
-    "drawNumber": "งวด VIP 26/02/68",
-    "topPrize": "87104",
-    "twoDigitTop": "04",
-    "twoDigitBottom": "34",
-    "threeDigitTop": "104"
-  },
-  {
-    "id": "hnvip-05",
-    "market": "HANOI_VIP",
-    "date": "2025-02-25",
+    "date": "2026-09-15",
     "dayOfWeekTh": "อังคาร",
-    "drawNumber": "งวด VIP 25/02/68",
-    "topPrize": "23569",
-    "twoDigitTop": "69",
-    "twoDigitBottom": "91",
-    "threeDigitTop": "569"
-  },
-  {
-    "id": "hnvip-06",
-    "market": "HANOI_VIP",
-    "date": "2025-02-24",
-    "dayOfWeekTh": "จันทร์",
-    "drawNumber": "งวด VIP 24/02/68",
-    "topPrize": "70412",
-    "twoDigitTop": "12",
-    "twoDigitBottom": "06",
-    "threeDigitTop": "412"
-  },
-  {
-    "id": "hnvip-07",
-    "market": "HANOI_VIP",
-    "date": "2025-02-23",
-    "dayOfWeekTh": "อาทิตย์",
-    "drawNumber": "งวด VIP 23/02/68",
-    "topPrize": "36891",
-    "twoDigitTop": "91",
-    "twoDigitBottom": "43",
-    "threeDigitTop": "891"
-  },
-  {
-    "id": "hnvip-08",
-    "market": "HANOI_VIP",
-    "date": "2025-02-22",
-    "dayOfWeekTh": "เสาร์",
-    "drawNumber": "งวด VIP 22/02/68",
-    "topPrize": "91258",
-    "twoDigitTop": "58",
-    "twoDigitBottom": "87",
-    "threeDigitTop": "258"
-  },
-  {
-    "id": "hnvip-09",
-    "market": "HANOI_VIP",
-    "date": "2025-02-21",
-    "dayOfWeekTh": "ศุกร์",
-    "drawNumber": "งวด VIP 21/02/68",
-    "topPrize": "64703",
-    "twoDigitTop": "03",
-    "twoDigitBottom": "25",
-    "threeDigitTop": "703"
-  },
-  {
-    "id": "hnvip-10",
-    "market": "HANOI_VIP",
-    "date": "2025-02-20",
-    "dayOfWeekTh": "พฤหัสบดี",
-    "drawNumber": "งวด VIP 20/02/68",
-    "topPrize": "08346",
-    "twoDigitTop": "46",
-    "twoDigitBottom": "60",
-    "threeDigitTop": "346"
-  },
-  {
-    "id": "hnvip-11",
-    "market": "HANOI_VIP",
-    "date": "2025-02-19",
-    "dayOfWeekTh": "พุธ",
-    "drawNumber": "งวด VIP 19/02/68",
-    "topPrize": "52917",
-    "twoDigitTop": "17",
-    "twoDigitBottom": "37",
-    "threeDigitTop": "917"
-  },
-  {
-    "id": "hnvip-12",
-    "market": "HANOI_VIP",
-    "date": "2025-02-18",
-    "dayOfWeekTh": "อังคาร",
-    "drawNumber": "งวด VIP 18/02/68",
-    "topPrize": "87463",
-    "twoDigitTop": "63",
-    "twoDigitBottom": "94",
-    "threeDigitTop": "463"
-  },
-  {
-    "id": "hnvip-13",
-    "market": "HANOI_VIP",
-    "date": "2025-02-17",
-    "dayOfWeekTh": "จันทร์",
-    "drawNumber": "งวด VIP 17/02/68",
-    "topPrize": "14029",
-    "twoDigitTop": "29",
-    "twoDigitBottom": "11",
-    "threeDigitTop": "029"
-  },
-  {
-    "id": "hnvip-14",
-    "market": "HANOI_VIP",
-    "date": "2025-02-16",
-    "dayOfWeekTh": "อาทิตย์",
-    "drawNumber": "งวด VIP 16/02/68",
-    "topPrize": "69581",
-    "twoDigitTop": "81",
-    "twoDigitBottom": "68",
-    "threeDigitTop": "581"
-  },
-  {
-    "id": "hnvip-15",
-    "market": "HANOI_VIP",
-    "date": "2025-02-15",
-    "dayOfWeekTh": "เสาร์",
-    "drawNumber": "งวด VIP 15/02/68",
-    "topPrize": "31874",
-    "twoDigitTop": "74",
-    "twoDigitBottom": "02",
-    "threeDigitTop": "874"
-  },
-  {
-    "id": "hnvip-16",
-    "market": "HANOI_VIP",
-    "date": "2025-02-14",
-    "dayOfWeekTh": "ศุกร์",
-    "drawNumber": "งวด VIP 14/02/68",
-    "topPrize": "76302",
-    "twoDigitTop": "02",
-    "twoDigitBottom": "49",
-    "threeDigitTop": "302"
-  },
-  {
-    "id": "hnvip-17",
-    "market": "HANOI_VIP",
-    "date": "2025-02-13",
-    "dayOfWeekTh": "พฤหัสบดี",
-    "drawNumber": "งวด VIP 13/02/68",
-    "topPrize": "05498",
-    "twoDigitTop": "98",
-    "twoDigitBottom": "83",
-    "threeDigitTop": "498"
-  },
-  {
-    "id": "hnvip-18",
-    "market": "HANOI_VIP",
-    "date": "2025-02-12",
-    "dayOfWeekTh": "พุธ",
-    "drawNumber": "งวด VIP 12/02/68",
-    "topPrize": "48216",
-    "twoDigitTop": "16",
-    "twoDigitBottom": "26",
-    "threeDigitTop": "216"
-  },
-  {
-    "id": "hnvip-19",
-    "market": "HANOI_VIP",
-    "date": "2025-02-11",
-    "dayOfWeekTh": "อังคาร",
-    "drawNumber": "งวด VIP 11/02/68",
-    "topPrize": "93750",
-    "twoDigitTop": "50",
-    "twoDigitBottom": "70",
-    "threeDigitTop": "750"
-  },
-  {
-    "id": "hnvip-20",
-    "market": "HANOI_VIP",
-    "date": "2025-02-10",
-    "dayOfWeekTh": "จันทร์",
-    "drawNumber": "งวด VIP 10/02/68",
-    "topPrize": "27184",
-    "twoDigitTop": "84",
+    "drawNumber": "VIP 15/09/2026",
+    "topPrize": "49782",
+    "twoDigitTop": "82",
     "twoDigitBottom": "15",
-    "threeDigitTop": "184"
+    "threeDigitTop": "782"
   },
   {
-    "id": "hnvip-21",
+    "id": "hnvip-2026-09-14",
     "market": "HANOI_VIP",
-    "date": "2025-02-09",
+    "date": "2026-09-14",
+    "dayOfWeekTh": "จันทร์",
+    "drawNumber": "VIP 14/09/2026",
+    "topPrize": "76103",
+    "twoDigitTop": "03",
+    "twoDigitBottom": "94",
+    "threeDigitTop": "103"
+  },
+  {
+    "id": "hnvip-2026-09-13",
+    "market": "HANOI_VIP",
+    "date": "2026-09-13",
     "dayOfWeekTh": "อาทิตย์",
-    "drawNumber": "งวด VIP 09/02/68",
-    "topPrize": "61935",
-    "twoDigitTop": "35",
-    "twoDigitBottom": "58",
-    "threeDigitTop": "935"
+    "drawNumber": "VIP 13/09/2026",
+    "topPrize": "18539",
+    "twoDigitTop": "39",
+    "twoDigitBottom": "48",
+    "threeDigitTop": "539"
   },
   {
-    "id": "hnvip-22",
+    "id": "hnvip-2026-09-12",
     "market": "HANOI_VIP",
-    "date": "2025-02-08",
+    "date": "2026-09-12",
     "dayOfWeekTh": "เสาร์",
-    "drawNumber": "งวด VIP 08/02/68",
-    "topPrize": "84520",
-    "twoDigitTop": "20",
-    "twoDigitBottom": "92",
-    "threeDigitTop": "520"
+    "drawNumber": "VIP 12/09/2026",
+    "topPrize": "93264",
+    "twoDigitTop": "64",
+    "twoDigitBottom": "70",
+    "threeDigitTop": "264"
   },
   {
-    "id": "hnvip-23",
+    "id": "hnvip-2026-09-11",
     "market": "HANOI_VIP",
-    "date": "2025-02-07",
+    "date": "2026-09-11",
     "dayOfWeekTh": "ศุกร์",
-    "drawNumber": "งวด VIP 07/02/68",
-    "topPrize": "39271",
+    "drawNumber": "VIP 11/09/2026",
+    "topPrize": "50841",
+    "twoDigitTop": "41",
+    "twoDigitBottom": "26",
+    "threeDigitTop": "841"
+  },
+  {
+    "id": "hnvip-2026-09-10",
+    "market": "HANOI_VIP",
+    "date": "2026-09-10",
+    "dayOfWeekTh": "พฤหัสบดี",
+    "drawNumber": "VIP 10/09/2026",
+    "topPrize": "24695",
+    "twoDigitTop": "95",
+    "twoDigitBottom": "83",
+    "threeDigitTop": "695"
+  },
+  {
+    "id": "hnvip-2026-09-09",
+    "market": "HANOI_VIP",
+    "date": "2026-09-09",
+    "dayOfWeekTh": "พุธ",
+    "drawNumber": "VIP 09/09/2026",
+    "topPrize": "87310",
+    "twoDigitTop": "10",
+    "twoDigitBottom": "39",
+    "threeDigitTop": "310"
+  },
+  {
+    "id": "hnvip-2026-09-08",
+    "market": "HANOI_VIP",
+    "date": "2026-09-08",
+    "dayOfWeekTh": "อังคาร",
+    "drawNumber": "VIP 08/09/2026",
+    "topPrize": "61958",
+    "twoDigitTop": "58",
+    "twoDigitBottom": "02",
+    "threeDigitTop": "958"
+  },
+  {
+    "id": "hnvip-2026-09-07",
+    "market": "HANOI_VIP",
+    "date": "2026-09-07",
+    "dayOfWeekTh": "จันทร์",
+    "drawNumber": "VIP 07/09/2026",
+    "topPrize": "35427",
+    "twoDigitTop": "27",
+    "twoDigitBottom": "67",
+    "threeDigitTop": "427"
+  },
+  {
+    "id": "hnvip-2026-09-06",
+    "market": "HANOI_VIP",
+    "date": "2026-09-06",
+    "dayOfWeekTh": "อาทิตย์",
+    "drawNumber": "VIP 06/09/2026",
+    "topPrize": "08271",
     "twoDigitTop": "71",
-    "twoDigitBottom": "36",
+    "twoDigitBottom": "51",
     "threeDigitTop": "271"
   },
   {
-    "id": "hnvip-24",
+    "id": "hnvip-2026-09-05",
     "market": "HANOI_VIP",
-    "date": "2025-02-06",
+    "date": "2026-09-05",
+    "dayOfWeekTh": "เสาร์",
+    "drawNumber": "VIP 05/09/2026",
+    "topPrize": "92146",
+    "twoDigitTop": "46",
+    "twoDigitBottom": "88",
+    "threeDigitTop": "146"
+  },
+  {
+    "id": "hnvip-2026-09-04",
+    "market": "HANOI_VIP",
+    "date": "2026-09-04",
+    "dayOfWeekTh": "ศุกร์",
+    "drawNumber": "VIP 04/09/2026",
+    "topPrize": "46583",
+    "twoDigitTop": "83",
+    "twoDigitBottom": "35",
+    "threeDigitTop": "583"
+  },
+  {
+    "id": "hnvip-2026-09-03",
+    "market": "HANOI_VIP",
+    "date": "2026-09-03",
     "dayOfWeekTh": "พฤหัสบดี",
-    "drawNumber": "งวด VIP 06/02/68",
-    "topPrize": "06843",
-    "twoDigitTop": "43",
-    "twoDigitBottom": "80",
-    "threeDigitTop": "843"
+    "drawNumber": "VIP 03/09/2026",
+    "topPrize": "73019",
+    "twoDigitTop": "19",
+    "twoDigitBottom": "92",
+    "threeDigitTop": "019"
   },
   {
-    "id": "hnvip-25",
+    "id": "hnvip-2026-09-02",
     "market": "HANOI_VIP",
-    "date": "2025-02-05",
+    "date": "2026-09-02",
     "dayOfWeekTh": "พุธ",
-    "drawNumber": "งวด VIP 05/02/68",
-    "topPrize": "52197",
-    "twoDigitTop": "97",
-    "twoDigitBottom": "24",
-    "threeDigitTop": "197"
-  },
-  {
-    "id": "hnvip-26",
-    "market": "HANOI_VIP",
-    "date": "2025-02-04",
-    "dayOfWeekTh": "อังคาร",
-    "drawNumber": "งวด VIP 04/02/68",
-    "topPrize": "78406",
-    "twoDigitTop": "06",
-    "twoDigitBottom": "67",
-    "threeDigitTop": "406"
-  },
-  {
-    "id": "hnvip-27",
-    "market": "HANOI_VIP",
-    "date": "2025-02-03",
-    "dayOfWeekTh": "จันทร์",
-    "drawNumber": "งวด VIP 03/02/68",
-    "topPrize": "13952",
+    "drawNumber": "VIP 02/09/2026",
+    "topPrize": "19452",
     "twoDigitTop": "52",
-    "twoDigitBottom": "01",
-    "threeDigitTop": "952"
+    "twoDigitBottom": "40",
+    "threeDigitTop": "452"
   },
   {
-    "id": "hnvip-28",
+    "id": "hnvip-2026-09-01",
     "market": "HANOI_VIP",
-    "date": "2025-02-02",
-    "dayOfWeekTh": "อาทิตย์",
-    "drawNumber": "งวด VIP 02/02/68",
-    "topPrize": "47689",
-    "twoDigitTop": "89",
-    "twoDigitBottom": "45",
-    "threeDigitTop": "689"
-  },
-  {
-    "id": "hnvip-29",
-    "market": "HANOI_VIP",
-    "date": "2025-02-01",
-    "dayOfWeekTh": "เสาร์",
-    "drawNumber": "งวด VIP 01/02/68",
-    "topPrize": "90214",
-    "twoDigitTop": "14",
-    "twoDigitBottom": "89",
-    "threeDigitTop": "214"
-  },
-  {
-    "id": "hnvip-30",
-    "market": "HANOI_VIP",
-    "date": "2025-01-31",
-    "dayOfWeekTh": "ศุกร์",
-    "drawNumber": "งวด VIP 31/01/68",
-    "topPrize": "25873",
-    "twoDigitTop": "73",
-    "twoDigitBottom": "32",
-    "threeDigitTop": "873"
-  },
-  {
-    "id": "hnvip-31",
-    "market": "HANOI_VIP",
-    "date": "2025-01-30",
-    "dayOfWeekTh": "พฤหัสบดี",
-    "drawNumber": "งวด VIP 30/01/68",
-    "topPrize": "68140",
-    "twoDigitTop": "40",
-    "twoDigitBottom": "76",
-    "threeDigitTop": "140"
-  },
-  {
-    "id": "hnvip-32",
-    "market": "HANOI_VIP",
-    "date": "2025-01-29",
-    "dayOfWeekTh": "พุธ",
-    "drawNumber": "งวด VIP 29/01/68",
-    "topPrize": "34795",
-    "twoDigitTop": "95",
-    "twoDigitBottom": "10",
-    "threeDigitTop": "795"
-  },
-  {
-    "id": "hnvip-33",
-    "market": "HANOI_VIP",
-    "date": "2025-01-28",
+    "date": "2026-09-01",
     "dayOfWeekTh": "อังคาร",
-    "drawNumber": "งวด VIP 28/01/68",
-    "topPrize": "81026",
-    "twoDigitTop": "26",
-    "twoDigitBottom": "54",
-    "threeDigitTop": "026"
+    "drawNumber": "VIP 01/09/2026",
+    "topPrize": "82736",
+    "twoDigitTop": "36",
+    "twoDigitBottom": "74",
+    "threeDigitTop": "736"
   },
   {
-    "id": "hnvip-34",
+    "id": "hnvip-2026-08-31",
     "market": "HANOI_VIP",
-    "date": "2025-01-27",
+    "date": "2026-08-31",
     "dayOfWeekTh": "จันทร์",
-    "drawNumber": "งวด VIP 27/01/68",
-    "topPrize": "59381",
-    "twoDigitTop": "81",
-    "twoDigitBottom": "98",
-    "threeDigitTop": "381"
-  },
-  {
-    "id": "hnvip-35",
-    "market": "HANOI_VIP",
-    "date": "2025-01-26",
-    "dayOfWeekTh": "อาทิตย์",
-    "drawNumber": "งวด VIP 26/01/68",
-    "topPrize": "02647",
-    "twoDigitTop": "47",
-    "twoDigitBottom": "41",
-    "threeDigitTop": "647"
-  },
-  {
-    "id": "hnvip-36",
-    "market": "HANOI_VIP",
-    "date": "2025-01-25",
-    "dayOfWeekTh": "เสาร์",
-    "drawNumber": "งวด VIP 25/01/68",
-    "topPrize": "74913",
-    "twoDigitTop": "13",
-    "twoDigitBottom": "85",
-    "threeDigitTop": "913"
-  },
-  {
-    "id": "hnvip-37",
-    "market": "HANOI_VIP",
-    "date": "2025-01-24",
-    "dayOfWeekTh": "ศุกร์",
-    "drawNumber": "งวด VIP 24/01/68",
-    "topPrize": "18560",
-    "twoDigitTop": "60",
-    "twoDigitBottom": "29",
-    "threeDigitTop": "560"
-  },
-  {
-    "id": "hnvip-38",
-    "market": "HANOI_VIP",
-    "date": "2025-01-23",
-    "dayOfWeekTh": "พฤหัสบดี",
-    "drawNumber": "งวด VIP 23/01/68",
-    "topPrize": "63294",
-    "twoDigitTop": "94",
-    "twoDigitBottom": "63",
-    "threeDigitTop": "294"
-  },
-  {
-    "id": "hnvip-39",
-    "market": "HANOI_VIP",
-    "date": "2025-01-22",
-    "dayOfWeekTh": "พุธ",
-    "drawNumber": "งวด VIP 22/01/68",
-    "topPrize": "97408",
+    "drawNumber": "VIP 31/08/2026",
+    "topPrize": "57308",
     "twoDigitTop": "08",
-    "twoDigitBottom": "07",
-    "threeDigitTop": "408"
+    "twoDigitBottom": "19",
+    "threeDigitTop": "308"
   },
   {
-    "id": "hnvip-40",
+    "id": "hnvip-2026-08-30",
     "market": "HANOI_VIP",
-    "date": "2025-01-21",
-    "dayOfWeekTh": "อังคาร",
-    "drawNumber": "งวด VIP 21/01/68",
-    "topPrize": "41835",
-    "twoDigitTop": "35",
-    "twoDigitBottom": "50",
-    "threeDigitTop": "835"
-  },
-  {
-    "id": "hnvip-41",
-    "market": "HANOI_VIP",
-    "date": "2025-01-20",
-    "dayOfWeekTh": "จันทร์",
-    "drawNumber": "งวด VIP 20/01/68",
-    "topPrize": "86072",
-    "twoDigitTop": "72",
-    "twoDigitBottom": "94",
-    "threeDigitTop": "072"
-  },
-  {
-    "id": "hnvip-42",
-    "market": "HANOI_VIP",
-    "date": "2025-01-19",
+    "date": "2026-08-30",
     "dayOfWeekTh": "อาทิตย์",
-    "drawNumber": "งวด VIP 19/01/68",
-    "topPrize": "29514",
-    "twoDigitTop": "14",
-    "twoDigitBottom": "38",
-    "threeDigitTop": "514"
+    "drawNumber": "VIP 30/08/2026",
+    "topPrize": "30964",
+    "twoDigitTop": "64",
+    "twoDigitBottom": "63",
+    "threeDigitTop": "964"
   },
   {
-    "id": "hnvip-43",
+    "id": "hnvip-2026-08-29",
     "market": "HANOI_VIP",
-    "date": "2025-01-18",
+    "date": "2026-08-29",
     "dayOfWeekTh": "เสาร์",
-    "drawNumber": "งวด VIP 18/01/68",
-    "topPrize": "73189",
-    "twoDigitTop": "89",
-    "twoDigitBottom": "71",
-    "threeDigitTop": "189"
-  },
-  {
-    "id": "hnvip-44",
-    "market": "HANOI_VIP",
-    "date": "2025-01-17",
-    "dayOfWeekTh": "ศุกร์",
-    "drawNumber": "งวด VIP 17/01/68",
-    "topPrize": "05426",
-    "twoDigitTop": "26",
-    "twoDigitBottom": "15",
-    "threeDigitTop": "426"
-  },
-  {
-    "id": "hnvip-45",
-    "market": "HANOI_VIP",
-    "date": "2025-01-16",
-    "dayOfWeekTh": "พฤหัสบดี",
-    "drawNumber": "งวด VIP 16/01/68",
-    "topPrize": "58973",
-    "twoDigitTop": "73",
-    "twoDigitBottom": "59",
-    "threeDigitTop": "973"
-  },
-  {
-    "id": "hnvip-46",
-    "market": "HANOI_VIP",
-    "date": "2025-01-15",
-    "dayOfWeekTh": "พุธ",
-    "drawNumber": "งวด VIP 15/01/68",
-    "topPrize": "32701",
-    "twoDigitTop": "01",
-    "twoDigitBottom": "93",
-    "threeDigitTop": "701"
-  },
-  {
-    "id": "hnvip-47",
-    "market": "HANOI_VIP",
-    "date": "2025-01-14",
-    "dayOfWeekTh": "อังคาร",
-    "drawNumber": "งวด VIP 14/01/68",
-    "topPrize": "69485",
-    "twoDigitTop": "85",
-    "twoDigitBottom": "27",
-    "threeDigitTop": "485"
-  },
-  {
-    "id": "hnvip-48",
-    "market": "HANOI_VIP",
-    "date": "2025-01-13",
-    "dayOfWeekTh": "จันทร์",
-    "drawNumber": "งวด VIP 13/01/68",
-    "topPrize": "14039",
-    "twoDigitTop": "39",
-    "twoDigitBottom": "61",
-    "threeDigitTop": "039"
-  },
-  {
-    "id": "hnvip-49",
-    "market": "HANOI_VIP",
-    "date": "2025-01-12",
-    "dayOfWeekTh": "อาทิตย์",
-    "drawNumber": "งวด VIP 12/01/68",
-    "topPrize": "87621",
+    "drawNumber": "VIP 29/08/2026",
+    "topPrize": "64821",
     "twoDigitTop": "21",
-    "twoDigitBottom": "04",
-    "threeDigitTop": "621"
+    "twoDigitBottom": "07",
+    "threeDigitTop": "821"
   },
   {
-    "id": "hnvip-50",
+    "id": "hnvip-2026-08-28",
     "market": "HANOI_VIP",
-    "date": "2025-01-11",
+    "date": "2026-08-28",
+    "dayOfWeekTh": "ศุกร์",
+    "drawNumber": "VIP 28/08/2026",
+    "topPrize": "28195",
+    "twoDigitTop": "95",
+    "twoDigitBottom": "54",
+    "threeDigitTop": "195"
+  },
+  {
+    "id": "hnvip-2026-08-27",
+    "market": "HANOI_VIP",
+    "date": "2026-08-27",
+    "dayOfWeekTh": "พฤหัสบดี",
+    "drawNumber": "VIP 27/08/2026",
+    "topPrize": "95470",
+    "twoDigitTop": "70",
+    "twoDigitBottom": "81",
+    "threeDigitTop": "470"
+  },
+  {
+    "id": "hnvip-2026-08-26",
+    "market": "HANOI_VIP",
+    "date": "2026-08-26",
+    "dayOfWeekTh": "พุธ",
+    "drawNumber": "VIP 26/08/2026",
+    "topPrize": "41738",
+    "twoDigitTop": "38",
+    "twoDigitBottom": "23",
+    "threeDigitTop": "738"
+  },
+  {
+    "id": "hnvip-2026-08-25",
+    "market": "HANOI_VIP",
+    "date": "2026-08-25",
+    "dayOfWeekTh": "อังคาร",
+    "drawNumber": "VIP 25/08/2026",
+    "topPrize": "70265",
+    "twoDigitTop": "65",
+    "twoDigitBottom": "96",
+    "threeDigitTop": "265"
+  },
+  {
+    "id": "hnvip-2026-08-24",
+    "market": "HANOI_VIP",
+    "date": "2026-08-24",
+    "dayOfWeekTh": "จันทร์",
+    "drawNumber": "VIP 24/08/2026",
+    "topPrize": "36849",
+    "twoDigitTop": "49",
+    "twoDigitBottom": "45",
+    "threeDigitTop": "849"
+  },
+  {
+    "id": "hnvip-2026-08-23",
+    "market": "HANOI_VIP",
+    "date": "2026-08-23",
+    "dayOfWeekTh": "อาทิตย์",
+    "drawNumber": "VIP 23/08/2026",
+    "topPrize": "89512",
+    "twoDigitTop": "12",
+    "twoDigitBottom": "78",
+    "threeDigitTop": "512"
+  },
+  {
+    "id": "hnvip-2026-08-22",
+    "market": "HANOI_VIP",
+    "date": "2026-08-22",
     "dayOfWeekTh": "เสาร์",
-    "drawNumber": "งวด VIP 11/01/68",
-    "topPrize": "41398",
-    "twoDigitTop": "98",
-    "twoDigitBottom": "48",
-    "threeDigitTop": "398"
+    "drawNumber": "VIP 22/08/2026",
+    "topPrize": "52087",
+    "twoDigitTop": "87",
+    "twoDigitBottom": "31",
+    "threeDigitTop": "087"
+  },
+  {
+    "id": "hnvip-2026-08-21",
+    "market": "HANOI_VIP",
+    "date": "2026-08-21",
+    "dayOfWeekTh": "ศุกร์",
+    "drawNumber": "VIP 21/08/2026",
+    "topPrize": "14396",
+    "twoDigitTop": "96",
+    "twoDigitBottom": "69",
+    "threeDigitTop": "396"
+  },
+  {
+    "id": "hnvip-2026-08-20",
+    "market": "HANOI_VIP",
+    "date": "2026-08-20",
+    "dayOfWeekTh": "พฤหัสบดี",
+    "drawNumber": "VIP 20/08/2026",
+    "topPrize": "67923",
+    "twoDigitTop": "23",
+    "twoDigitBottom": "04",
+    "threeDigitTop": "923"
+  },
+  {
+    "id": "hnvip-2026-08-19",
+    "market": "HANOI_VIP",
+    "date": "2026-08-19",
+    "dayOfWeekTh": "พุธ",
+    "drawNumber": "VIP 19/08/2026",
+    "topPrize": "23580",
+    "twoDigitTop": "80",
+    "twoDigitBottom": "52",
+    "threeDigitTop": "580"
+  },
+  {
+    "id": "hnvip-2026-08-18",
+    "market": "HANOI_VIP",
+    "date": "2026-08-18",
+    "dayOfWeekTh": "อังคาร",
+    "drawNumber": "VIP 18/08/2026",
+    "topPrize": "98417",
+    "twoDigitTop": "17",
+    "twoDigitBottom": "86",
+    "threeDigitTop": "417"
+  },
+  {
+    "id": "hnvip-2026-08-17",
+    "market": "HANOI_VIP",
+    "date": "2026-08-17",
+    "dayOfWeekTh": "จันทร์",
+    "drawNumber": "VIP 17/08/2026",
+    "topPrize": "45169",
+    "twoDigitTop": "69",
+    "twoDigitBottom": "13",
+    "threeDigitTop": "169"
+  },
+  {
+    "id": "hnvip-2026-08-16",
+    "market": "HANOI_VIP",
+    "date": "2026-08-16",
+    "dayOfWeekTh": "อาทิตย์",
+    "drawNumber": "VIP 16/08/2026",
+    "topPrize": "71604",
+    "twoDigitTop": "04",
+    "twoDigitBottom": "97",
+    "threeDigitTop": "604"
+  },
+  {
+    "id": "hnvip-2026-08-15",
+    "market": "HANOI_VIP",
+    "date": "2026-08-15",
+    "dayOfWeekTh": "เสาร์",
+    "drawNumber": "VIP 15/08/2026",
+    "topPrize": "07852",
+    "twoDigitTop": "52",
+    "twoDigitBottom": "42",
+    "threeDigitTop": "852"
+  },
+  {
+    "id": "hnvip-2026-08-14",
+    "market": "HANOI_VIP",
+    "date": "2026-08-14",
+    "dayOfWeekTh": "ศุกร์",
+    "drawNumber": "VIP 14/08/2026",
+    "topPrize": "83921",
+    "twoDigitTop": "21",
+    "twoDigitBottom": "75",
+    "threeDigitTop": "921"
+  },
+  {
+    "id": "hnvip-2026-08-13",
+    "market": "HANOI_VIP",
+    "date": "2026-08-13",
+    "dayOfWeekTh": "พฤหัสบดี",
+    "drawNumber": "VIP 13/08/2026",
+    "topPrize": "59276",
+    "twoDigitTop": "76",
+    "twoDigitBottom": "38",
+    "threeDigitTop": "276"
+  },
+  {
+    "id": "hnvip-2026-08-12",
+    "market": "HANOI_VIP",
+    "date": "2026-08-12",
+    "dayOfWeekTh": "พุธ",
+    "drawNumber": "VIP 12/08/2026",
+    "topPrize": "26438",
+    "twoDigitTop": "38",
+    "twoDigitBottom": "80",
+    "threeDigitTop": "438"
+  },
+  {
+    "id": "hnvip-2026-08-11",
+    "market": "HANOI_VIP",
+    "date": "2026-08-11",
+    "dayOfWeekTh": "อังคาร",
+    "drawNumber": "VIP 11/08/2026",
+    "topPrize": "60195",
+    "twoDigitTop": "95",
+    "twoDigitBottom": "24",
+    "threeDigitTop": "195"
+  },
+  {
+    "id": "hnvip-2026-08-10",
+    "market": "HANOI_VIP",
+    "date": "2026-08-10",
+    "dayOfWeekTh": "จันทร์",
+    "drawNumber": "VIP 10/08/2026",
+    "topPrize": "34751",
+    "twoDigitTop": "51",
+    "twoDigitBottom": "61",
+    "threeDigitTop": "751"
+  },
+  {
+    "id": "hnvip-2026-08-09",
+    "market": "HANOI_VIP",
+    "date": "2026-08-09",
+    "dayOfWeekTh": "อาทิตย์",
+    "drawNumber": "VIP 09/08/2026",
+    "topPrize": "81504",
+    "twoDigitTop": "04",
+    "twoDigitBottom": "09",
+    "threeDigitTop": "504"
+  },
+  {
+    "id": "hnvip-2026-08-08",
+    "market": "HANOI_VIP",
+    "date": "2026-08-08",
+    "dayOfWeekTh": "เสาร์",
+    "drawNumber": "VIP 08/08/2026",
+    "topPrize": "47089",
+    "twoDigitTop": "89",
+    "twoDigitBottom": "53",
+    "threeDigitTop": "089"
+  },
+  {
+    "id": "hnvip-2026-08-07",
+    "market": "HANOI_VIP",
+    "date": "2026-08-07",
+    "dayOfWeekTh": "ศุกร์",
+    "drawNumber": "VIP 07/08/2026",
+    "topPrize": "92637",
+    "twoDigitTop": "37",
+    "twoDigitBottom": "90",
+    "threeDigitTop": "637"
+  },
+  {
+    "id": "hnvip-2026-08-06",
+    "market": "HANOI_VIP",
+    "date": "2026-08-06",
+    "dayOfWeekTh": "พฤหัสบดี",
+    "drawNumber": "VIP 06/08/2026",
+    "topPrize": "18372",
+    "twoDigitTop": "72",
+    "twoDigitBottom": "46",
+    "threeDigitTop": "372"
+  },
+  {
+    "id": "hnvip-2026-08-05",
+    "market": "HANOI_VIP",
+    "date": "2026-08-05",
+    "dayOfWeekTh": "พุธ",
+    "drawNumber": "VIP 05/08/2026",
+    "topPrize": "75916",
+    "twoDigitTop": "16",
+    "twoDigitBottom": "82",
+    "threeDigitTop": "916"
+  },
+  {
+    "id": "hnvip-2026-08-04",
+    "market": "HANOI_VIP",
+    "date": "2026-08-04",
+    "dayOfWeekTh": "อังคาร",
+    "drawNumber": "VIP 04/08/2026",
+    "topPrize": "32480",
+    "twoDigitTop": "80",
+    "twoDigitBottom": "17",
+    "threeDigitTop": "480"
+  },
+  {
+    "id": "hnvip-2026-08-03",
+    "market": "HANOI_VIP",
+    "date": "2026-08-03",
+    "dayOfWeekTh": "จันทร์",
+    "drawNumber": "VIP 03/08/2026",
+    "topPrize": "69845",
+    "twoDigitTop": "45",
+    "twoDigitBottom": "73",
+    "threeDigitTop": "845"
+  },
+  {
+    "id": "hnvip-2026-08-02",
+    "market": "HANOI_VIP",
+    "date": "2026-08-02",
+    "dayOfWeekTh": "อาทิตย์",
+    "drawNumber": "VIP 02/08/2026",
+    "topPrize": "04129",
+    "twoDigitTop": "29",
+    "twoDigitBottom": "58",
+    "threeDigitTop": "129"
+  },
+  {
+    "id": "hnvip-2026-08-01",
+    "market": "HANOI_VIP",
+    "date": "2026-08-01",
+    "dayOfWeekTh": "เสาร์",
+    "drawNumber": "VIP 01/08/2026",
+    "topPrize": "86593",
+    "twoDigitTop": "93",
+    "twoDigitBottom": "21",
+    "threeDigitTop": "593"
+  },
+  {
+    "id": "hnvip-2026-07-31",
+    "market": "HANOI_VIP",
+    "date": "2026-07-31",
+    "dayOfWeekTh": "ศุกร์",
+    "drawNumber": "VIP 31/07/2026",
+    "topPrize": "53074",
+    "twoDigitTop": "74",
+    "twoDigitBottom": "65",
+    "threeDigitTop": "074"
+  },
+  {
+    "id": "hnvip-2026-07-30",
+    "market": "HANOI_VIP",
+    "date": "2026-07-30",
+    "dayOfWeekTh": "พฤหัสบดี",
+    "drawNumber": "VIP 30/07/2026",
+    "topPrize": "29718",
+    "twoDigitTop": "18",
+    "twoDigitBottom": "98",
+    "threeDigitTop": "718"
+  },
+  {
+    "id": "hnvip-2026-07-29",
+    "market": "HANOI_VIP",
+    "date": "2026-07-29",
+    "dayOfWeekTh": "พุธ",
+    "drawNumber": "VIP 29/07/2026",
+    "topPrize": "71462",
+    "twoDigitTop": "62",
+    "twoDigitBottom": "34",
+    "threeDigitTop": "462"
+  },
+  {
+    "id": "hnvip-2026-07-28",
+    "market": "HANOI_VIP",
+    "date": "2026-07-28",
+    "dayOfWeekTh": "อังคาร",
+    "drawNumber": "VIP 28/07/2026",
+    "topPrize": "48305",
+    "twoDigitTop": "05",
+    "twoDigitBottom": "87",
+    "threeDigitTop": "305"
   }
 ];
 

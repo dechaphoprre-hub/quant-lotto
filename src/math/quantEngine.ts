@@ -69,10 +69,39 @@ export function calculateDigitStatistics(draws: DrawRecord[]): DigitStat[] {
 }
 
 /**
+ * Mulberry32: Fast, high-quality, 32-bit deterministic seeded pseudo-random number generator.
+ * Produces identical bit-exact sequences across Chrome, Safari, Firefox, iOS, Android, and PC.
+ */
+export function createSeededRandom(seed: number | string): () => number {
+  let s = typeof seed === 'string' ? hashSeed(seed) : seed;
+  return function mulberry32(): number {
+    s |= 0;
+    s = (s + 0x6D2B79F5) | 0;
+    let t = Math.imul(s ^ (s >>> 15), 1 | s);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+function hashSeed(str: string): number {
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+    hash = (Math.imul(31, hash) + str.charCodeAt(i)) | 0;
+  }
+  return hash;
+}
+
+/**
  * 2. Monte Carlo Simulation Engine (2D)
+ * Deterministic Seeded Simulation across devices and browsers.
  * Defensive Guard against empty stats, zero weights, and NaN intervals.
  */
-export function runMonteCarloSimulation(stats: DigitStat[], iterations = 50000): MonteCarloSimulation {
+export function runMonteCarloSimulation(
+  stats: DigitStat[],
+  iterations = 50000,
+  seed: string | number = 'QUANT-NEXUS-DEFAULT-SEED'
+): MonteCarloSimulation {
+  const rng = createSeededRandom(seed);
   const safeStats = stats.length === 100 ? stats : calculateDigitStatistics([]);
   const totalWeight = Math.max(0.0001, safeStats.reduce((sum, s) => sum + (s.probabilityWeight || 1), 0));
   const hits: Record<string, number> = {};
@@ -91,7 +120,7 @@ export function runMonteCarloSimulation(stats: DigitStat[], iterations = 50000):
   const safeIterations = Math.max(1000, iterations);
 
   for (let i = 0; i < safeIterations; i++) {
-    const r = Math.random();
+    const r = rng();
     let low = 0;
     let high = cdf.length - 1;
     let selected = cdf[high].digit;

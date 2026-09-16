@@ -44,6 +44,12 @@ export interface Translations {
   sumRootLabel: string;
   payoutComparison: string;
   liveClockLabel: string;
+  drawTodayAlertTitle: string;
+  drawTodayAlertSub: string;
+  drawTodayBadge: string;
+  drawLiveAlertTitle: string;
+  drawLiveAlertSub: string;
+  drawLiveBadge: string;
   drawTomorrowAlertTitle: string;
   drawTomorrowAlertSub: string;
   drawTomorrowBadge: string;
@@ -201,6 +207,12 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     sumRootLabel: 'ผลรวมราก (Sum Root)',
     payoutComparison: 'อัตราจ่าย 3 ตัว: 850x - 900x (เทียบกับ 2 ตัว: 90x - 95x)',
     liveClockLabel: 'เวลาเซิร์ฟเวอร์ระบบสด',
+    drawTodayAlertTitle: '🚨 วันนี้วันหวยออก! สลากกินแบ่งรัฐบาลไทย (16 กันยายน 2569)',
+    drawTodayAlertSub: 'ออกรางวัลวันนี้ เวลา 14:30 - 15:30 น. โมเดลคำนวณสถิติ 100,000 รอบล็อกเป้าหมายพร้อมแล้ว',
+    drawTodayBadge: 'งวดวันนี้ 16 ก.ย. 69',
+    drawLiveAlertTitle: '🔴 กำลังออกรางวัลสด! สลากกินแบ่งรัฐบาลไทย',
+    drawLiveAlertSub: 'ระบบกำลังเปิดรับผลรางวัลสดพร้อมคำนวณอัตราความแม่นยำ (Verification Audit)',
+    drawLiveBadge: 'LIVE NOW',
     drawTomorrowAlertTitle: '🚨 พรุ่งนี้วันหวยออก! สลากกินแบ่งรัฐบาลไทย (16 กันยายน 2569)',
     drawTomorrowAlertSub: 'ออกรางวัลพรุ่งนี้เวลา 14:30 - 15:30 น. โมเดลคำนวณสถิติ 100,000 รอบล็อกเป้าหมายพร้อมแล้ว',
     drawTomorrowBadge: 'งวดพรุ่งนี้ 16 ก.ย. 69',
@@ -365,6 +377,12 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     sumRootLabel: 'ຜົນລວມຮາກ (Sum Root)',
     payoutComparison: 'ອັດຕາຈ່າຍ 3 ໂຕ: 850x - 900x (ທຽບກັບ 2 ໂຕ: 90x - 95x)',
     liveClockLabel: 'ເວລາເຊີບເວີສົດ',
+    drawTodayAlertTitle: '🚨 ມື້ນີ້ແມ່ນມື້ຫວຍອອກ! ສະຫລາກກິນແບ່ງລັດຖະບານໄທ (16 ກັນຍາ 2026)',
+    drawTodayAlertSub: 'ອອກລາງວັນມື້ນີ້ເວລາ 14:30 - 15:30. ໂມເດວຄຳນວນສະຖິຕິ 100,000 ຮອບພ້ອມແລ້ວ',
+    drawTodayBadge: 'ງວດມື້ນີ້ 16 ກ.ຍ.',
+    drawLiveAlertTitle: '🔴 ກຳລັງອອກລາງວັນສົດ! ສະຫລາກກິນແບ່ງລັດຖະບານໄທ',
+    drawLiveAlertSub: 'ລະບົບກຳລັງເປີດຮັບຜົນລາງວັນສົດພ້ອມຄຳນວນຄວາມຖືກຕ້ອງ',
+    drawLiveBadge: 'LIVE NOW',
     drawTomorrowAlertTitle: '🚨 ມື້ອື່ນແມ່ນມື້ຫວຍອອກ! ສະຫລາກກິນແບ່ງລັດຖະບານໄທ (16 ກັນຍາ 2026)',
     drawTomorrowAlertSub: 'ອອກລາງວັນມື້ອື່ນເວລາ 14:30 - 15:30. ໂມເດວຄຳນວນສະຖິຕິ 100,000 ຮອບພ້ອມແລ້ວ',
     drawTomorrowBadge: 'ງວດມື້ອື່ນ 16 ກ.ຍ.',
@@ -529,6 +547,12 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     sumRootLabel: 'Tổng Căn (Sum Root)',
     payoutComparison: 'Tỷ lệ trả thưởng 3 Càng: 850x - 900x (so với 2 Số: 90x - 95x)',
     liveClockLabel: 'Giờ Hệ Thống Trực Tiếp',
+    drawTodayAlertTitle: '🚨 HÔM NAY LÀ NGÀY QUAY THƯỞNG! Xổ Số Thái Lan (16/09/2026)',
+    drawTodayAlertSub: 'Quay thưởng hôm nay lúc 14:30 - 15:30. Mô hình giả lập lượng tử 100.000 vòng đã khóa mục tiêu',
+    drawTodayBadge: 'Kỳ quay hôm nay 16/09',
+    drawLiveAlertTitle: '🔴 ĐANG QUAY THƯỞNG TRỰC TIẾP! Xổ Số Thái Lan',
+    drawLiveAlertSub: 'Hệ thống đang theo dõi kết quả trực tiếp và xác thực thuật toán',
+    drawLiveBadge: 'LIVE NOW',
     drawTomorrowAlertTitle: '🚨 NGÀY MAI LÀ NGÀY QUAY THƯỞNG! Xổ Số Thái Lan (16/09/2026)',
     drawTomorrowAlertSub: 'Quay thưởng ngày mai lúc 14:30 - 15:30. Mô hình giả lập lượng tử 100.000 vòng đã khóa mục tiêu',
     drawTomorrowBadge: 'Kỳ quay ngày mai 16/09',
@@ -693,6 +717,12 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     sumRootLabel: 'Digital Root (Sum Root)',
     payoutComparison: '3D Payout Multiplier: 850x - 900x (vs 2D: 90x - 95x)',
     liveClockLabel: 'Live System Clock',
+    drawTodayAlertTitle: '🚨 TODAY IS OFFICIAL DRAW DAY! Thai Lottery (16 September 2026)',
+    drawTodayAlertSub: 'Official draw broadcast today at 14:30 - 15:30 UTC+7. 100,000 Monte Carlo simulations locked.',
+    drawTodayBadge: 'TODAY 16 SEP',
+    drawLiveAlertTitle: '🔴 LIVE BROADCAST IN PROGRESS! Thai Lottery',
+    drawLiveAlertSub: 'Live draw streaming. Real-time verification and algorithmic hit-rate auditing active.',
+    drawLiveBadge: 'LIVE NOW',
     drawTomorrowAlertTitle: '🚨 TOMORROW IS OFFICIAL DRAW DAY! Thai Lottery (16 September 2026)',
     drawTomorrowAlertSub: 'Official draw broadcast tomorrow at 14:30 - 15:30 UTC+7. 100,000 Monte Carlo simulations locked.',
     drawTomorrowBadge: 'TOMORROW 16 SEP',

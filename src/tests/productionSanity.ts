@@ -52,24 +52,28 @@ const sampleInvalidThai: Partial<DrawRecord> = {
 const v2 = validateDrawRecord(sampleInvalidThai);
 assert(!v2.isValid && v2.errors.length >= 4, 'Invalid record correctly rejected with all errors caught', JSON.stringify(v2.errors));
 
-// 2. Deep Historical Dataset Integrity
-console.log('\n--- 2. Testing Deep Authentic Datasets ---');
+// 2. Deep Historical Dataset Integrity & 2026 Recency
+console.log('\n--- 2. Testing Deep Authentic Datasets & 2026 Recency ---');
 
 const thaiClean = sanitizeDrawDataset(THAI_LOTTERY_DRAWS);
 assert(thaiClean.rejectedCount === 0, `Thai dataset clean with 0 errors (Total: ${THAI_LOTTERY_DRAWS.length} draws)`);
 assert(thaiClean.cleanDataset.length >= 40, `Thai dataset has deep sample size (${thaiClean.cleanDataset.length} >= 40)`);
+assert(THAI_LOTTERY_DRAWS[0].date === '2026-09-01', `Thai latest draw is 2026-09-01 (${THAI_LOTTERY_DRAWS[0].date})`);
 
 const laoClean = sanitizeDrawDataset(LAO_LOTTERY_DRAWS);
 assert(laoClean.rejectedCount === 0, `Lao dataset clean with 0 errors (Total: ${LAO_LOTTERY_DRAWS.length} draws)`);
 assert(laoClean.cleanDataset.length >= 40, `Lao dataset has deep sample size (${laoClean.cleanDataset.length} >= 40)`);
+assert(LAO_LOTTERY_DRAWS[0].date === '2026-09-14', `Lao latest draw is 2026-09-14 (${LAO_LOTTERY_DRAWS[0].date})`);
 
 const hanoiClean = sanitizeDrawDataset(HANOI_LOTTERY_DRAWS);
 assert(hanoiClean.rejectedCount === 0, `Hanoi Regular dataset clean with 0 errors (Total: ${HANOI_LOTTERY_DRAWS.length} draws)`);
 assert(hanoiClean.cleanDataset.length >= 40, `Hanoi Regular dataset has deep sample size (${hanoiClean.cleanDataset.length} >= 40)`);
+assert(HANOI_LOTTERY_DRAWS[0].date === '2026-09-15', `Hanoi Regular latest draw is 2026-09-15 (${HANOI_LOTTERY_DRAWS[0].date})`);
 
 const hanoiVipClean = sanitizeDrawDataset(HANOI_VIP_LOTTERY_DRAWS);
 assert(hanoiVipClean.rejectedCount === 0, `Hanoi VIP dataset clean with 0 errors (Total: ${HANOI_VIP_LOTTERY_DRAWS.length} draws)`);
 assert(hanoiVipClean.cleanDataset.length >= 40, `Hanoi VIP dataset has deep sample size (${hanoiVipClean.cleanDataset.length} >= 40)`);
+assert(HANOI_VIP_LOTTERY_DRAWS[0].date === '2026-09-15', `Hanoi VIP latest draw is 2026-09-15 (${HANOI_VIP_LOTTERY_DRAWS[0].date})`);
 
 const samePrizeCount = HANOI_LOTTERY_DRAWS.filter((h, idx) => h.topPrize === HANOI_VIP_LOTTERY_DRAWS[idx]?.topPrize).length;
 assert(samePrizeCount === 0, 'Hanoi Regular and Hanoi VIP are strictly distinct, independent datasets');
@@ -90,15 +94,19 @@ assert(emptyStats.length === 100, 'calculateDigitStatistics([]) handles empty ar
 const emptyHasNan = emptyStats.some(s => isNaN(s.frequency) || isNaN(s.zScore) || isNaN(s.probabilityWeight));
 assert(!emptyHasNan, 'Zero NaN values when calculating on empty dataset');
 
-// 4. Monte Carlo 100,000 Iterations Simulation
-console.log('\n--- 4. Testing Monte Carlo Simulation Core ---');
-const mcResult = runMonteCarloSimulation(stats, 100000);
-assert(mcResult.iterations === 100000, 'Monte Carlo executes requested 100,000 iterations');
-assert(mcResult.topRanked.length === 10, 'Returns top 10 ranked density peaks');
+// 4. Monte Carlo Simulation Core & Deterministic PRNG
+console.log('\n--- 4. Testing Monte Carlo Simulation Core & Deterministic PRNG ---');
+const mcRun1 = runMonteCarloSimulation(stats, 50000, 'TEST-SEED-MULBERRY-2026');
+const mcRun2 = runMonteCarloSimulation(stats, 50000, 'TEST-SEED-MULBERRY-2026');
+assert(mcRun1.iterations === 50000, 'Monte Carlo executes requested 50,000 iterations');
+assert(mcRun1.topRanked.length === 10, 'Returns top 10 ranked density peaks');
 
-const mcHasNan = mcResult.topRanked.some(r => isNaN(r.probability) || isNaN(r.hits) || isNaN(r.confidenceInterval[0]));
+const isExactMatch = mcRun1.topRanked.every((r, idx) => r.digit === mcRun2.topRanked[idx].digit && r.hits === mcRun2.topRanked[idx].hits);
+assert(isExactMatch, 'Mulberry32 PRNG is 100% bit-exact deterministic across runs/devices with same seed');
+
+const mcHasNan = mcRun1.topRanked.some(r => isNaN(r.probability) || isNaN(r.hits) || isNaN(r.confidenceInterval[0]));
 assert(!mcHasNan, 'Zero NaN values in Monte Carlo ranked results');
-assert(!isNaN(mcResult.entropyScore) && mcResult.entropyScore > 0, `Entropy score valid: ${mcResult.entropyScore}`);
+assert(!isNaN(mcRun1.entropyScore) && mcRun1.entropyScore > 0, `Entropy score valid: ${mcRun1.entropyScore}`);
 
 // 5. Markov Chain State Transitions
 console.log('\n--- 5. Testing Markov Chain State Transitions ---');

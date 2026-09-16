@@ -56,10 +56,14 @@ export const App: React.FC = () => {
     }));
   };
 
-  // Compute quantitative models for the selected market
+  // Compute quantitative models for the selected market with deterministic cross-device PRNG
   const digitStats = useMemo(() => calculateDigitStatistics(draws), [draws]);
   const markovStates = useMemo(() => calculateMarkovTransitions(draws), [draws]);
-  const monteCarlo = useMemo(() => runMonteCarloSimulation(digitStats, monteCarloRuns), [digitStats, monteCarloRuns]);
+  const simulationSeed = `${activeMarket}-${latestDraw?.date || '2026-09-16'}-${monteCarloRuns}`;
+  const monteCarlo = useMemo(
+    () => runMonteCarloSimulation(digitStats, monteCarloRuns, simulationSeed),
+    [digitStats, monteCarloRuns, simulationSeed]
+  );
   const threeDigitCandidates = useMemo(() => runThreeDigitSimulation(draws), [draws]);
 
   const handleRerunMonteCarlo = (iterations: number) => {
