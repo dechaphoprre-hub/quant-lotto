@@ -59,6 +59,15 @@ The "Proof of Algorithm" tab must only ever show real, pre-committed predictions
 - `npm run generate:proof` computes a Top-5 prediction from only the verified draws known so far, hashes it, and inserts it into `proof_records` before the next draw happens. It is chained after `npm run ingest:glo` in `.github/workflows/ingest-glo.yml`, so a fresh prediction is committed right after each draw is ingested, for the draw after that.
 - Scoring against the real result happens automatically inside the GLO ingestion (`scripts/lib/glo.ts`) the moment that draw's result is verified; a proof record is never edited to change its prediction after it was committed.
 
+## Automated draw announcements (no manual posting required)
+
+`scripts/announce-draw.ts` runs automatically as the last step of `.github/workflows/ingest-glo.yml`, right after a draw is verified. It posts the result (and, if one is pending, the already-locked-in prediction for the next draw) to whichever channels are configured — entirely hands-off, no one has to log in and post anything:
+
+- **LINE broadcast**: set the `LINE_CHANNEL_ACCESS_TOKEN` GitHub Actions secret (from the LINE Developers Console, Messaging API channel).
+- **Facebook Page post**: set `FACEBOOK_PAGE_ID` (repository variable) and `FACEBOOK_PAGE_ACCESS_TOKEN` (secret) from Meta for Developers. Posts to a Page, not a group — no one needs to join or moderate a group.
+
+Neither is required — with both unset, the step logs that it's skipping and exits cleanly; the ingestion pipeline never fails because a social channel isn't configured yet. Set `SITE_URL` (repository variable) if the deployed site ever moves off the default GitHub Pages URL.
+
 ## Validating scoring changes before they ship (backtesting)
 
 Before changing how any "top pick" ranking works (2D or 3D), run a walk-forward backtest against real history first — don't assume a heuristic helps just because it sounds plausible. `npm run backtest:3d` (needs `SUPABASE_URL` and the public `SUPABASE_ANON_KEY` — read-only, no service-role key required) re-derives the historical top-5 picks using only draws strictly before each target draw, and reports the real hit rate against a pure-chance baseline.
