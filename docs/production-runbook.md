@@ -59,6 +59,12 @@ The "Proof of Algorithm" tab must only ever show real, pre-committed predictions
 - `npm run generate:proof` computes a Top-5 prediction from only the verified draws known so far, hashes it, and inserts it into `proof_records` before the next draw happens. It is chained after `npm run ingest:glo` in `.github/workflows/ingest-glo.yml`, so a fresh prediction is committed right after each draw is ingested, for the draw after that.
 - Scoring against the real result happens automatically inside the GLO ingestion (`scripts/lib/glo.ts`) the moment that draw's result is verified; a proof record is never edited to change its prediction after it was committed.
 
+## Validating scoring changes before they ship (backtesting)
+
+Before changing how any "top pick" ranking works (2D or 3D), run a walk-forward backtest against real history first — don't assume a heuristic helps just because it sounds plausible. `npm run backtest:3d` (needs `SUPABASE_URL` and the public `SUPABASE_ANON_KEY` — read-only, no service-role key required) re-derives the historical top-5 picks using only draws strictly before each target draw, and reports the real hit rate against a pure-chance baseline.
+
+This caught a real bug: the original 3D scoring gave the strongest weight to whichever numbers were discovered first while scanning newest-first, which meant the most recent draw's own numbers almost always dominated the "next draw" picks — so right after a draw, the app would show that day's own result back as if it had predicted it. The backtest showed recency-weighting had no real hit-rate advantage over plain historical frequency (both indistinguishable from chance), so `runThreeDigitSimulation` in `quantEngine.ts` now ranks by frequency alone.
+
 ## Laos / Hanoi / Hanoi VIP: no official API exists
 
 Unlike Thailand's GLO, there is no official government API for Lao or Vietnamese (Hanoi) lottery results. Wiring an automated scraper against an unverified third-party site and marking it `VERIFIED` would misrepresent it as government-confirmed, which this project treats as a hard no (see "no fabricated data" throughout this file).
