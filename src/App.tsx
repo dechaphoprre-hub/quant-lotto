@@ -84,13 +84,6 @@ export const App: React.FC = () => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [adminConsoleEnabled]);
 
-  const handleDatasetUpdated = (updated: DrawRecord[]) => {
-    setDatasets(prev => ({
-      ...prev,
-      [activeMarket]: updated
-    }));
-  };
-
   // Compute quantitative models for the selected market with deterministic cross-device PRNG
   const digitStats = useMemo(() => calculateDigitStatistics(draws), [draws]);
   const markovStates = useMemo(() => calculateMarkovTransitions(draws), [draws]);
@@ -251,9 +244,6 @@ export const App: React.FC = () => {
         isOpen={adminConsoleEnabled && isAdminOpen}
         onClose={() => setIsAdminOpen(false)}
         activeMarket={activeMarket}
-        currentDataset={draws}
-        onDatasetUpdated={handleDatasetUpdated}
-        factoryDefaultDataset={MARKET_CONFIG[activeMarket].dataset}
       />
     </div>
   );

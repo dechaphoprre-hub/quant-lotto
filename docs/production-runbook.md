@@ -59,6 +59,16 @@ The "Proof of Algorithm" tab must only ever show real, pre-committed predictions
 - `npm run generate:proof` computes a Top-5 prediction from only the verified draws known so far, hashes it, and inserts it into `proof_records` before the next draw happens. It is chained after `npm run ingest:glo` in `.github/workflows/ingest-glo.yml`, so a fresh prediction is committed right after each draw is ingested, for the draw after that.
 - Scoring against the real result happens automatically inside the GLO ingestion (`scripts/lib/glo.ts`) the moment that draw's result is verified; a proof record is never edited to change its prediction after it was committed.
 
+## Admin backend (real auth, approval, and audit trail)
+
+The operator console (`Ctrl/Cmd+Shift+A`, gated by `VITE_ADMIN_CONSOLE_ENABLED`) no longer has a client-side PIN or any ability to write to the browser's local storage as if it were production data. It signs in against real Supabase Auth, and every write is enforced by Postgres row-level security, not by frontend logic:
+
+1. Create a real user in Supabase Auth (dashboard → Authentication → Users, or invite by email).
+2. Grant them a role with the service-role key: `insert into admin_roles (user_id, role) values ('<uuid>', 'EDITOR');` (or `'ADMIN'`). There is no self-service way to grant a role — this is intentional.
+3. An `EDITOR` or `ADMIN` can submit a manual draw correction (with a reason) from the console. It lands in `draw_corrections` with `status = 'PENDING'` and is not public yet.
+4. A *different* `ADMIN` (never the submitter — RLS blocks self-approval) approves or rejects it from the same console. Approval triggers a Postgres function that writes the real `draws` row and an `audit_logs` entry in the same transaction.
+5. Before the first correction for a market can be approved, `data_sources` needs a row with `source_type = 'MANUAL'` for that market (migration `004_admin_backend.sql` seeds one per market as `UNVERIFIED`); flip it to `VERIFIED` once you trust who holds `ADMIN`/`EDITOR`.
+
 ## Sponsor banners (real revenue, no fabricated traffic)
 
 `public.ad_campaigns` already has an RLS policy exposing only rows that are `active` and inside `[starts_at, ends_at]`. `src/components/BannerAd.tsx` renders whatever is currently active for a slot, or nothing at all — there is no placeholder "estimated revenue" banner in production. To sell and run a real sponsor slot: insert a row into `ad_campaigns` with the service-role key once a sponsor is signed, and let it expire naturally via `ends_at`.

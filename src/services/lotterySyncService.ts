@@ -1,5 +1,6 @@
 import { MarketType, DrawRecord } from '../types';
 import { sanitizeDrawDataset } from './dataValidator';
+import { SUPABASE_URL, SUPABASE_ANON_KEY } from './supabaseConfig';
 
 export interface SyncStatus {
   lastChecked: string;
@@ -16,8 +17,6 @@ interface DataApiResponse {
 }
 
 const DATA_API_BASE_URL = (import.meta.env.VITE_DATA_API_BASE_URL as string | undefined)?.replace(/\/$/, '');
-const SUPABASE_URL = (import.meta.env.VITE_SUPABASE_URL as string | undefined)?.replace(/\/$/, '');
-const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY as string | undefined;
 const REQUEST_TIMEOUT_MS = 10000;
 
 const getThaiDayName = (date: string): string => {
