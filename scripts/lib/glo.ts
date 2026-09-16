@@ -16,7 +16,6 @@ interface GloPayload {
       last2?: { number?: GloNumber[] };
       last3f?: { number?: GloNumber[] };
       last3b?: { number?: GloNumber[] };
-      n3?: { straight3?: { number?: GloNumber[] } };
     };
   };
 }
@@ -93,7 +92,12 @@ export const ingestThaiGloDraw = async (dateInput: string, api: SupabaseApi): Pr
         if (!gloResponse.ok) throw new Error(`GLO HTTP ${gloResponse.status}`);
         payload = await gloResponse.json() as GloPayload;
         if (payload.status && payload.response?.data) break;
+        // GLO answered successfully and confirmed there is no draw on this
+        // exact calendar date (a real, deterministic outcome — Thai public
+        // holidays shift the actual draw date). Retrying won't change that.
         lastError = 'GLO returned no published result for this date.';
+        payload = undefined;
+        break;
       } catch (error) {
         lastError = error instanceof Error ? error.message : String(error);
       }
@@ -108,7 +112,10 @@ export const ingestThaiGloDraw = async (dateInput: string, api: SupabaseApi): Pr
     const bottomTwo = getValue(data.last2?.number);
     const frontThree = data.last3f?.number?.map(item => item.value) || [];
     const backThree = data.last3b?.number?.map(item => item.value) || [];
-    const threeTop = getValue(data.n3?.straight3?.number);
+    // Thai lottery's "3-digit top" is not an independently drawn number —
+    // GLO's API has no field for it because it's always just the last 3
+    // digits of the first-prize number (same pattern as two_digit_top below).
+    const threeTop = topPrize.slice(-3);
     const required = [topPrize, bottomTwo, ...frontThree, ...backThree, threeTop];
     if (!/^\d{6}$/.test(topPrize) || !/^\d{2}$/.test(bottomTwo) || frontThree.length !== 2 || backThree.length !== 2 || !/^\d{3}$/.test(threeTop) || required.some(value => !/^\d+$/.test(value))) {
       throw new Error('GLO response failed Thai result shape validation.');
