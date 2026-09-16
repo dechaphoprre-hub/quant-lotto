@@ -1,0 +1,28 @@
+name: Validate Live Lottery Data
+
+on:
+  schedule:
+    - cron: '15 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Validate all market datasets
+        run: npm run validate:data
+        env:
+          DATA_API_BASE_URL: ${{ vars.VITE_DATA_API_BASE_URL }}
+          MAX_DATA_AGE_HOURS: 48

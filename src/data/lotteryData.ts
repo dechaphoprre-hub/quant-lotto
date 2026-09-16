@@ -1,9 +1,8 @@
 import { DrawRecord } from '../types';
 
 /**
- * Real Official Historical Thai Government Lottery Draws (ข้อมูลจริง 100% จากสำนักงานสลากกินแบ่งรัฐบาล)
- * Covers complete official records through September 2026, including Top Prize (รางวัลที่ 1),
- * 2-digit bottom, 3-digit front, and 3-digit back.
+ * Bundled Thai historical snapshot. Records require source verification before publication.
+ * The primary source is the Government Lottery Office results archive.
  */
 export const THAI_LOTTERY_DRAWS: DrawRecord[] = [
   {
@@ -1719,7 +1718,7 @@ export const THAI_LOTTERY_DRAWS: DrawRecord[] = [
 ];
 
 /**
- * Real Official Historical Lao Development Lottery Draws (หวยพัฒนาลาว)
+ * Bundled Lao historical snapshot. A verified primary source is not configured yet.
  * Continuous historical records leading up to 14 September 2026 (Monday).
  * Schedule: Mon, Wed, Fri (20:00 - 20:30 ICT).
  */
@@ -2277,7 +2276,7 @@ export const LAO_LOTTERY_DRAWS: DrawRecord[] = [
 ];
 
 /**
- * Real Official Historical Hanoi Regular Lottery Draws (หวยฮานอยปกติ เวียดนาม 18:15)
+ * Bundled Hanoi historical snapshot. Records require reconciliation with a primary source.
  * Continuous daily records leading up to 15 September 2026.
  */
 export const HANOI_LOTTERY_DRAWS: DrawRecord[] = [
@@ -2834,7 +2833,7 @@ export const HANOI_LOTTERY_DRAWS: DrawRecord[] = [
 ];
 
 /**
- * Real Official Historical Hanoi VIP Lottery Draws (หวยฮานอย VIP 19:15)
+ * Bundled Hanoi VIP historical snapshot. A verified primary source is not configured yet.
  * Distinct, independent continuous daily records leading up to 15 September 2026.
  */
 export const HANOI_VIP_LOTTERY_DRAWS: DrawRecord[] = [

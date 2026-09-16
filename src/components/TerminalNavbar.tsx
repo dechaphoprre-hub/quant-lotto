@@ -41,14 +41,16 @@ export const TerminalNavbar: React.FC<NavbarProps> = ({
       <div className="bg-terminal-bg/95 border-b border-terminal-border/60 px-3 sm:px-4 py-1.5 flex flex-wrap items-center justify-between gap-2 text-xs font-mono text-terminal-muted">
         <div className="flex items-center space-x-2 sm:space-x-3 overflow-hidden">
           {/* Operator Console Trigger Badge */}
-          <button
-            onClick={onOpenAdminConsole}
-            title="Operator Console (Ctrl+Shift+A)"
-            className="flex items-center text-emerald-400 font-semibold shrink-0 hover:text-emerald-300 transition-colors cursor-pointer"
-          >
-            <span className="w-2 h-2 rounded-full bg-emerald-400 mr-1.5 animate-pulse"></span>
-            <span className="text-[11px] sm:text-xs">{t.sysActive}</span>
-          </button>
+          {onOpenAdminConsole && (
+            <button
+              onClick={onOpenAdminConsole}
+              title="Operator Console (Ctrl+Shift+A)"
+              className="flex items-center text-emerald-400 font-semibold shrink-0 hover:text-emerald-300 transition-colors cursor-pointer"
+            >
+              <span className="w-2 h-2 rounded-full bg-emerald-400 mr-1.5 animate-pulse"></span>
+              <span className="text-[11px] sm:text-xs">{t.sysActive}</span>
+            </button>
+          )}
 
           <span className="text-slate-700 hidden sm:inline">|</span>
 

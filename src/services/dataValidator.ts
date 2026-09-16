@@ -8,8 +8,12 @@ export interface ValidationResult {
 /**
  * Validates a single DrawRecord according to strict lottery market rules.
  */
-export function validateDrawRecord(draw: Partial<DrawRecord>): ValidationResult {
+export function validateDrawRecord(draw: Partial<DrawRecord> | null | undefined): ValidationResult {
   const errors: string[] = [];
+
+  if (!draw || typeof draw !== 'object') {
+    return { isValid: false, errors: ['Draw record must be an object.'] };
+  }
 
   if (!draw.id || typeof draw.id !== 'string') {
     errors.push('Draw ID is missing or invalid.');
@@ -87,7 +91,7 @@ export function validateDrawRecord(draw: Partial<DrawRecord>): ValidationResult 
 /**
  * Sanitizes and deduplicates an array of draw records, sorting them newest to oldest.
  */
-export function sanitizeDrawDataset(draws: DrawRecord[]): {
+export function sanitizeDrawDataset(draws: unknown[]): {
   cleanDataset: DrawRecord[];
   rejectedCount: number;
   rejectionReasons: { id: string; errors: string[] }[];
@@ -97,26 +101,29 @@ export function sanitizeDrawDataset(draws: DrawRecord[]): {
   const cleanDataset: DrawRecord[] = [];
   const rejectionReasons: { id: string; errors: string[] }[] = [];
 
-  for (const draw of draws) {
+  for (const candidate of draws) {
+    const draw = candidate as Partial<DrawRecord>;
     const validation = validateDrawRecord(draw);
     if (!validation.isValid) {
       rejectionReasons.push({ id: draw.id || 'UNKNOWN', errors: validation.errors });
       continue;
     }
 
+    const validDraw = draw as DrawRecord;
+
     // Deduplicate by ID and Date within the same market
-    const uniqueKey = `${draw.market}-${draw.date}`;
-    if (seenIds.has(draw.id) || seenDates.has(uniqueKey)) {
+    const uniqueKey = `${validDraw.market}-${validDraw.date}`;
+    if (seenIds.has(validDraw.id) || seenDates.has(uniqueKey)) {
       rejectionReasons.push({
-        id: draw.id,
-        errors: [`Duplicate draw detected for market ${draw.market} on date ${draw.date}`]
+        id: validDraw.id,
+        errors: [`Duplicate draw detected for market ${validDraw.market} on date ${validDraw.date}`]
       });
       continue;
     }
 
-    seenIds.add(draw.id);
+    seenIds.add(validDraw.id);
     seenDates.add(uniqueKey);
-    cleanDataset.push(draw);
+    cleanDataset.push(validDraw);
   }
 
   // Sort chronologically descending (newest first)

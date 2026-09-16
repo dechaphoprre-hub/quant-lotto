@@ -3,6 +3,7 @@ import { MarketType, DimensionMode, DrawRecord } from './types';
 import { MARKET_CONFIG } from './data/lotteryData';
 import { calculateDigitStatistics, runMonteCarloSimulation, calculateMarkovTransitions, runThreeDigitSimulation } from './math/quantEngine';
 import { LotteryStorageService } from './services/storageService';
+import { LotterySyncService } from './services/lotterySyncService';
 import { TerminalNavbar } from './components/TerminalNavbar';
 import { MarketStatsHeader } from './components/MarketStatsHeader';
 import { QuantEnginesView } from './components/QuantEnginesView';
@@ -24,6 +25,8 @@ export const App: React.FC = () => {
   const [currentLang, setCurrentLang] = useState<Language>('TH');
   const [isGuideOpen, setIsGuideOpen] = useState<boolean>(false);
   const [isAdminOpen, setIsAdminOpen] = useState<boolean>(false);
+  const [syncMessage, setSyncMessage] = useState('Preparing data source...');
+  const adminConsoleEnabled = import.meta.env.VITE_ADMIN_CONSOLE_ENABLED === 'true';
 
   // Persistent market datasets with fallback to master factory data
   const [datasets, setDatasets] = useState<Record<MarketType, DrawRecord[]>>(() => ({
@@ -37,17 +40,46 @@ export const App: React.FC = () => {
   const draws = datasets[activeMarket] || MARKET_CONFIG[activeMarket].dataset;
   const latestDraw = draws[0] || MARKET_CONFIG[activeMarket].dataset[0];
 
+  useEffect(() => {
+    let cancelled = false;
+    const markets: MarketType[] = ['THAI', 'LAO', 'HANOI', 'HANOI_VIP'];
+
+    const syncDatasets = async () => {
+      const results = await Promise.all(
+        markets.map(market => LotterySyncService.checkAndUpdate(market, datasets[market]))
+      );
+
+      if (cancelled) return;
+
+      setDatasets(previous => {
+        const next = { ...previous };
+        results.forEach((result, index) => {
+          if (result.updated) next[markets[index]] = result.dataset;
+        });
+        return next;
+      });
+
+      const remoteCount = results.filter(result => result.updated).length;
+      setSyncMessage(remoteCount === markets.length
+        ? 'Live data API connected and datasets validated.'
+        : 'Live data API unavailable; showing bundled snapshots.');
+    };
+
+    void syncDatasets();
+    return () => { cancelled = true; };
+  }, []);
+
   // Operator keyboard shortcut (Ctrl + Shift + A)
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key.toLowerCase() === 'a') {
+      if (adminConsoleEnabled && (e.ctrlKey || e.metaKey) && e.shiftKey && e.key.toLowerCase() === 'a') {
         e.preventDefault();
         setIsAdminOpen(prev => !prev);
       }
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, []);
+  }, [adminConsoleEnabled]);
 
   const handleDatasetUpdated = (updated: DrawRecord[]) => {
     setDatasets(prev => ({
@@ -81,12 +113,15 @@ export const App: React.FC = () => {
         currentLang={currentLang}
         onSelectLang={setCurrentLang}
         onOpenGuide={() => setIsGuideOpen(true)}
-        onOpenAdminConsole={() => setIsAdminOpen(true)}
+        onOpenAdminConsole={adminConsoleEnabled ? () => setIsAdminOpen(true) : undefined}
         t={t}
       />
 
       {/* Main Terminal Workspace */}
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 py-6">
+        <div className="mb-4 text-[11px] font-mono text-slate-500" role="status">
+          DATA SOURCE: {syncMessage}
+        </div>
         {/* Real-time Draw Tomorrow Banner Alert */}
         <DrawTomorrowAlert
           market={activeMarket}
@@ -218,7 +253,7 @@ export const App: React.FC = () => {
 
       {/* Secret Operator Console Modal */}
       <AdminConsoleModal
-        isOpen={isAdminOpen}
+        isOpen={adminConsoleEnabled && isAdminOpen}
         onClose={() => setIsAdminOpen(false)}
         activeMarket={activeMarket}
         currentDataset={draws}

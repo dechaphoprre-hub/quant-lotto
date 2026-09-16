@@ -43,14 +43,8 @@ export const AdminConsoleModal: React.FC<AdminConsoleModalProps> = ({
 
   const handlePinSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Default Owner PIN: 1689
-    if (pin === '1689') {
-      setIsAuthorized(true);
-      setPinError(false);
-    } else {
-      setPinError(true);
-      setPin('');
-    }
+    setPinError(true);
+    setPin('');
   };
 
   const handleQuickAdd = (e: React.FormEvent) => {
@@ -188,7 +182,7 @@ export const AdminConsoleModal: React.FC<AdminConsoleModalProps> = ({
             </div>
             <h3 className="text-lg font-bold text-white font-mono mb-2">เจ้าหน้าที่ระบบ (Security Clearance)</h3>
             <p className="text-xs text-slate-400 font-mono mb-6">
-              กรุณากรอกรหัส PIN ประจำตัวเพื่อเข้าสู่ระบบควบคุมหลังบ้าน (Default PIN: 1689)
+              ระบบหลังบ้านต้องยืนยันตัวตนผ่าน server-side authentication ก่อนจึงจะเปิดใช้งานได้
             </p>
 
             <form onSubmit={handlePinSubmit} className="space-y-4">
@@ -205,7 +199,7 @@ export const AdminConsoleModal: React.FC<AdminConsoleModalProps> = ({
               {pinError && (
                 <div className="text-xs font-mono text-red-400 flex items-center justify-center space-x-1">
                   <AlertTriangle className="w-4 h-4 mr-1" />
-                  <span>รหัสผ่านไม่ถูกต้อง (Invalid PIN)</span>
+                  <span>Admin console ต้องเชื่อมต่อ backend authentication ก่อนใช้งาน</span>
                 </div>
               )}
 

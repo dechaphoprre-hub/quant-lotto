@@ -1,5 +1,4 @@
 import { MarketType, DrawRecord } from '../types';
-import { LotteryStorageService } from './storageService';
 import { sanitizeDrawDataset } from './dataValidator';
 
 export interface SyncStatus {
@@ -8,6 +7,37 @@ export interface SyncStatus {
   success: boolean;
   message: string;
 }
+
+interface DataApiResponse {
+  market: MarketType;
+  draws: unknown[];
+  fetchedAt?: string;
+  source?: string;
+}
+
+const DATA_API_BASE_URL = (import.meta.env.VITE_DATA_API_BASE_URL as string | undefined)?.replace(/\/$/, '');
+const SUPABASE_URL = (import.meta.env.VITE_SUPABASE_URL as string | undefined)?.replace(/\/$/, '');
+const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY as string | undefined;
+const REQUEST_TIMEOUT_MS = 10000;
+
+const getThaiDayName = (date: string): string => {
+  const names = ['อาทิตย์', 'จันทร์', 'อังคาร', 'พุธ', 'พฤหัสบดี', 'ศุกร์', 'เสาร์'];
+  return names[new Date(`${date}T00:00:00Z`).getUTCDay()] || '';
+};
+
+const mapSupabaseDraw = (row: Record<string, unknown>): DrawRecord => ({
+  id: String(row.id),
+  market: row.market_code as MarketType,
+  date: String(row.draw_date),
+  dayOfWeekTh: getThaiDayName(String(row.draw_date)),
+  drawNumber: String(row.draw_number),
+  topPrize: String(row.top_prize),
+  twoDigitTop: String(row.two_digit_top),
+  twoDigitBottom: String(row.two_digit_bottom),
+  threeDigitTop: row.three_digit_top ? String(row.three_digit_top) : undefined,
+  threeDigitFront: Array.isArray(row.three_digit_front) ? row.three_digit_front.map(String) : undefined,
+  threeDigitBack: Array.isArray(row.three_digit_back) ? row.three_digit_back.map(String) : undefined
+});
 
 /**
  * Lottery Cloud Sync Service:
@@ -53,8 +83,8 @@ export class LotterySyncService {
   }
 
   /**
-   * Perform automated cloud sync check for a market.
-   * In a serverless/static environment, this checks cached feeds or validates existing datasets.
+  * Fetch and validate a market dataset from the configured production API.
+  * The bundled snapshot is used only when no API is configured or the request fails.
    */
   static async checkAndUpdate(
     market: MarketType,
@@ -63,23 +93,66 @@ export class LotterySyncService {
     this.status.isSyncing = true;
 
     try {
-      // Simulated cloud ping with timeout protection
-      await new Promise(resolve => setTimeout(resolve, 400));
+      if (!DATA_API_BASE_URL && !(SUPABASE_URL && SUPABASE_ANON_KEY)) {
+        const { cleanDataset } = sanitizeDrawDataset(currentDataset);
+        this.status = {
+          lastChecked: new Date().toISOString(),
+          isSyncing: false,
+          success: false,
+          message: `Remote data API is not configured; using bundled snapshot for ${market}.`
+        };
+        return { updated: false, dataset: cleanDataset, message: this.status.message };
+      }
 
-      // Validate current dataset integrity
-      const { cleanDataset, rejectedCount } = sanitizeDrawDataset(currentDataset);
+      const controller = new AbortController();
+      const timeout = window.setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
+      const isCustomApi = Boolean(DATA_API_BASE_URL);
+      const endpoint = isCustomApi
+        ? `${DATA_API_BASE_URL}/markets/${market}/draws`
+        : `${SUPABASE_URL}/rest/v1/draws?market_code=eq.${market}&verification_status=eq.VERIFIED&select=id,market_code,draw_date,draw_number,top_prize,two_digit_top,two_digit_bottom,three_digit_top,three_digit_front,three_digit_back&order=draw_date.desc`;
+      const response = await fetch(endpoint, {
+        headers: {
+          Accept: 'application/json',
+          ...(isCustomApi ? {} : {
+            apikey: SUPABASE_ANON_KEY as string,
+            Authorization: `Bearer ${SUPABASE_ANON_KEY}`
+          })
+        },
+        signal: controller.signal
+      });
+      window.clearTimeout(timeout);
+
+      if (!response.ok) {
+        throw new Error(`Data API returned HTTP ${response.status}.`);
+      }
+
+      const rawPayload = await response.json() as Partial<DataApiResponse> | Record<string, unknown>[];
+      const payload: Partial<DataApiResponse> = isCustomApi
+        ? rawPayload as Partial<DataApiResponse>
+        : {
+          market,
+          draws: Array.isArray(rawPayload) ? rawPayload.map(mapSupabaseDraw) : [],
+          fetchedAt: new Date().toISOString(),
+          source: 'Supabase verified draws'
+        };
+      if (payload.market !== market || !Array.isArray(payload.draws)) {
+        throw new Error('Data API response does not match the required schema.');
+      }
+
+      const { cleanDataset, rejectedCount } = sanitizeDrawDataset(payload.draws);
+      if (cleanDataset.length === 0 || rejectedCount > 0) {
+        throw new Error(`Data API returned ${rejectedCount} invalid records.`);
+      }
 
       this.status = {
         lastChecked: new Date().toISOString(),
         isSyncing: false,
         success: true,
-        message: rejectedCount === 0
-          ? `Verified ${cleanDataset.length} official draws for ${market}.`
-          : `Cleaned ${rejectedCount} corrupt entries.`
+        message: `Loaded ${cleanDataset.length} validated draws for ${market}${payload.source ? ` from ${payload.source}` : ''}.`
       };
 
       return {
-        updated: false,
+        updated: true,
         dataset: cleanDataset,
         message: this.status.message
       };
@@ -88,7 +161,7 @@ export class LotterySyncService {
         lastChecked: new Date().toISOString(),
         isSyncing: false,
         success: false,
-        message: 'Cloud sync temporarily unreachable, utilizing verified local cache.'
+        message: `Remote data unavailable for ${market}; using bundled snapshot.`
       };
 
       return {

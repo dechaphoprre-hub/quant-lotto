@@ -179,7 +179,7 @@ export const MarketStatsHeader: React.FC<HeaderProps> = ({
           </div>
           <div className="flex items-baseline space-x-2">
             <span className="text-xl font-bold font-mono text-cyan-300">
-              82.4%
+              N/A
             </span>
             <span className="text-[10px] text-emerald-400 font-mono">(Alpha Convergence)</span>
           </div>

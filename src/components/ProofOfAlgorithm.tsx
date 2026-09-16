@@ -41,12 +41,12 @@ export const ProofOfAlgorithm: React.FC<ProofProps> = ({ t }) => {
           <div className="flex items-center space-x-4 bg-terminal-bg px-4 py-2 rounded-lg border border-terminal-border font-mono text-xs">
             <div>
               <span className="text-slate-500 text-[10px] uppercase block">{t.proofHitRateLabel}</span>
-              <span className="text-emerald-400 font-extrabold text-lg">82.4%</span>
+              <span className="text-amber-300 font-extrabold text-lg">N/A</span>
             </div>
             <div className="h-7 w-px bg-slate-800"></div>
             <div>
               <span className="text-slate-500 text-[10px] uppercase block">{t.proofVerifiedDrawsLabel}</span>
-              <span className="text-white font-extrabold text-lg">342 {t.proofDrawUnit}</span>
+              <span className="text-white font-extrabold text-lg">{STRUCTURED_PROOF_RECORDS.length} {t.proofDrawUnit}</span>
             </div>
           </div>
         </div>
@@ -54,7 +54,7 @@ export const ProofOfAlgorithm: React.FC<ProofProps> = ({ t }) => {
         <div className="mt-4 text-xs font-mono text-slate-400 bg-emerald-950/20 border border-emerald-900/40 p-3 rounded-lg flex items-start gap-2">
           <Lock className="w-4 h-4 text-emerald-400 mt-0.5 shrink-0" />
           <span>
-            <strong>{t.proofGuaranteeTitle}</strong> {t.proofGuaranteeText}
+            <strong>{t.proofGuaranteeTitle}</strong> Live cryptographic verification is available only for records ingested with a verified source and stored audit observation.
           </span>
         </div>
       </div>
