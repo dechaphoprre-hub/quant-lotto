@@ -1,7 +1,7 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { MarketType, DimensionMode, DrawRecord } from './types';
 import { MARKET_CONFIG } from './data/lotteryData';
-import { calculateDigitStatistics, runMonteCarloSimulation, calculateMarkovTransitions, runThreeDigitSimulation } from './math/quantEngine';
+import { calculateDigitStatistics, runMonteCarloSimulation, calculateMarkovTransitions, runThreeDigitSimulation, calculateThreeDigitPatternDistribution, calculateDigitalRootStats } from './math/quantEngine';
 import { LotteryStorageService } from './services/storageService';
 import { LotterySyncService } from './services/lotterySyncService';
 import { TerminalNavbar } from './components/TerminalNavbar';
@@ -94,6 +94,8 @@ export const App: React.FC = () => {
     [digitStats, monteCarloRuns, simulationSeed]
   );
   const threeDigitCandidates = useMemo(() => runThreeDigitSimulation(draws), [draws]);
+  const patternDistribution = useMemo(() => calculateThreeDigitPatternDistribution(draws), [draws]);
+  const rootStats = useMemo(() => calculateDigitalRootStats(draws), [draws]);
 
   const handleRerunMonteCarlo = (iterations: number) => {
     setMonteCarloRuns(iterations);
@@ -156,6 +158,8 @@ export const App: React.FC = () => {
               monteCarlo={monteCarlo}
               markovStates={markovStates}
               threeDigitCandidates={threeDigitCandidates}
+              patternDistribution={patternDistribution}
+              rootStats={rootStats}
               dimensionMode={dimensionMode}
               onSelectDimensionMode={setDimensionMode}
               onRerunMonteCarlo={handleRerunMonteCarlo}
