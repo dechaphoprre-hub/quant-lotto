@@ -38,6 +38,20 @@ SUPABASE_SERVICE_ROLE_KEY=<Supabase service-role key>
 
 The worker uses it only inside GitHub Actions to write verified draws, observations, and ingestion-run status. It must never be exposed as a `VITE_*` variable.
 
+## Backfilling historical Thai draws
+
+`npm run backfill:glo` fetches each historical draw directly from the live GLO API (never from the bundled `src/data/lotteryData.ts` snapshot, which is unverified sample data) and upserts it into Supabase the same way the scheduled ingestion workflow does.
+
+```text
+SUPABASE_URL=<project ref>
+SUPABASE_SERVICE_ROLE_KEY=<service-role key>
+BACKFILL_START_DATE=YYYY-MM-DD   # earliest draw date to backfill
+BACKFILL_END_DATE=YYYY-MM-DD     # optional, defaults to today
+BACKFILL_DELAY_MS=2000           # optional, delay between GLO requests
+```
+
+Draws that are already `VERIFIED` in Supabase are skipped automatically, so the command is safe to re-run. GLO draws publish on the 1st and 16th of each month; the script derives candidate dates from that schedule and reports a pass/fail count per date at the end.
+
 ## Current limitation
 
 The repository contains the schema and frontend contract, but no provider credentials or verified Lao/Hanoi VIP source. Those markets must remain unavailable or explicitly marked unverified until a source is configured.

@@ -10,6 +10,7 @@
     "test": "npx tsx src/tests/productionSanity.ts",
     "validate:data": "npx tsx scripts/validate-data.ts",
     "ingest:glo": "npx tsx scripts/ingest-glo.ts",
+    "backfill:glo": "npx tsx scripts/backfill-glo.ts",
     "deploy": "npm run build && npx gh-pages -d dist"
   },
   "dependencies": {
