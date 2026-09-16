@@ -1,5 +1,6 @@
 import { createHash } from 'node:crypto';
 import { MarketType } from '../../src/types/index.ts';
+import { scoreProof } from './prediction.ts';
 
 const MARKET: MarketType = 'THAI';
 const GLO_URL = 'https://www.glo.or.th/api/lottery/getLotteryAward';
@@ -135,6 +136,7 @@ export const ingestThaiGloDraw = async (dateInput: string, api: SupabaseApi): Pr
       method: 'POST',
       body: JSON.stringify({ draw_id: `th-${dateInput}`, source_id: sourceId, raw_payload: JSON.parse(raw), payload_hash: hash, reconciliation_status: 'MATCHED' })
     });
+    await resolvePendingProof(dateInput, { twoDigitTop: topPrize.slice(-2), twoDigitBottom: bottomTwo }, api);
     if (runId) await api(`ingestion_runs?id=eq.${runId}`, { method: 'PATCH', body: JSON.stringify({ finished_at: new Date().toISOString(), status: 'SUCCEEDED', records_seen: 1, records_accepted: 1 }) });
     return { status: 'SUCCEEDED', dateInput, message: `${topPrize}, bottom ${bottomTwo}` };
   } catch (error) {
@@ -142,4 +144,27 @@ export const ingestThaiGloDraw = async (dateInput: string, api: SupabaseApi): Pr
     if (runId) await api(`ingestion_runs?id=eq.${runId}`, { method: 'PATCH', body: JSON.stringify({ finished_at: new Date().toISOString(), status: 'FAILED', error_message: message }) });
     return { status: 'FAILED', dateInput, message };
   }
+};
+
+/**
+ * Scores a pre-committed proof_records row against the draw that just
+ * verified, if one exists for this market/date. A no-op when no
+ * prediction was committed for this draw, or it was already scored.
+ */
+const resolvePendingProof = async (
+  dateInput: string,
+  actual: { twoDigitTop: string; twoDigitBottom: string },
+  api: SupabaseApi
+): Promise<void> => {
+  const pending = await api(
+    `proof_records?market_code=eq.${MARKET}&draw_date=eq.${dateInput}&scored_at=is.null&select=id,predicted_top5`
+  ) as Array<{ id: string; predicted_top5: string[] }>;
+  const record = pending?.[0];
+  if (!record) return;
+
+  const matchType = scoreProof(record.predicted_top5, actual);
+  await api(`proof_records?id=eq.${record.id}`, {
+    method: 'PATCH',
+    body: JSON.stringify({ draw_id: `th-${dateInput}`, match_type: matchType, scored_at: new Date().toISOString() })
+  });
 };

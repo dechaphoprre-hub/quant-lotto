@@ -141,6 +141,11 @@ export interface Translations {
   proofThResult: string;
   proofThHash: string;
   proofCopied: string;
+  proofLoadingLabel: string;
+  proofEmptyTitle: string;
+  proofEmptyDesc: string;
+  proofPendingBadge: string;
+  proofPendingDesc: string;
 
   // Guide Modal
   guideTitle: string;
@@ -315,6 +320,11 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     proofThResult: 'ผลการจับคู่',
     proofThHash: 'รหัสแฮช SHA-256 ยืนยันเวลา',
     proofCopied: 'คัดลอกรหัสแฮชสำเร็จ!',
+    proofLoadingLabel: 'กำลังโหลดข้อมูลจริงจาก Supabase...',
+    proofEmptyTitle: 'ยังไม่มีประวัติที่ตรวจสอบแล้ว',
+    proofEmptyDesc: 'ระบบยังไม่มีการทำนายที่ล็อกไว้ล่วงหน้าและตรวจสอบครบกับผลจริง ข้อมูลจะปรากฏหลังผ่านงวดถัดไป',
+    proofPendingBadge: 'รอผลงวดถัดไป',
+    proofPendingDesc: 'ล็อกเลขทำนายและรหัสแฮชไว้แล้วก่อนหวยออก รอผลจริงมาตรวจสอบ',
 
     guideTitle: 'คู่มือใช้งาน QUANTLOTTO สำหรับผู้เริ่มต้น',
     guideSub: 'ดูจบใน 1 นาที เข้าใจทันทีว่าต้องดูตรงไหนก่อนหวยออก!',
@@ -485,6 +495,11 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     proofThResult: 'ຜົນການຈັບຄູ່',
     proofThHash: 'ລະຫັດແຮຊ SHA-256 ຢືນຢັນເວລາ',
     proofCopied: 'ຄັດລອກລະຫັດແຮຊແລ້ວ!',
+    proofLoadingLabel: 'ກຳລັງໂຫຼດຂໍ້ມູນຈິງຈາກ Supabase...',
+    proofEmptyTitle: 'ຍັງບໍ່ມີປະຫວັດທີ່ກວດສອບແລ້ວ',
+    proofEmptyDesc: 'ລະບົບຍັງບໍ່ມີການທຳນາຍທີ່ລັອກໄວ້ລ່ວງໜ້າ ແລະ ກວດສອບກັບຜົນຈິງແລ້ວ ຂໍ້ມູນຈະປາກົດຫຼັງຈາກງວດຖັດໄປ',
+    proofPendingBadge: 'ລໍຖ້າຜົນງວດຖັດໄປ',
+    proofPendingDesc: 'ລັອກເລກທຳນາຍ ແລະ ລະຫັດແຮັຊໄວ້ກ່ອນອອກຜົນ ລໍຖ້າຜົນຈິງມາກວດສອບ',
 
     guideTitle: 'ຄູ່ມືນຳໃຊ້ QUANTLOTTO ສຳລັບຜູ້ເລີ່ມຕົ້ນ',
     guideSub: 'ເບິ່ງຈົບໃນ 1 ນາທີ ເຂົ້າໃຈທັນທີວ່າຄວນເບິ່ງຈຸດໃດກ່ອນຫວຍອອກ!',
@@ -655,6 +670,11 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     proofThResult: 'Khớp kết quả',
     proofThHash: 'Mã băm SHA-256 đối soát',
     proofCopied: 'Đã sao chép mã băm thành công!',
+    proofLoadingLabel: 'Đang tải dữ liệu thực từ Supabase...',
+    proofEmptyTitle: 'Chưa có lịch sử đã đối soát',
+    proofEmptyDesc: 'Hệ thống chưa có dự đoán nào được khóa trước và đối soát với kết quả thật. Dữ liệu sẽ xuất hiện sau kỳ quay tiếp theo.',
+    proofPendingBadge: 'Chờ kết quả kỳ tới',
+    proofPendingDesc: 'Đã khóa số dự đoán và mã băm trước khi quay số, đang chờ kết quả thật để đối soát.',
 
     guideTitle: 'HƯỚNG DẪN DÀNH CHO NGƯỜI MỚI',
     guideSub: 'Xem trong 1 phút để hiểu cách soi cầu xác suất cao nhất trước giờ quay!',
@@ -825,6 +845,11 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     proofThResult: 'RESULT MATCH',
     proofThHash: 'SHA-256 COMMITMENT',
     proofCopied: 'Copied hash to clipboard!',
+    proofLoadingLabel: 'Loading live data from Supabase...',
+    proofEmptyTitle: 'No audited track record yet',
+    proofEmptyDesc: 'No prediction has been committed in advance and reconciled against a real result yet. This will populate after the next draw.',
+    proofPendingBadge: 'Awaiting next draw',
+    proofPendingDesc: 'Prediction and hash are already locked in ahead of the draw, pending the real result to reconcile against.',
 
     guideTitle: 'QUANTLOTTO BEGINNER QUICK-START GUIDE',
     guideSub: 'Learn how to navigate and extract top probability picks in 60 seconds!',
