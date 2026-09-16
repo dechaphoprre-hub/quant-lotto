@@ -138,6 +138,35 @@ assert(allValidRoots, 'All digital sum roots are in range 1-9');
 const allRealHits = threeD.every(c => Number.isInteger(c.hits) && c.hits >= 1);
 assert(allRealHits, `3D candidate "hits" are real integer occurrence counts, not a synthetic formula (${threeD.map(c => c.hits).join(', ')})`);
 
+// Regression guard: a brand-new number that only appeared in the single
+// most recent draw must NOT outrank a number with real historical
+// frequency, just because it's "recent" — this is the exact bug a
+// walk-forward backtest caught (the top pick simply echoed the latest
+// draw's own numbers back as a "prediction").
+const oldFrequentNumber = thaiClean.cleanDataset[thaiClean.cleanDataset.length - 1].threeDigitTop!;
+const brandNewLatestDraw: DrawRecord = {
+  ...thaiClean.cleanDataset[0],
+  id: 'th-regression-test',
+  date: '2099-01-01',
+  threeDigitTop: '999',
+  threeDigitFront: ['998', '997'],
+  threeDigitBack: ['996', '995']
+};
+const inflatedFrequencyDataset = [
+  brandNewLatestDraw,
+  ...Array(6).fill(null).map((_, i) => ({ ...thaiClean.cleanDataset[thaiClean.cleanDataset.length - 1], id: `th-freq-${i}`, threeDigitTop: oldFrequentNumber })),
+  ...thaiClean.cleanDataset
+];
+const regressionResult = runThreeDigitSimulation(inflatedFrequencyDataset);
+assert(
+  !regressionResult.some(c => c.digit === '999'),
+  `A brand-new, never-before-seen number from only the latest draw does not rank in the top 5 just for being recent (top picks: ${regressionResult.map(c => c.digit).join(', ')})`
+);
+assert(
+  regressionResult.some(c => c.digit === oldFrequentNumber),
+  `A number with real high historical frequency still ranks in the top 5 (top picks: ${regressionResult.map(c => c.digit).join(', ')})`
+);
+
 const patternDistribution = calculateThreeDigitPatternDistribution(thaiClean.cleanDataset);
 assert(patternDistribution.length === 4, 'Pattern distribution covers all 4 pattern categories');
 const distributionTotal = patternDistribution.reduce((sum, p) => sum + p.percentage, 0);

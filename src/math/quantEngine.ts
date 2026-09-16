@@ -188,58 +188,51 @@ export const getThreeDigitSumRoot = (str: string): number => {
   return sum > 9 ? (sum % 9 || 9) : sum;
 };
 
-const collectThreeDigitAppearances = (draws: DrawRecord[]): { frequencyMap: Record<string, number>; recent3D: string[] } => {
+const collectThreeDigitAppearances = (draws: DrawRecord[]): { frequencyMap: Record<string, number> } => {
   const frequencyMap: Record<string, number> = {};
-  const recent3D: string[] = [];
 
   draws.forEach(d => {
     const candidates = [d.threeDigitTop, ...(d.threeDigitFront || []), ...(d.threeDigitBack || [])].filter(Boolean) as string[];
     candidates.forEach(num => {
       if (/^\d{3}$/.test(num)) {
         frequencyMap[num] = (frequencyMap[num] || 0) + 1;
-        if (!recent3D.includes(num)) {
-          recent3D.push(num);
-        }
       }
     });
   });
 
-  return { frequencyMap, recent3D };
+  return { frequencyMap };
 };
 
 /**
  * 3. Three Digit Simulation & Pattern Detector (3D Mode)
- * Empirically derives top 3D candidates from authentic draw history, with
- * pattern classification and digital sum roots. `hits` is the real count
- * of times this exact 3-digit number has appeared in the loaded history —
- * never a synthetic formula dressed up to look like a simulation output.
+ * Ranks every 3-digit number that has ever appeared in the loaded history
+ * by raw historical frequency alone — no recency weighting. A walk-forward
+ * backtest against 67 real draws (scripts/backtest-3d-scoring.ts) showed
+ * recency-weighting a candidate pool that always put the most-recently-seen
+ * draw's own numbers first produced no better hit rate than pure frequency
+ * (both indistinguishable from chance), while creating a real trust problem:
+ * right after every draw, the "top pick" would just echo that draw's own
+ * numbers back as if it had been predicted. `hits` is the real historical
+ * appearance count — never a synthetic formula.
  */
 export function runThreeDigitSimulation(draws: DrawRecord[]): ThreeDigitCandidate[] {
-  const { frequencyMap, recent3D } = collectThreeDigitAppearances(draws);
+  const { frequencyMap } = collectThreeDigitAppearances(draws);
 
-  // Weight candidates by recency & historical frequency
-  const scored = recent3D.slice(0, 15).map((num, idx) => {
-    const pattern = getThreeDigitPattern(num);
-    const sumRoot = getThreeDigitSumRoot(num);
-    const recencyWeight = Math.max(1, 15 - idx);
-    const freq = frequencyMap[num] || 1;
-    const score = (recencyWeight * 1.5) + (freq * 2);
-    return { num, pattern, sumRoot, score, freq };
-  }).sort((a, b) => b.score - a.score);
+  const ranked = Object.entries(frequencyMap)
+    .map(([num, freq]) => ({ num, freq, pattern: getThreeDigitPattern(num), sumRoot: getThreeDigitSumRoot(num) }))
+    // Ties broken lexicographically (never by recency) for determinism.
+    .sort((a, b) => b.freq - a.freq || a.num.localeCompare(b.num));
 
-  const top = scored.slice(0, 5);
-  const totalScore = top.reduce((acc, s) => acc + s.score, 0) || 1;
+  const top = ranked.slice(0, 5);
+  const totalFreq = top.reduce((sum, item) => sum + item.freq, 0) || 1;
 
-  return top.map(item => {
-    const prob = Number(((item.score / totalScore) * 60).toFixed(1));
-    return {
-      digit: item.num,
-      hits: item.freq,
-      probability: prob > 0 ? prob : 12.5,
-      pattern: item.pattern,
-      sumRoot: item.sumRoot
-    };
-  });
+  return top.map(item => ({
+    digit: item.num,
+    hits: item.freq,
+    probability: Number(((item.freq / totalFreq) * 60).toFixed(1)),
+    pattern: item.pattern,
+    sumRoot: item.sumRoot
+  }));
 }
 
 export interface PatternDistributionEntry {
