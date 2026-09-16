@@ -3,7 +3,8 @@ import { MarketType } from '../types';
 import { AdminSession, AdminRole, signIn, signOut, fetchAdminRole } from '../services/authService';
 import { DrawCorrectionView, submitCorrection, fetchPendingCorrections, reviewCorrection } from '../services/correctionsService';
 import { submitBeliefNumber } from '../services/beliefNumbersService';
-import { X, ShieldAlert, CheckCircle2, AlertTriangle, KeyRound, PlusCircle, LogOut, ClipboardCheck, Newspaper } from 'lucide-react';
+import { extractNumbersFromText } from '../math/newsNumberExtraction';
+import { X, ShieldAlert, CheckCircle2, AlertTriangle, KeyRound, PlusCircle, LogOut, ClipboardCheck, Newspaper, ScanText } from 'lucide-react';
 
 interface AdminConsoleModalProps {
   isOpen: boolean;
@@ -34,6 +35,7 @@ export const AdminConsoleModal: React.FC<AdminConsoleModalProps> = ({ isOpen, on
   const [beliefHeadline, setBeliefHeadline] = useState('');
   const [beliefNumbers, setBeliefNumbers] = useState('');
   const [beliefSource, setBeliefSource] = useState('');
+  const [beliefNewsText, setBeliefNewsText] = useState('');
 
   const loadPending = useCallback(async (activeSession: AdminSession) => {
     setPending(await fetchPendingCorrections(activeSession));
@@ -109,6 +111,12 @@ export const AdminConsoleModal: React.FC<AdminConsoleModalProps> = ({ isOpen, on
     }
   };
 
+  const handleExtractNumbers = () => {
+    if (!beliefNewsText.trim()) return;
+    const extracted = extractNumbersFromText(beliefNewsText);
+    setBeliefNumbers(extracted.join(', '));
+  };
+
   const handleSubmitBelief = async (e: React.FormEvent) => {
     e.preventDefault();
     setFormError(null);
@@ -133,6 +141,7 @@ export const AdminConsoleModal: React.FC<AdminConsoleModalProps> = ({ isOpen, on
       setBeliefHeadline('');
       setBeliefNumbers('');
       setBeliefSource('');
+      setBeliefNewsText('');
     } else {
       setFormError(result.error);
     }
@@ -305,6 +314,24 @@ export const AdminConsoleModal: React.FC<AdminConsoleModalProps> = ({ isOpen, on
                 <span className="text-xs font-mono font-bold text-white uppercase">โพสต์เลขจากกระแสสังคม/ข่าว ({activeMarket}) — เผยแพร่ทันที</span>
               </div>
               <form onSubmit={handleSubmitBelief} className="space-y-3">
+                <div className="space-y-1.5">
+                  <textarea
+                    placeholder="วางข้อความข่าว/รายละเอียดเหตุการณ์ตรงนี้ เช่น ทะเบียนรถ, อายุ, วันที่ — ระบบจะดึงเลขที่ปรากฏในข้อความให้อัตโนมัติ (ไม่ใช่ AI อ่านทำความเข้าใจข่าว แค่ดึงตัวเลขที่มีอยู่แล้วตามสูตรเลขศาสตร์พื้นฐาน)"
+                    value={beliefNewsText}
+                    onChange={e => setBeliefNewsText(e.target.value)}
+                    rows={2}
+                    className="w-full bg-slate-950 border border-purple-900/50 rounded-lg px-3 py-2 text-xs font-mono text-white focus:outline-none focus:border-purple-500"
+                  />
+                  <button
+                    type="button"
+                    onClick={handleExtractNumbers}
+                    disabled={!beliefNewsText.trim()}
+                    className="flex items-center space-x-1.5 px-3 py-1.5 bg-purple-950/60 hover:bg-purple-900/60 disabled:opacity-40 border border-purple-700/50 rounded-lg text-[11px] font-mono font-bold text-purple-200 transition-colors"
+                  >
+                    <ScanText className="w-3.5 h-3.5" />
+                    <span>ดึงเลขจากข้อความ (เติมช่อง "เลขที่เกี่ยวข้อง" ด้านล่างให้อัตโนมัติ)</span>
+                  </button>
+                </div>
                 <input
                   type="text"
                   placeholder="หัวข้อข่าว/เหตุการณ์ เช่น ทะเบียนรถอุบัติเหตุข่าวดัง"
@@ -315,7 +342,7 @@ export const AdminConsoleModal: React.FC<AdminConsoleModalProps> = ({ isOpen, on
                 />
                 <input
                   type="text"
-                  placeholder="เลขที่เกี่ยวข้อง คั่นด้วยจุลภาค เช่น 12, 89, 894"
+                  placeholder="เลขที่เกี่ยวข้อง คั่นด้วยจุลภาค เช่น 12, 89, 894 (หรือกดปุ่มดึงเลขด้านบน)"
                   value={beliefNumbers}
                   onChange={e => setBeliefNumbers(e.target.value)}
                   className="w-full bg-slate-950 border border-terminal-border rounded-lg px-3 py-2 text-xs font-mono text-white focus:outline-none focus:border-purple-500"
