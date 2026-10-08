@@ -16,7 +16,8 @@ interface DataApiResponse {
   source?: string;
 }
 
-const DATA_API_BASE_URL = (import.meta.env.VITE_DATA_API_BASE_URL as string | undefined)?.replace(/\/$/, '');
+// External APIs disconnected by user request
+const DATA_API_BASE_URL: string | undefined = undefined;
 const REQUEST_TIMEOUT_MS = 10000;
 
 const getThaiDayName = (date: string): string => {
